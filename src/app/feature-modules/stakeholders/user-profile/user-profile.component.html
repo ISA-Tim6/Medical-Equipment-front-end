@@ -1,34 +1,105 @@
-<form>
+<form formGroup="userForm">
   <h2>My Profile</h2>
   <label for="email">Email:</label>
-  <input type="email" id="email" name="email" required />
+  <input
+    type="email"
+    id="email"
+    name="email"
+    formControlName="email"
+    required
+    readonly
+  />
 
   <label for="password">Password:</label>
-  <input type="password" id="password" name="password" required />
+  <input
+    type="password"
+    id="password"
+    name="password"
+    formControlName="password"
+    required
+    [readonly]="!editMode"
+  />
 
   <label for="confirmPassword">Confirm Password:</label>
-  <input type="password" id="confirmPassword" name="confirmPassword" required />
+  <input
+    type="password"
+    id="confirmPassword"
+    name="confirmPassword"
+    formControlName="password"
+    required
+    [readonly]="!editMode"
+  />
 
   <label for="firstName">First Name:</label>
-  <input type="text" id="firstName" name="firstName" required />
+  <input
+    type="text"
+    id="firstName"
+    name="firstName"
+    formControlName="firstName"
+    required
+    [readonly]="!editMode"
+  />
 
   <label for="lastName">Last Name:</label>
-  <input type="text" id="lastName" name="lastName" required />
+  <input
+    type="text"
+    id="lastName"
+    name="lastName"
+    formControlName="lastName"
+    required
+    [readonly]="!editMode"
+  />
 
   <label for="city">City:</label>
-  <input type="text" id="city" name="city" required />
+  <input
+    type="text"
+    id="city"
+    name="city"
+    formControlName="city"
+    required
+    [readonly]="!editMode"
+  />
 
   <label for="country">Country:</label>
-  <input type="text" id="country" name="country" required />
+  <input
+    type="text"
+    id="country"
+    name="country"
+    formControlName="country"
+    required
+    [readonly]="!editMode"
+  />
 
   <label for="phoneNumber">Phone Number:</label>
-  <input type="tel" id="phoneNumber" name="phoneNumber" required />
+  <input
+    type="tel"
+    id="phoneNumber"
+    name="phoneNumber"
+    formControlName="phoneNumber"
+    required
+    [readonly]="!editMode"
+  />
 
   <label for="occupation">Occupation:</label>
-  <input type="text" id="occupation" name="occupation" required />
+  <input
+    type="text"
+    id="occupation"
+    name="occupation"
+    formControlName="occupation"
+    required
+    [readonly]="!editMode"
+  />
 
   <label for="companyInfo">Company Information:</label>
-  <textarea id="companyInfo" name="companyInfo" rows="4"></textarea>
+  <textarea
+    id="companyInfo"
+    name="companyInfo"
+    formControlName="companyInfo"
+    rows="4"
+    [readonly]="!editMode"
+  ></textarea>
 
-  <button type="submit">Submit</button>
+  <button type="button" (click)="onEditMode()">
+    {{ editMode ? "Save Changes" : "Edit Profile" }}
+  </button>
 </form>
