@@ -1,14 +1,23 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from '../model/user.model';
+import { StakeholdersService } from '../stakeholders.service';
 
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.css'],
 })
-export class UserProfileComponent implements OnChanges {
-  @Input() user: User | undefined;
+export class UserProfileComponent implements OnChanges, OnInit {
+  user: User | undefined;
+
+  constructor(private service: StakeholdersService) {}
 
   editMode = false;
 
@@ -23,6 +32,14 @@ export class UserProfileComponent implements OnChanges {
     employment: new FormControl('', [Validators.required]),
     infoAboutInstitution: new FormControl('', [Validators.required]),
   });
+
+  ngOnInit(): void {
+    this.service.getUser().subscribe({
+      next: (result: User) => {
+        this.user = result;
+      },
+    });
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     throw new Error('Method not implemented.');
