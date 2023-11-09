@@ -7,6 +7,7 @@ export interface User {
   city: string;
   country: string;
   phoneNumber: string;
-  occupation: string;
-  companyInfo: string;
+  employment: string;
+  infoAboutInstitution: string;
+  loggedBefore: boolean;
 }

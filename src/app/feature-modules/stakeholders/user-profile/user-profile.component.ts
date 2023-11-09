@@ -20,8 +20,8 @@ export class UserProfileComponent implements OnChanges {
     city: new FormControl('', [Validators.required]),
     country: new FormControl('', [Validators.required]),
     phoneNumber: new FormControl('', [Validators.required]),
-    occupation: new FormControl('', [Validators.required]),
-    companyInfo: new FormControl('', [Validators.required]),
+    employment: new FormControl('', [Validators.required]),
+    infoAboutInstitution: new FormControl('', [Validators.required]),
   });
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -41,8 +41,9 @@ export class UserProfileComponent implements OnChanges {
         city: this.userForm.value.city || '',
         country: this.userForm.value.country || '',
         phoneNumber: this.userForm.value.phoneNumber || '',
-        occupation: this.userForm.value.occupation || '',
-        companyInfo: this.userForm.value.companyInfo || '',
+        employment: this.userForm.value.employment || '',
+        infoAboutInstitution: this.userForm.value.infoAboutInstitution || '',
+        loggedBefore: this.user!.loggedBefore,
       };
 
       /*this.service.updateProfile(user).subscribe({
