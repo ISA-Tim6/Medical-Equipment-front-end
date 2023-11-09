@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { OnInit } from 'MedicalEquipment/@angular/core';
+import { OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
