@@ -1,13 +1,18 @@
 export interface User {
   id?: number;
   email: string;
+  username: string;
   password: string;
   name: string;
   surname: string;
   city: string;
   country: string;
   phoneNumber: string;
-  employment: string;
+  employment: number;
   infoAboutInstitution: string;
   loggedBefore: boolean;
+}
+export enum Employment{
+  COMPANY_ADMIN,
+	SISTEM_ADMIN,
 }

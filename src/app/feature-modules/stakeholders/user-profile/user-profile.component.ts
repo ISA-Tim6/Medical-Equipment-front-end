@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { User } from '../model/user.model';
+import { Employment, User } from '../model/user.model';
 
 @Component({
   selector: 'app-user-profile',
@@ -14,6 +14,7 @@ export class UserProfileComponent implements OnChanges {
 
   userForm = new FormGroup({
     email: new FormControl('', [Validators.required]),
+    username: new FormControl('',[Validators.required]),
     password: new FormControl('', [Validators.required]),
     name: new FormControl('', [Validators.required]),
     surname: new FormControl('', [Validators.required]),
@@ -35,13 +36,14 @@ export class UserProfileComponent implements OnChanges {
     if (this.editMode) {
       const user: User = {
         email: this.user!.email,
+        username:this.userForm.value.username || '',
         password: this.userForm.value.password || '',
         name: this.userForm.value.name || '',
         surname: this.userForm.value.surname || '',
         city: this.userForm.value.city || '',
         country: this.userForm.value.country || '',
         phoneNumber: this.userForm.value.phoneNumber || '',
-        employment: this.userForm.value.employment || '',
+        employment: Employment.COMPANY_ADMIN,//this.userForm.value.employment || '',
         infoAboutInstitution: this.userForm.value.infoAboutInstitution || '',
         loggedBefore: this.user!.loggedBefore,
       };

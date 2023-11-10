@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserProfileComponent } from './user-profile/user-profile.component';
-
+import { RegistrationFormComponent } from './registration-form/registration-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
-  declarations: [UserProfileComponent],
-  imports: [CommonModule],
-  exports: [UserProfileComponent],
+  declarations: [UserProfileComponent,RegistrationFormComponent],
+  imports: [CommonModule,ReactiveFormsModule],
+  exports: [UserProfileComponent,RegistrationFormComponent]
 })
 export class StakeholdersModule {}

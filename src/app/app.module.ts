@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { StakeholdersModule } from './feature-modules/stakeholders/stakeholders.module';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent],
@@ -13,6 +14,9 @@ import { StakeholdersModule } from './feature-modules/stakeholders/stakeholders.
     AppRoutingModule,
     HttpClientModule,
     StakeholdersModule,
+    ReactiveFormsModule,
+    FormsModule,
+    
   ],
   exports: [AppComponent],
   providers: [],
