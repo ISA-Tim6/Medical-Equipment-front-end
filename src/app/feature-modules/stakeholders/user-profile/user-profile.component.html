@@ -1,4 +1,4 @@
-<form formGroup="userForm">
+<form [formGroup]="userForm">
   <h2>My Profile</h2>
   <label for="email">Email:</label>
   <input
@@ -8,6 +8,7 @@
     formControlName="email"
     required
     readonly
+    [value]="user.email"
   />
 
   <label for="password">Password:</label>
@@ -18,6 +19,7 @@
     formControlName="password"
     required
     [readonly]="!editMode"
+    [value]="user.password"
   />
 
   <label for="confirmPassword">Confirm Password:</label>
@@ -28,6 +30,7 @@
     formControlName="password"
     required
     [readonly]="!editMode"
+    [value]="user.password"
   />
 
   <label for="firstName">First Name:</label>
@@ -38,6 +41,7 @@
     formControlName="name"
     required
     [readonly]="!editMode"
+    [value]="user.name"
   />
 
   <label for="lastName">Last Name:</label>
@@ -48,6 +52,7 @@
     formControlName="surame"
     required
     [readonly]="!editMode"
+    [value]="user.surname"
   />
 
   <label for="city">City:</label>
@@ -58,6 +63,7 @@
     formControlName="city"
     required
     [readonly]="!editMode"
+    [value]="user.city"
   />
 
   <label for="country">Country:</label>
@@ -68,6 +74,7 @@
     formControlName="country"
     required
     [readonly]="!editMode"
+    [value]="user.country"
   />
 
   <label for="phoneNumber">Phone Number:</label>
@@ -78,9 +85,10 @@
     formControlName="phoneNumber"
     required
     [readonly]="!editMode"
+    [value]="user.phoneNumber"
   />
 
-  <label for="occupation">Occupation:</label>
+  <label for="occupation">employment:</label>
   <input
     type="text"
     id="occupation"
@@ -88,6 +96,7 @@
     formControlName="employment"
     required
     [readonly]="!editMode"
+    [value]="user.employment"
   />
 
   <label for="companyInfo">Company Information:</label>
@@ -97,6 +106,7 @@
     formControlName="infoAboutInstitution"
     rows="4"
     [readonly]="!editMode"
+    [value]="user.infoAboutInstitution"
   ></textarea>
 
   <button type="button" (click)="onEditMode()">

@@ -15,7 +15,18 @@ import { StakeholdersService } from '../stakeholders.service';
   styleUrls: ['./user-profile.component.css'],
 })
 export class UserProfileComponent implements OnChanges, OnInit {
-  user: User | undefined;
+  user: User = {
+    email: '',
+    password: '',
+    name: '',
+    surname: '',
+    city: '',
+    country: '',
+    phoneNumber: '',
+    employment: '',
+    infoAboutInstitution: '',
+    loggedBefore: false,
+  };
 
   constructor(private service: StakeholdersService) {}
 
@@ -45,29 +56,27 @@ export class UserProfileComponent implements OnChanges, OnInit {
     throw new Error('Method not implemented.');
   }
   onEditMode() {
+    if (this.editMode) this.updateProfile();
     this.editMode = !this.editMode;
   }
 
   updateProfile(): void {
-    if (this.editMode) {
-      const user: User = {
-        email: this.user!.email,
-        password: this.userForm.value.password || '',
-        name: this.userForm.value.name || '',
-        surname: this.userForm.value.surname || '',
-        city: this.userForm.value.city || '',
-        country: this.userForm.value.country || '',
-        phoneNumber: this.userForm.value.phoneNumber || '',
-        employment: this.userForm.value.employment || '',
-        infoAboutInstitution: this.userForm.value.infoAboutInstitution || '',
-        loggedBefore: this.user!.loggedBefore,
-      };
-
-      /*this.service.updateProfile(user).subscribe({
-        next: () => {
-          this.reviewsUpdated.emit();
-        },
-      });*/
-    }
+    const user: User = {
+      email: this.user!.email,
+      password: this.userForm.value.password || '',
+      name: this.userForm.value.name || '',
+      surname: this.userForm.value.surname || '',
+      city: this.userForm.value.city || '',
+      country: this.userForm.value.country || '',
+      phoneNumber: this.userForm.value.phoneNumber || '',
+      employment: this.userForm.value.employment || '',
+      infoAboutInstitution: this.userForm.value.infoAboutInstitution || '',
+      loggedBefore: this.user!.loggedBefore,
+    };
+    this.service.updateUser(user).subscribe({
+      next: (result: User) => {
+        this.user = result;
+      },
+    });
   }
 }
