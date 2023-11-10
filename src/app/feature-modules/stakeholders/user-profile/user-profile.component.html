@@ -88,16 +88,18 @@
     [value]="user.phoneNumber"
   />
 
-  <label for="occupation">employment:</label>
-  <input
-    type="text"
-    id="occupation"
-    name="occupation"
-    formControlName="employment"
-    required
-    [readonly]="!editMode"
-    [value]="user.employment"
-  />
+  <label for="occupation">Employment:</label>
+  <select formControlName="employment" id="employment">
+    <option
+      id="occupation"
+      required
+      [readonly]="!editMode"
+      *ngFor="let employment of employments"
+      [value]="employment.value"
+    >
+      {{ employment.label }}
+    </option>
+  </select>
 
   <label for="companyInfo">Company Information:</label>
   <textarea
