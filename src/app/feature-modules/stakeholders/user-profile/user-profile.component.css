@@ -1,57 +1,71 @@
 body {
   font-family: "Segoe UI", Tahoma;
-  background-color: #f0f0f0;
+  background-color: #f8f8f8;
   margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
 }
-form {
-  background-color: #fff;
-  padding: 30px;
-  border-radius: 8px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  width: 400px;
+
+.profile-container {
+  display: flex;
+  justify-content: space-between;
+  width: 800px;
 }
-.profile {
+
+.profile,
+.edit-form {
   background-color: #fff;
   padding: 30px;
   border-radius: 8px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  width: 400px;
+  width: 380px;
+  box-sizing: border-box;
+  margin: 0 10px;
 }
 
 h2 {
   text-align: center;
-  color: #333;
+  color: #1f3a5b;
+}
+
+.label-group {
+  display: flex;
+  justify-content: space-between;
 }
 
 label {
   display: block;
   margin-bottom: 8px;
-  color: #555;
+  color: #1f3a5b;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 14px;
+  transition: color 0.3s;
 }
 
-input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 16px;
-  box-sizing: border-box;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
+label:hover {
+  color: #45a049;
 }
 
+input,
 textarea {
   width: 100%;
   padding: 10px;
   margin-bottom: 16px;
   box-sizing: border-box;
-  border: 1px solid #ccc;
+  border: 1px solid #dcdcdc;
   border-radius: 4px;
   font-size: 16px;
-  resize: vertical;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #4caf50;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
 }
 
 button {
@@ -67,4 +81,37 @@ button {
 
 button:hover {
   background-color: #45a049;
+}
+.error-message {
+  color: #ff0000;
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+select {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #dcdcdc;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+select:focus {
+  border-color: #4caf50;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+select::after {
+  content: "\25BC";
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  pointer-events: none;
 }

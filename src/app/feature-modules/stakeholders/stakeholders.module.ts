@@ -3,9 +3,11 @@ import { CommonModule } from '@angular/common';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { RegistrationFormComponent } from './registration-form/registration-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+
 @NgModule({
-  declarations: [UserProfileComponent,RegistrationFormComponent],
-  imports: [CommonModule,ReactiveFormsModule],
-  exports: [UserProfileComponent,RegistrationFormComponent]
+  declarations: [UserProfileComponent, RegistrationFormComponent],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule],
+  exports: [UserProfileComponent, RegistrationFormComponent],
 })
 export class StakeholdersModule {}

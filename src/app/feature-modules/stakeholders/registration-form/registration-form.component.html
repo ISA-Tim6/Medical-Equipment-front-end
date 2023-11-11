@@ -1,126 +1,246 @@
 <form>
-    <div class="container" style="box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.5); max-width: 900px;">
-        <h1>Register</h1>
-        <p>Please fill in this form to create an account.</p>
-        <hr>
-        <div>
-            <div [formGroup]="registrationForm">
-                <label for="email"><b>Email</b></label>
-                <input type="text" placeholder="Enter Email" name="email" id="email" oninput="this.className = ''" required formControlName="email" [(ngModel)]="user.email">
-                <span *ngIf="email && email.invalid && email.touched" style="color: red;">
-                    Email is required!
-                </span>
-                <br>
-                
-            </div>
-            <div [formGroup]="registrationForm">
-                <label for="username"><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" name="username" id="username" oninput="this.className = ''" required formControlName="username" [(ngModel)]="user.username">
-                <span *ngIf="username && username.invalid && username.touched" style="color: red;">
-                    username is required!
-                </span>
-                <br>
-                
-            </div>
+  <div
+    class="container"
+    style="box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.5); max-width: 900px"
+  >
+    <h1>Register</h1>
+    <p>Please fill in this form to create an account.</p>
+    <hr />
+    <div>
+      <div [formGroup]="registrationForm">
+        <label for="email"><b>Email</b></label>
+        <input
+          type="text"
+          placeholder="Enter Email"
+          name="email"
+          id="email"
+          oninput="this.className = ''"
+          required
+          formControlName="email"
+          [(ngModel)]="user.email"
+        />
+        <span
+          *ngIf="email && email.invalid && email.touched"
+          style="color: red"
+        >
+          Email is required!
+        </span>
+        <br />
+      </div>
+      <div [formGroup]="registrationForm">
+        <label for="username"><b>Username</b></label>
+        <input
+          type="text"
+          placeholder="Enter Username"
+          name="username"
+          id="username"
+          oninput="this.className = ''"
+          required
+          formControlName="username"
+          [(ngModel)]="user.username"
+        />
+        <span
+          *ngIf="username && username.invalid && username.touched"
+          style="color: red"
+        >
+          username is required!
+        </span>
+        <br />
+      </div>
 
-            <div [formGroup]="registrationForm">
-                <label for="password"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="password" id="password" oninput="this.className = ''" ngModel="user.password" formControlName="password" required [(ngModel)]="user.password">
+      <div [formGroup]="registrationForm">
+        <label for="password"><b>Password</b></label>
+        <input
+          type="password"
+          placeholder="Enter Password"
+          name="password"
+          id="password"
+          oninput="this.className = ''"
+          ngModel="user.password"
+          formControlName="password"
+          required
+          [(ngModel)]="user.password"
+        />
 
-                <span *ngIf=" password && password.invalid && password.touched" style="color: red;">
-                    Password is required!
-                </span>
-                <br>
-                
-                <br>
-            </div>
+        <span
+          *ngIf="password && password.invalid && password.touched"
+          style="color: red"
+        >
+          Password is required!
+        </span>
+        <br />
 
+        <br />
+      </div>
 
-            <div [formGroup]="registrationForm">
-            <label for="psw-repeat"><b>Repeat Password</b></label>
-            <input type="password" placeholder="Repeat Password" (input)="repeatPassword($event)" name="psw_repeat" id="psw_repeat" required>
-            <span *ngIf="isRepatPasswordIsEmpty()" style="color: #FDB5B5;">
-                This field is required!
-            </span>
-            <br>
-            <span *ngIf="!isPasswordCorrect()" style="color: red;">
-                The entered and repeated passwords don't match, try again!
-            </span>
-            </div>
-            <hr>
+      <div [formGroup]="registrationForm">
+        <label for="psw-repeat"><b>Repeat Password</b></label>
+        <input
+          type="password"
+          placeholder="Repeat Password"
+          (input)="repeatPassword($event)"
+          name="psw_repeat"
+          id="psw_repeat"
+          required
+        />
+        <span *ngIf="isRepatPasswordIsEmpty()" style="color: #fdb5b5">
+          This field is required!
+        </span>
+        <br />
+        <span *ngIf="!isPasswordCorrect()" style="color: red">
+          The entered and repeated passwords don't match, try again!
+        </span>
+      </div>
+      <hr />
 
-            
-            <div [formGroup]="registrationForm">
-                <label for="name"><b>Name</b></label>
-                <input type="text"  placeholder="Enter Name" name="name" id="name" oninput="this.className = ''" required formControlName="name" [(ngModel)]="user.name">
-                <span *ngIf="name && name.invalid && name.touched" style="color: red;">
-                    Name is required!
-                </span>
-                <br>
-                
-            </div>
-            <br>
+      <div [formGroup]="registrationForm">
+        <label for="name"><b>Name</b></label>
+        <input
+          type="text"
+          placeholder="Enter Name"
+          name="name"
+          id="name"
+          oninput="this.className = ''"
+          required
+          formControlName="name"
+          [(ngModel)]="user.name"
+        />
+        <span *ngIf="name && name.invalid && name.touched" style="color: red">
+          Name is required!
+        </span>
+        <br />
+      </div>
+      <br />
 
-            <div [formGroup]="registrationForm">
-                <label for="surname"><b>Surname</b></label>
-                <input type="text" placeholder="Enter Surname" name="surname" id="surname" oninput="this.className = ''" required formControlName="surname" [(ngModel)]="user.surname">
-                <span *ngIf="surname && surname.invalid && surname.touched "style="color: red;">
-                    Surname is required!
-                </span>
+      <div [formGroup]="registrationForm">
+        <label for="surname"><b>Surname</b></label>
+        <input
+          type="text"
+          placeholder="Enter Surname"
+          name="surname"
+          id="surname"
+          oninput="this.className = ''"
+          required
+          formControlName="surname"
+          [(ngModel)]="user.surname"
+        />
+        <span
+          *ngIf="surname && surname.invalid && surname.touched"
+          style="color: red"
+        >
+          Surname is required!
+        </span>
 
-               
-                <br>
-            </div>
-            
-            <div [formGroup]="registrationForm">
-                <label for="city"><b>City</b></label>
-                <input type="text" placeholder="Enter City" name="city" id="city"  oninput="this.className = ''" required formControlName="city" [(ngModel)]="user.city">
-                <span *ngIf="city && city.invalid && city.touched "style="color: red;">
-                    City is required!
-                </span>
-            </div>
+        <br />
+      </div>
 
-            <div [formGroup]="registrationForm">
-                <label for="country"><b>Country</b></label>
-                <input type="text" placeholder="Enter Country" name="country" id="country" oninput="this.className = ''" required formControlName="country" [(ngModel)]="user.country">
-                <span *ngIf="country && country.invalid && country.touched "style="color: red;">
-                    Country is required!
-                </span>
-            </div>
+      <div [formGroup]="registrationForm">
+        <label for="city"><b>City</b></label>
+        <input
+          type="text"
+          placeholder="Enter City"
+          name="city"
+          id="city"
+          oninput="this.className = ''"
+          required
+          formControlName="city"
+          [(ngModel)]="user.city"
+        />
+        <span *ngIf="city && city.invalid && city.touched" style="color: red">
+          City is required!
+        </span>
+      </div>
 
-            <div [formGroup]="registrationForm">
-                <label for="phoneNumber"><b>Phone</b></label>
-                <input type="tel" placeholder="Enter Phone" name="phoneNumber" id="phoneNumber" oninput="this.className = ''" required formControlName="phoneNumber" [(ngModel)]="user.phoneNumber">
-                <span *ngIf="phoneNumber && phoneNumber.invalid && phoneNumber.touched "style="color: red;">
-                    Phone number is required!
-                </span>
-                
-            </div>   
+      <div [formGroup]="registrationForm">
+        <label for="country"><b>Country</b></label>
+        <input
+          type="text"
+          placeholder="Enter Country"
+          name="country"
+          id="country"
+          oninput="this.className = ''"
+          required
+          formControlName="country"
+          [(ngModel)]="user.country"
+        />
+        <span
+          *ngIf="country && country.invalid && country.touched"
+          style="color: red"
+        >
+          Country is required!
+        </span>
+      </div>
 
-            <div [formGroup]="registrationForm">
-                <label for="employment"><b>Employment: </b></label>
-                <!--<input type="text" placeholder="Enter Employment" name="profession" id="profession" oninput="this.className = ''" required formControlName="employment" [(ngModel)]="user.employment">-->
-               
-                
-                <select formControlName="employment" id="employment">
-                    <option *ngFor="let employment of employments" [value]="employment.value">{{ employment.label }}</option>
-                  </select>
-                <span *ngIf="profession && profession.invalid && profession.touched "style="color: red;">
-                    Profession is required!
-                </span>
-            </div>
-            <br>
-            <div [formGroup]="registrationForm">
-                <label for="infoAboutInstitution"><b>Information</b></label>
-                <input type="text" placeholder="Enter Information about company/school/college/..." name="infoAboutInstitution" id="infoAboutInstitution" oninput="this.className = ''" required formControlName="infoAboutInstitution" [(ngModel)]="user.infoAboutInstitution">
-                <span *ngIf="infoAboutInstitution && infoAboutInstitution.invalid && infoAboutInstitution.touched "style="color: red;">
-                    Info about institution is required!
-                </span>
-            </div>   
+      <div [formGroup]="registrationForm">
+        <label for="phoneNumber"><b>Phone</b></label>
+        <input
+          type="tel"
+          placeholder="Enter Phone"
+          name="phoneNumber"
+          id="phoneNumber"
+          oninput="this.className = ''"
+          required
+          formControlName="phoneNumber"
+          [(ngModel)]="user.phoneNumber"
+        />
+        <span
+          *ngIf="phoneNumber && phoneNumber.invalid && phoneNumber.touched"
+          style="color: red"
+        >
+          Phone number is required!
+        </span>
+      </div>
 
-        </div>
-        </div>
-    
-    
+      <div [formGroup]="registrationForm">
+        <label for="employment"><b>Employment: </b></label>
+        <!--<input type="text" placeholder="Enter Employment" name="profession" id="profession" oninput="this.className = ''" required formControlName="employment" [(ngModel)]="user.employment">-->
+
+        <select formControlName="employment" id="employment">
+          <option
+            *ngFor="let employment of employments"
+            [value]="employment.value"
+          >
+            {{ employment.label }}
+          </option>
+        </select>
+        <span
+          *ngIf="profession && profession.invalid && profession.touched"
+          style="color: red"
+        >
+          Profession is required!
+        </span>
+      </div>
+      <br />
+      <div [formGroup]="registrationForm">
+        <label for="infoAboutInstitution"><b>Information</b></label>
+        <input
+          type="text"
+          placeholder="Enter Information about company/school/college/..."
+          name="infoAboutInstitution"
+          id="infoAboutInstitution"
+          oninput="this.className = ''"
+          required
+          formControlName="infoAboutInstitution"
+          [(ngModel)]="user.infoAboutInstitution"
+        />
+        <span
+          *ngIf="
+            infoAboutInstitution &&
+            infoAboutInstitution.invalid &&
+            infoAboutInstitution.touched
+          "
+          style="color: red"
+        >
+          Info about institution is required!
+        </span>
+      </div>
+    </div>
+  </div>
 </form>
-<button class="registerbtn" (click)="registerUser()" [disabled]="registrationForm.invalid && !isAllValid()">Register</button>
+<button
+  class="registerbtn"
+  (click)="registerUser()"
+  [disabled]="registrationForm.invalid && !isAllValid()"
+>
+  Register
+</button>

@@ -12,7 +12,7 @@ export interface User {
   infoAboutInstitution: string;
   loggedBefore: boolean;
 }
-export enum Employment{
+export enum Employment {
   COMPANY_ADMIN,
-	SISTEM_ADMIN,
+  SISTEM_ADMIN,
 }

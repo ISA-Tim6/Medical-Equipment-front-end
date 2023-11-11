@@ -1,130 +1,161 @@
-<div class="profile">
-  <h2>My Profile</h2>
-  <label for="email">Email:</label>
-  <label for="email">{{ user.email }}</label>
+<div class="profile-container">
+  <div class="profile">
+    <h2>My Profile</h2>
+    <label for="email">Email:</label>
+    <label for="email">{{ user.email }}</label>
 
-  <label for="email">Username:</label>
-  <label for="email">{{ user.username }}</label>
+    <label for="email">Username:</label>
+    <label for="email">{{ user.username }}</label>
 
-  <label for="firstName">First Name:</label>
-  <label for="email">{{ user.name }}</label>
+    <label for="firstName">First Name:</label>
+    <label for="email">{{ user.name }}</label>
 
-  <label for="lastName">Last Name:</label>
-  <label for="email">{{ user.surname }}</label>
+    <label for="lastName">Last Name:</label>
+    <label for="email">{{ user.surname }}</label>
 
-  <label for="city">City:</label>
-  <label for="email">{{ user.city }}</label>
+    <label for="city">City:</label>
+    <label for="email">{{ user.city }}</label>
 
-  <label for="country">Country:</label>
-  <label for="email">{{ user.country }}</label>
+    <label for="country">Country:</label>
+    <label for="email">{{ user.country }}</label>
 
-  <label for="phoneNumber">Phone Number:</label>
-  <label for="email">{{ user.phoneNumber }}</label>
+    <label for="phoneNumber">Phone Number:</label>
+    <label for="email">{{ user.phoneNumber }}</label>
 
-  <label for="occupation">Employment:</label>
-  <label for="email">{{ user.employment }}</label>
+    <label for="occupation">Employment:</label>
+    <label for="email">{{ user.employment }}</label>
 
-  <label for="companyInfo">Company Information:</label>
-  <label for="email">{{ user.infoAboutInstitution }}</label>
+    <label for="companyInfo">Company Information:</label>
+    <label for="email">{{ user.infoAboutInstitution }}</label>
 
-  <button type="button" (click)="onEditMode()">
-    {{ "Edit Profile" }}
-  </button>
+    <button type="button" (click)="onEditMode()">
+      {{ "Edit Profile" }}
+    </button>
+  </div>
+
+  <div *ngIf="editMode" class="edit-form">
+    <form [formGroup]="userForm">
+      <h2>Edit Profile</h2>
+
+      <label for="username">Username:</label>
+      <input
+        type="text"
+        id="username"
+        name="username"
+        formControlName="username"
+        required
+      />
+      <div *ngIf="isUsernameInvalid" class="error-message">
+        Username is required.
+      </div>
+
+      <label for="password">Password:</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        formControlName="password"
+        required
+      />
+      <div *ngIf="isPasswordInvalid" class="error-message">
+        Password is required.
+      </div>
+
+      <label for="confirmPassword">Confirm Password:</label>
+      <input
+        type="password"
+        id="password"
+        name="confirmPassword"
+        formControlName="confirmPassword"
+        required
+      />
+      <div *ngIf="isConfirmPasswordInvalid" class="error-message">
+        Please confirm password.
+      </div>
+
+      <label for="firstName">First Name:</label>
+      <input
+        type="text"
+        id="firstName"
+        name="firstName"
+        formControlName="name"
+        required
+      />
+      <div *ngIf="isNameInvalid" class="error-message">
+        First name is required, must start with capital letter.
+      </div>
+
+      <label for="lastName">Last Name:</label>
+      <input
+        type="text"
+        id="lastName"
+        name="lastName"
+        formControlName="surname"
+        required
+      />
+      <div *ngIf="isSurnameInvalid" class="error-message">
+        Last name is required, must start with capital letter.
+      </div>
+
+      <label for="city">City:</label>
+      <input
+        type="text"
+        id="city"
+        name="city"
+        formControlName="city"
+        required
+      />
+      <div *ngIf="isCityInvalid" class="error-message">
+        City is required, must start with capital letter.
+      </div>
+
+      <label for="country">Country:</label>
+      <input
+        type="text"
+        id="country"
+        name="country"
+        formControlName="country"
+        required
+      />
+      <div *ngIf="isCountryInvalid" class="error-message">
+        Country is required, must start with capital letter.
+      </div>
+
+      <label for="phoneNumber">Phone Number:</label>
+      <input
+        type="tel"
+        id="phoneNumber"
+        name="phoneNumber"
+        formControlName="phoneNumber"
+        required
+      />
+      <div *ngIf="isNumberInvalid" class="error-message">
+        Phone number is required, must contain 9 or 10 digits.
+      </div>
+    </form>
+
+    <label for="occupation">Employment:</label>
+    <select id="occupation" required [(ngModel)]="selected">
+      <option *ngFor="let employment of employments" [value]="employment.value">
+        {{ employment.label }}
+      </option>
+    </select>
+
+    <form [formGroup]="userForm">
+      <label for="companyInfo">Company Information:</label>
+      <textarea
+        id="companyInfo"
+        name="companyInfo"
+        formControlName="infoAboutInstitution"
+        rows="4"
+      ></textarea>
+      <div *ngIf="areInfoInvalid" class="error-message">
+        Company information are required.
+      </div>
+
+      <button type="button" (click)="updateProfile()">
+        {{ editMode ? "Save Changes" : "Edit Profile" }}
+      </button>
+    </form>
+  </div>
 </div>
-
-<form [formGroup]="userForm">
-  <h2>My Profile</h2>
-  <label for="email">Email:</label>
-  <input
-    type="email"
-    id="email"
-    name="email"
-    formControlName="email"
-    required
-  />
-
-  <label for="username">Username:</label>
-  <input
-    type="text"
-    id="username"
-    name="username"
-    formControlName="username"
-    required
-  />
-
-  <label for="password">Password:</label>
-  <input
-    type="password"
-    id="password"
-    name="password"
-    formControlName="password"
-    required
-  />
-
-  <label for="confirmPassword">Confirm Password:</label>
-  <input
-    type="password"
-    id="confirmPassword"
-    name="confirmPassword"
-    formControlName="password"
-    required
-  />
-
-  <label for="firstName">First Name:</label>
-  <input
-    type="text"
-    id="firstName"
-    name="firstName"
-    formControlName="name"
-    required
-  />
-
-  <label for="lastName">Last Name:</label>
-  <input
-    type="text"
-    id="lastName"
-    name="lastName"
-    formControlName="surname"
-    required
-  />
-
-  <label for="city">City:</label>
-  <input type="text" id="city" name="city" formControlName="city" required />
-
-  <label for="country">Country:</label>
-  <input
-    type="text"
-    id="country"
-    name="country"
-    formControlName="country"
-    required
-  />
-
-  <label for="phoneNumber">Phone Number:</label>
-  <input
-    type="tel"
-    id="phoneNumber"
-    name="phoneNumber"
-    formControlName="phoneNumber"
-    required
-  />
-
-  <label for="occupation">Occupation:</label>
-  <select id="occupation" required>
-    <option *ngFor="let employment of employments" [value]="employment.value">
-      {{ employment.label }}
-    </option>
-  </select>
-
-  <label for="companyInfo">Company Information:</label>
-  <textarea
-    id="companyInfo"
-    name="companyInfo"
-    formControlName="infoAboutInstitution"
-    rows="4"
-  ></textarea>
-
-  <button type="button" (click)="onEditMode()">
-    {{ editMode ? "Save Changes" : "Edit Profile" }}
-  </button>
-</form>
