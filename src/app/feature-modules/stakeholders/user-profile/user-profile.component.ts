@@ -59,12 +59,12 @@ export class UserProfileComponent implements OnChanges, OnInit {
     });
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    throw new Error('Method not implemented.');
-  }
+  ngOnChanges(changes: SimpleChanges): void {}
   onEditMode() {
-    if (this.editMode) this.updateProfile();
-    this.editMode = !this.editMode;
+    //if (this.editMode) this.updateProfile();
+    this.editMode = true;
+    this.userForm.reset();
+    this.userForm.patchValue(this.user);
   }
 
   updateProfile(): void {

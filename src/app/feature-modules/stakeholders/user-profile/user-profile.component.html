@@ -1,3 +1,37 @@
+<div class="profile">
+  <h2>My Profile</h2>
+  <label for="email">Email:</label>
+  <label for="email">{{ user.email }}</label>
+
+  <label for="email">Username:</label>
+  <label for="email">{{ user.username }}</label>
+
+  <label for="firstName">First Name:</label>
+  <label for="email">{{ user.name }}</label>
+
+  <label for="lastName">Last Name:</label>
+  <label for="email">{{ user.surname }}</label>
+
+  <label for="city">City:</label>
+  <label for="email">{{ user.city }}</label>
+
+  <label for="country">Country:</label>
+  <label for="email">{{ user.country }}</label>
+
+  <label for="phoneNumber">Phone Number:</label>
+  <label for="email">{{ user.phoneNumber }}</label>
+
+  <label for="occupation">Employment:</label>
+  <label for="email">{{ user.employment }}</label>
+
+  <label for="companyInfo">Company Information:</label>
+  <label for="email">{{ user.infoAboutInstitution }}</label>
+
+  <button type="button" (click)="onEditMode()">
+    {{ "Edit Profile" }}
+  </button>
+</div>
+
 <form [formGroup]="userForm">
   <h2>My Profile</h2>
   <label for="email">Email:</label>
@@ -7,8 +41,15 @@
     name="email"
     formControlName="email"
     required
-    readonly
-    [value]="user.email"
+  />
+
+  <label for="username">Username:</label>
+  <input
+    type="text"
+    id="username"
+    name="username"
+    formControlName="username"
+    required
   />
 
   <label for="password">Password:</label>
@@ -18,8 +59,6 @@
     name="password"
     formControlName="password"
     required
-    [readonly]="!editMode"
-    [value]="user.password"
   />
 
   <label for="confirmPassword">Confirm Password:</label>
@@ -29,8 +68,6 @@
     name="confirmPassword"
     formControlName="password"
     required
-    [readonly]="!editMode"
-    [value]="user.password"
   />
 
   <label for="firstName">First Name:</label>
@@ -40,8 +77,6 @@
     name="firstName"
     formControlName="name"
     required
-    [readonly]="!editMode"
-    [value]="user.name"
   />
 
   <label for="lastName">Last Name:</label>
@@ -49,22 +84,12 @@
     type="text"
     id="lastName"
     name="lastName"
-    formControlName="surame"
+    formControlName="surname"
     required
-    [readonly]="!editMode"
-    [value]="user.surname"
   />
 
   <label for="city">City:</label>
-  <input
-    type="text"
-    id="city"
-    name="city"
-    formControlName="city"
-    required
-    [readonly]="!editMode"
-    [value]="user.city"
-  />
+  <input type="text" id="city" name="city" formControlName="city" required />
 
   <label for="country">Country:</label>
   <input
@@ -73,8 +98,6 @@
     name="country"
     formControlName="country"
     required
-    [readonly]="!editMode"
-    [value]="user.country"
   />
 
   <label for="phoneNumber">Phone Number:</label>
@@ -84,19 +107,11 @@
     name="phoneNumber"
     formControlName="phoneNumber"
     required
-    [readonly]="!editMode"
-    [value]="user.phoneNumber"
   />
 
-  <label for="occupation">Employment:</label>
-  <select formControlName="employment" id="employment">
-    <option
-      id="occupation"
-      required
-      [readonly]="!editMode"
-      *ngFor="let employment of employments"
-      [value]="employment.value"
-    >
+  <label for="occupation">Occupation:</label>
+  <select id="occupation" required>
+    <option *ngFor="let employment of employments" [value]="employment.value">
       {{ employment.label }}
     </option>
   </select>
@@ -107,8 +122,6 @@
     name="companyInfo"
     formControlName="infoAboutInstitution"
     rows="4"
-    [readonly]="!editMode"
-    [value]="user.infoAboutInstitution"
   ></textarea>
 
   <button type="button" (click)="onEditMode()">
