@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { StakeholdersService } from '../stakeholders.service';
-import { Employment, User } from '../model/user.model';
+import { Category, Employment, User } from '../model/user.model';
 
 @Component({
   selector: 'app-user-profile',
@@ -32,6 +32,8 @@ export class UserProfileComponent implements OnChanges, OnInit {
     employment: this.employments[0].value,
     infoAboutInstitution: '',
     loggedBefore: false,
+    category: Category.REGULAR,
+    penals: 0,
   };
 
   constructor(private service: StakeholdersService) {}
@@ -112,6 +114,8 @@ export class UserProfileComponent implements OnChanges, OnInit {
         employment: this.selected ? parseInt(this.selected, 10) : 0,
         infoAboutInstitution: this.userForm.value.infoAboutInstitution || '',
         loggedBefore: this.user!.loggedBefore,
+        penals: this.user!.penals,
+        category: this.user!.category,
       };
       this.service.updateUser(user, oldUsername).subscribe({
         next: (result: User) => {
@@ -219,5 +223,21 @@ export class UserProfileComponent implements OnChanges, OnInit {
       !this.isCityInvalid &&
       !this.isCountryInvalid
     );
+  }
+
+  getCategory(category: Category | undefined): string {
+    if (category === undefined) {
+      return 'N/A';
+    }
+    switch (category.toString()) {
+      case 'REGULAR':
+        return 'REGULAR';
+      case 'SILVER':
+        return 'SILVER';
+      case 'GOLD':
+        return 'GOLD';
+      default:
+        return '';
+    }
   }
 }

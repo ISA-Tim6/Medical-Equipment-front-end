@@ -28,6 +28,12 @@
     <label for="companyInfo">Company Information:</label>
     <label for="email">{{ user.infoAboutInstitution }}</label>
 
+    <label for="penals">Penals:</label>
+    <label for="penals">{{ user.penals }}</label>
+
+    <label for="category">Category:</label>
+    <label for="category">{{ getCategory(user.category) }}</label>
+
     <button type="button" (click)="onEditMode()">
       {{ "Edit Profile" }}
     </button>
