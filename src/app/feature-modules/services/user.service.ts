@@ -24,7 +24,7 @@ export class UserService {
 
   registerUser(user:User): Observable<any>{
     console.log(user.infoAboutInstitution)
-    return this.http.post<any>(environment.apiHost+"saveUser",user)
+    return this.http.post<any>(environment.apiHost+"registerUser",user)
     
   }
 

@@ -47,7 +47,9 @@ export class RegistrationFormComponent implements OnChanges{
                 ? parseInt(this.selected, 2)
                 : 0,
     infoAboutInstitution: this.registrationForm.value.infoAboutInstitution || "",
-    loggedBefore: false
+    loggedBefore: false,
+    penals: 0,
+    category: 0
   };
 
 
@@ -57,14 +59,16 @@ export class RegistrationFormComponent implements OnChanges{
       this.user.infoAboutInstitution=this.registrationForm.get('infoAboutInstitution')!.value || "";
       
       this.userService.registerUser(this.user).subscribe(
-        /*(error: HttpErrorResponse) => {
-          console.error("Registration failed:", error);
-          alert('Email is already taken!')
-        }*/
-        next=>{
-          alert("dodano")
+        next => {
+          console.log('Registracija uspešna');
+          alert('Uspješno dodano.');
+        },
+        error => {
+          console.error('Greška prilikom registracije', error);
+          alert('Greška. Korisnik postoji.');
         }
       );
+      this.registrationForm.reset();
  
   }
 
@@ -96,7 +100,7 @@ export class RegistrationFormComponent implements OnChanges{
     return this.registrationForm.get('phoneNumber'); 
   }
 
-  get profession(){
+  get employment(){
     return this.registrationForm.get('employment'); 
   }
 
@@ -108,7 +112,7 @@ export class RegistrationFormComponent implements OnChanges{
   }
 
   public isValid(name:string){
-    let sampleRegEx: RegExp = /[A-Z][A-Za-z]+/;
+    let sampleRegEx: RegExp = /^[A-Z][A-Za-z ]*$/;
     return sampleRegEx.test(name);
   }
 
@@ -145,7 +149,7 @@ export class RegistrationFormComponent implements OnChanges{
   }
   isPhoneNumberValid(){
     let isValidPhoneNumber:boolean=false;
-    let sampleRegEx: RegExp = /[0-9]+/;
+    let sampleRegEx: RegExp =  /^[0-9]{9,10}$/
     if(sampleRegEx.test(this.user.phoneNumber))
       if(this.user.phoneNumber.length>3)
         isValidPhoneNumber=true;
@@ -163,13 +167,12 @@ export class RegistrationFormComponent implements OnChanges{
     let emailValid:boolean = false;
     let longPasswordValid:boolean = false;
     let passwordCorrect:boolean = false;
-    let genderValid:boolean=false;
     let phoneValid:boolean = false;
     
     if((this.isValid(this.user.name)))
         nameValid=true;
 
-    if(this.isValid(this.user.email))
+    if(this.isValid(this.user.surname))
       surnameValid=true;
 
     if(this.isValidEmail(this.user.email))

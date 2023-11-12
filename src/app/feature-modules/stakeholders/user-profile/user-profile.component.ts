@@ -102,7 +102,7 @@ export class UserProfileComponent implements OnChanges, OnInit {
     if (this.isInputValid) {
       var oldUsername = this.user.username;
       const user: User = {
-        id: this.user!.id,
+        user_id: this.user!.user_id,
         email: this.user!.email,
         password: this.userForm.value.password || '',
         name: this.userForm.value.name || '',
