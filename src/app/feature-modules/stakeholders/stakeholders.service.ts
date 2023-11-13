@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { User } from './model/user.model';
+import { RegistratedUser } from './model/user.model';
 import { environment } from 'src/env/environment';
 
 @Injectable({
@@ -10,12 +10,15 @@ import { environment } from 'src/env/environment';
 export class StakeholdersService {
   constructor(private http: HttpClient) {}
 
-  getUser(): Observable<User> {
-    return this.http.get<User>(environment.apiHost + 1);
+  getUser(): Observable<RegistratedUser> {
+    return this.http.get<RegistratedUser>(environment.apiHost + 1);
   }
 
-  updateUser(user: User, oldUsername: string): Observable<User> {
-    return this.http.put<User>(
+  updateUser(
+    user: RegistratedUser,
+    oldUsername: string
+  ): Observable<RegistratedUser> {
+    return this.http.put<RegistratedUser>(
       environment.apiHost + 'updateUser/' + oldUsername,
       user
     );
