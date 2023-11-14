@@ -18,4 +18,5 @@ export class UserService {
     console.log(user.infoAboutInstitution);
     return this.http.post<any>(environment.apiHost + 'registerUser', user);
   }
+  
 }

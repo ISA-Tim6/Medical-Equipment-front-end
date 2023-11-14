@@ -239,7 +239,7 @@
 </form>
 <button
   class="registerbtn"
-  (click)="registerUser()"
+  (click)="registerUser($event)"
   [disabled]="registrationForm.invalid && !isAllValid()"
 >
   Register

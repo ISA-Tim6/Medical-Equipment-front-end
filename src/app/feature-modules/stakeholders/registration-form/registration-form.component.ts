@@ -59,22 +59,24 @@ export class RegistrationFormComponent implements OnChanges {
     category: 0
   };
 
-  public registerUser() {
-    
+  public registerUser(event: Event) {
+    event.preventDefault();
+
       
       this.user.infoAboutInstitution=this.registrationForm.get('infoAboutInstitution')!.value || "";
       
-      this.userService.registerUser(this.user).subscribe(
-        /*(error: HttpErrorResponse) => {
-          console.error("Registration failed:", error);
-          alert('Email is already taken!')
-        }*/
-        next=>{
-          alert("dodano")
+      this.userService.registerUser(this.user).subscribe((response:any)=>{
+          if (response.status == "success") {
+            alert("Email successfully sent.")
+          } else {
+            alert("Error.")
+          }
+          this.registrationForm.reset();
         }
       );
  
   }
+
 
   get name() {
     return this.registrationForm.get('name');
