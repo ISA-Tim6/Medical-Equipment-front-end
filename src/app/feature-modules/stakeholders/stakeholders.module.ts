@@ -5,12 +5,14 @@ import { RegistrationFormComponent } from './registration-form/registration-form
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { CompanySearchComponent } from './company-search/company-search.component';
+import { CompanyAdminProfileComponent } from './company-admin-profile/company-admin-profile.component';
 
 @NgModule({
   declarations: [
     UserProfileComponent,
     RegistrationFormComponent,
     CompanySearchComponent,
+    CompanyAdminProfileComponent,
   ],
   imports: [CommonModule, ReactiveFormsModule, FormsModule],
   exports: [UserProfileComponent, RegistrationFormComponent],

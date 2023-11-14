@@ -1,0 +1,90 @@
+<div>
+    <p>Company admin profile</p>
+    <hr>
+    <div>
+        <div>
+            <label><b>Name:</b></label>
+            <input
+            disabled={{disabledStatus}}
+            type="text"
+            [(ngModel)]="companyAdmin.name"
+          />
+          <span *ngIf="disabledStatus==false && invalidName" style="color: red">
+            Invalid name!
+          </span>
+        <div>
+    </div>
+    <div>
+        <label><b>Surname:</b></label>
+        <input
+        disabled={{disabledStatus}}
+        type="text"
+        [(ngModel)]="companyAdmin.surname"
+        />
+        <span *ngIf="disabledStatus==false && invalidSurname" style="color: red">
+            Invalid surname!
+          </span>
+    </div>
+    <div>
+        <label><b>Username:</b></label>
+        <input
+        disabled={{disabledStatus}}
+        type="text"
+        [(ngModel)]="companyAdmin.username"
+        />
+    </div>
+    <div>
+        <label><b>Password:</b></label>
+        <input
+        disabled={{disabledStatus}}
+        type="text"
+        [(ngModel)]="companyAdmin.password"
+        />
+    </div>
+    <div>
+        <label><b>Phone number:</b></label>
+        <input
+        type="text"
+        disabled={{disabledStatus}}
+        [(ngModel)]="companyAdmin.phoneNumber"
+        />
+    </div>
+    <div>
+        <label><b>Email:</b></label>
+        <input
+        type="text"
+        disabled={{disabledStatus}}
+        [(ngModel)]="companyAdmin.email"
+        />
+    </div>
+    <div>
+        <label><b>City:</b></label>
+        <input
+        type="text"
+        disabled={{disabledStatus}}
+        [(ngModel)]="companyAdmin.city"
+        />
+    </div>
+    <div>
+        <label><b>Country:</b></label>
+        <input
+        type="text"
+        disabled={{disabledStatus}}
+        [(ngModel)]="companyAdmin.country"
+        />
+    </div>
+    <div>
+        <label><b>Information about institution:</b></label>
+        <input
+        type="text"
+        disabled={{disabledStatus}}
+        [(ngModel)]="companyAdmin.infoAboutInstitution"
+        />
+    </div>
+    <span>
+    <button (click)="updateUser()" >{{edit}}</button>
+    <button (click)="onSeeCompanyProfile()">See company profile</button>
+    </span>
+
+
+</div>
