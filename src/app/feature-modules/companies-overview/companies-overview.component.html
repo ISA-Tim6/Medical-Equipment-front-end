@@ -1,0 +1,17 @@
+<div>
+    <p>All companies</p>
+    <hr>
+    <table>
+        <tr *ngFor="let c of companies">
+            <td (onClick)="showDetails(c)">
+                <span>Name:</span> {{c.name}}
+                <br>
+                <span>Average grade: </span>{{c.averageGrade}}
+                <br>
+                <span>City:</span> {{c.address.city}}
+                <br>
+            </td>
+        </tr>
+
+    </table>
+</div>
