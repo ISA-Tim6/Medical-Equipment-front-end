@@ -32,6 +32,15 @@ export class CompanyAdminProfileComponent implements OnInit{
     company_id:1
   };
 
+  invalidName:Boolean=false;
+  invalidSurname:Boolean=false;
+  invalidEmail:Boolean=false;
+  invalidUsername:Boolean=false;
+  invalidPassword:Boolean=false;
+  invalidCity:Boolean=false;
+  invalidCountry:Boolean=false;
+  invalidPhoneNumber:Boolean=false;
+
   ngOnInit(): void {
     this.service.getCompanyAdmin(this.id).subscribe({
       next: (result: CompanyAdmin) => {

@@ -24,7 +24,7 @@ export class CompaniesOverviewComponent implements OnInit{
   id:number;
 
   showDetails(c:Company):void{
-    this.router.navigate([`company/${this.id}`]);
+    this.router.navigate([`company/${c.company_id}`]);
 
   }
 }

@@ -1,1 +1,58 @@
-<p>company-overview works!</p>
+<p>Details about company<p>
+<hr>
+<br>
+<table>
+    <tr>
+        <th>Name</th>
+        <td>{{company.name}}</td>
+    </tr>
+    <tr>
+        <th>Average grade</th>
+        <td>{{company.averageGrade}}</td>
+    </tr>
+    <tr>
+        <th>Address</th>
+        <td>
+            <table>
+                <tr>
+                    <th>City</th>
+                    <td>{{company.address.city}}</td>
+                </tr>
+                <tr>
+                    <th>Country</th>
+                    <td>{{company.address.country}}</td>
+                </tr>
+                <tr>
+                    <th>Street</th>
+                    <td>{{company.address.street}}</td>
+                </tr>
+                <tr>
+                    <th>Street number</th>
+                    <td>{{company.address.streetNumber}}</td>
+                </tr>
+                <tr>
+                    <th>Longitude</th>
+                    <td>{{company.address.longitude}}</td>
+                </tr>
+                <tr>
+                    <th>Latitude</th>
+                    <td>{{company.address.latitude}}</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <th>Equipment:</th>
+        <td>
+            <table>
+                <tr *ngFor="let e of company.equipment">
+                    <td>
+                        <div class="div-equipment"><div class="div-equipment-header">Name  </div><div class="span-equipment"> {{e.name}}</div></div>
+                        <div class="div-equipment"><div class="div-equipment-header">Description </div><div class="span-equipment">{{e.description}}</div></div>
+                        <div class="div-equipment"><div class="div-equipment-header">Type </div><div class="span-equipment">{{e.type}}</div></div>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
