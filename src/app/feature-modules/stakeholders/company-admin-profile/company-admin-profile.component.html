@@ -1,0 +1,84 @@
+<div>
+    <p>Company admin profile:</p>
+    <hr>
+    <div>
+        <div>
+            Name:
+            <input
+            disabled={{disabledStatus}}
+            type="text"
+            [(ngModel)]="companyAdmin.name"
+          />
+        <div>
+    </div>
+    <div>
+        Surname:
+        <input
+        disabled={{disabledStatus}}
+        type="text"
+        [(ngModel)]="companyAdmin.surname"
+        />
+    </div>
+    <div>
+        Username:
+        <input
+        disabled={{disabledStatus}}
+        type="text"
+        [(ngModel)]="companyAdmin.username"
+        />
+    </div>
+    <div>
+        Password:
+        <input
+        disabled={{disabledStatus}}
+        type="text"
+        [(ngModel)]="companyAdmin.password"
+        />
+    </div>
+    <div>
+        Phone number:
+        <input
+        type="text"
+        disabled={{disabledStatus}}
+        [(ngModel)]="companyAdmin.phoneNumber"
+        />
+    </div>
+    <div>
+        Email:
+        <input
+        type="text"
+        disabled={{disabledStatus}}
+        [(ngModel)]="companyAdmin.email"
+        />
+    </div>
+    <div>
+        City:
+        <input
+        type="text"
+        disabled={{disabledStatus}}
+        [(ngModel)]="companyAdmin.city"
+        />
+    </div>
+    <div>
+        Country:
+        <input
+        type="text"
+        disabled={{disabledStatus}}
+        [(ngModel)]="companyAdmin.country"
+        />
+    </div>
+    <div>
+        Information about instituion:
+        <input
+        type="text"
+        disabled={{disabledStatus}}
+        [(ngModel)]="companyAdmin.infoAboutInstitution"
+        />
+    </div>
+    <span>
+    <button (click)="updateUser()" >{{edit}}</button>
+    <button (click)="onSeeCompanyProfile()">See company profile</button>
+    </span>
+
+
+</div>

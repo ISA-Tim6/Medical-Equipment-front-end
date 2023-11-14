@@ -1,0 +1,116 @@
+<div>
+    <p>company-profile</p>
+    <hr>
+    <div>
+        Name:
+        <input
+        disabled={{disabledStatus}}
+        type="text"
+        [(ngModel)]="company.name"
+        />
+    </div>
+    <div>
+        Average grade:
+        <input
+        disabled={{disabledStatus}}
+        type="text"
+        [(ngModel)]="company.averageGrade"
+        />
+    </div>
+    <div>Address:</div>                                                     
+    <div>
+        City
+        <input
+        disabled={{disabledStatus}}
+        type="text"
+        [(ngModel)]="company.address.city"
+        />
+    </div>
+    <div>
+        Country
+        <input
+        disabled={{disabledStatus}}
+        type="text"
+        [(ngModel)]="company.address.country"
+        />
+    </div>
+    <div>
+        Street
+        <input
+        disabled={{disabledStatus}}
+        type="text"
+        [(ngModel)]="company.address.street"
+        />
+    </div>
+    <div>
+        Street number
+        <input
+        disabled={{disabledStatus}}
+        type="text"
+        [(ngModel)]="company.address.streetNumber"
+        />
+    </div>
+    <button (click)="OnEdit()">{{edit}}</button>
+    <div>
+        Other company admins:
+        <table>
+            <thead>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Username</th>
+                <th>City</th>
+                <th>Country</th>
+                <th>Email</th>
+                <th>Phone number</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let a of admins">
+                    <td>{{a.name}}</td>
+                    <td>{{a.surname}}</td>
+                    <td>{{a.username}}</td>
+                    <td>{{a.city}}</td>
+                    <td>{{a.country}}</td>
+                    <td>{{a.email}}</td>
+                    <td>{{a.phoneNumber}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        Equipment:
+    </div>
+    <div>
+        <table>
+            <thead>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Type</th>
+                <th></th>
+            </thead>
+            <tr *ngFor="let e of company.equipment">
+                <td>{{e.name}}</td>
+                <td>{{e.description}}</td>
+                <td>{{e.type}}</td>
+                <td><button (click)="OnMinus(e)">-</button></td>
+            </tr>
+            <tr>
+                <button (click)="OnPlus()">+</button>
+            </tr>
+        </table>
+        <div>
+            <form [formGroup]="equipmentForm" *ngIf="equipmentFormVisible">
+                <div>
+                <input type="text" required  placeholder="name" formControlName="name">
+                </div>
+                <div>
+                <input type="text" required  placeholder="description" formControlName="description">
+                </div>
+                <div>
+                    <input type="text" required   placeholder="type" formControlName="type">
+                    </div>
+                <button (click)="OnConfirm()">Confirm</button>
+            </form>
+        </div>
+    </div>
+</div>
+

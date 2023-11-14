@@ -1,0 +1,11 @@
+td{
+    border: 2px solid blue;
+    background-color: beige;
+    width: 5cm;
+}
+
+span{
+    font-weight: bold;
+    color:blue;
+    margin-left: 5px;
+}
