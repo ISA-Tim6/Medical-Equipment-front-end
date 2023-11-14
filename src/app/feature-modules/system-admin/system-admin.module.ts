@@ -5,17 +5,14 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SystemAdminFormComponent } from './system-admin-form/system-admin-form.component';
 import { CompanyAdminFormComponent } from './company-admin-form/company-admin-form.component';
+import { StakeholdersModule } from '../stakeholders/stakeholders.module';
 
 @NgModule({
   declarations: [
     CompanyFormComponent,
     SystemAdminFormComponent,
-    CompanyAdminFormComponent
+    CompanyAdminFormComponent,
   ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule
-  ]
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, StakeholdersModule],
 })
-export class SystemAdminModule { }
+export class SystemAdminModule {}
