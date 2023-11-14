@@ -1,0 +1,40 @@
+<form [formGroup]="adminForm">
+    <h2>Register new system administrator</h2>
+    <label>Name:</label>
+    <input type="text" formControlName="name">
+    <br>
+
+    <label>Surname:</label>
+    <input type="text" formControlName="surname">
+    <br>
+
+    <label>Username:</label>
+    <input type="text" formControlName="username">
+    <br>
+
+    <label>Password:</label>
+    <input type="text" formControlName="password">
+    <br>
+
+    <label>Email:</label>
+    <input type="text" formControlName="password">
+    <br>
+
+    <label>Phone number:</label>
+    <input type="text" formControlName="phoneNumber">
+    <br>
+
+    <label>City:</label>
+    <input type="text" formControlName="city">
+    <br>
+
+    <label>Country:</label>
+    <input type="text" formControlName="country">
+    <br>
+
+    <label>Information about company:</label>
+    <input type="text" formControlName="infoAboutInstitution">
+    <br>
+
+    <button (click)="onSave()">Save</button>
+</form>
