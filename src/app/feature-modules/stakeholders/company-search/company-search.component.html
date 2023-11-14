@@ -1,0 +1,27 @@
+<div class="search-container">
+  <h2 class="search-heading">Company Search</h2>
+  <p>Please select the parameter you want to search by:</p>
+  <select id="search-parameter">
+    <option value="name">Name</option>
+    <option value="location">Location</option>
+  </select>
+
+  <label for="parameter-value">Enter parameter value:</label>
+  <input type="text" id="parameter-value" class="fancy-input" />
+
+  <button class="fancy-search-btn">Search</button>
+
+  <div class="filter-container">
+    <label for="filter-rating">Filter by rating:</label>
+    <input type="range" id="filter-rating" min="1" max="10" value="5" />
+    <button class="fancy-filter-btn">Filter</button>
+  </div>
+
+  <div class="card-container">
+    <div class="card">
+      <h3 class="card-title">Company A</h3>
+      <p class="card-info">Address: 123 Main St</p>
+      <p class="card-info">Rating: 4.5</p>
+    </div>
+  </div>
+</div>
