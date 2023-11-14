@@ -1,165 +1,210 @@
 <div class="profile-container">
   <div class="profile">
-    <h2>My Profile</h2>
-    <label for="email">Email:</label>
-    <label for="email">{{ user.email }}</label>
+    <h2 class="profile-heading">My Profile</h2>
 
-    <label for="email">Username:</label>
-    <label for="email">{{ user.username }}</label>
+    <div class="profile-group">
+      <label for="email" class="fancy-label">Email:</label>
+      <div for="email" class="fancy-span">{{ user.email }}</div>
+    </div>
 
-    <label for="firstName">First Name:</label>
-    <label for="email">{{ user.name }}</label>
+    <div class="profile-group">
+      <label for="username" class="fancy-label">Username:</label>
+      <span for="username" class="fancy-span">{{ user.username }}</span>
+    </div>
 
-    <label for="lastName">Last Name:</label>
-    <label for="email">{{ user.surname }}</label>
+    <div class="profile-group">
+      <label for="firstName" class="fancy-label">First Name:</label>
+      <span for="email" class="fancy-span">{{ user.name }}</span>
+    </div>
 
-    <label for="city">City:</label>
-    <label for="email">{{ user.city }}</label>
+    <div class="profile-group">
+      <label for="lastName" class="fancy-label">Last Name:</label>
+      <span for="email" class="fancy-span">{{ user.surname }}</span>
+    </div>
 
-    <label for="country">Country:</label>
-    <label for="email">{{ user.country }}</label>
+    <div class="profile-group">
+      <label for="city" class="fancy-label">City:</label>
+      <span for="email" class="fancy-span">{{ user.city }}</span>
+    </div>
 
-    <label for="phoneNumber">Phone Number:</label>
-    <label for="email">{{ user.phoneNumber }}</label>
+    <div class="profile-group">
+      <label for="country" class="fancy-label">Country:</label>
+      <span for="email" class="fancy-span">{{ user.country }}</span>
+    </div>
 
-    <label for="occupation">Employment:</label>
-    <label for="email">{{ user.employment }}</label>
+    <div class="profile-group">
+      <label for="phoneNumber" class="fancy-label">Phone Number:</label>
+      <span for="email" class="fancy-span">{{ user.phoneNumber }}</span>
+    </div>
 
-    <label for="companyInfo">Company Information:</label>
-    <label for="email">{{ user.infoAboutInstitution }}</label>
+    <div class="profile-group">
+      <label for="occupation" class="fancy-label">Employment:</label>
+      <span for="email" class="fancy-span">{{ user.employment }}</span>
+    </div>
 
-    <label for="penals">Penals:</label>
-    <label for="penals">{{ user.penals }}</label>
+    <div class="profile-group">
+      <label for="companyInfo" class="fancy-label">Company Information:</label>
+      <span for="companyInfo" class="fancy-span-info">{{
+        user.infoAboutInstitution
+      }}</span>
+    </div>
 
-    <label for="category">Category:</label>
-    <label for="category">{{ getCategory(user.category) }}</label>
+    <div class="profile-group">
+      <label for="penals" class="fancy-label">Penals:</label>
+      <span for="penals" class="fancy-span">{{ user.penals }}</span>
+    </div>
 
-    <button type="button" (click)="onEditMode()">
+    <div class="profile-group">
+      <label for="category" class="fancy-label">Category:</label>
+      <span for="category" class="fancy-span">{{
+        getCategory(user.category)
+      }}</span>
+    </div>
+
+    <button type="button" class="profile-edit-btn" (click)="onEditMode()">
       {{ "Edit Profile" }}
     </button>
   </div>
 
   <div *ngIf="editMode" class="edit-form">
     <form [formGroup]="userForm">
-      <h2>Edit Profile</h2>
+      <h2 class="profile-heading">Edit Profile</h2>
 
-      <label for="username">Username:</label>
+      <label for="username" class="fancy-label-1">Username:</label>
       <input
         type="text"
         id="username"
         name="username"
         formControlName="username"
         required
+        class="fancy-input"
       />
-      <div *ngIf="isUsernameInvalid" class="error-message">
+      <div *ngIf="isUsernameInvalid" class="error-message fancy-error">
         Username is required.
       </div>
 
-      <label for="password">Password:</label>
+      <label for="password" class="fancy-label-1">Password:</label>
       <input
         type="password"
         id="password"
         name="password"
         formControlName="password"
         required
+        class="fancy-input"
       />
-      <div *ngIf="isPasswordInvalid" class="error-message">
+      <div *ngIf="isPasswordInvalid" class="error-message fancy-error">
         Password is required.
       </div>
 
-      <label for="confirmPassword">Confirm Password:</label>
+      <label for="confirmPassword" class="fancy-label-1"
+        >Confirm Password:</label
+      >
       <input
         type="password"
         id="password"
         name="confirmPassword"
         formControlName="confirmPassword"
         required
+        class="fancy-input"
       />
-      <div *ngIf="isConfirmPasswordInvalid" class="error-message">
+      <div *ngIf="isConfirmPasswordInvalid" class="error-message fancy-error">
         Please confirm password.
       </div>
 
-      <label for="firstName">First Name:</label>
+      <label for="firstName" class="fancy-label-1">First Name:</label>
       <input
         type="text"
         id="firstName"
         name="firstName"
         formControlName="name"
         required
+        class="fancy-input"
       />
-      <div *ngIf="isNameInvalid" class="error-message">
+      <div *ngIf="isNameInvalid" class="error-message fancy-error">
         First name is required, must start with capital letter.
       </div>
 
-      <label for="lastName">Last Name:</label>
+      <label for="lastName" class="fancy-label-1">Last Name:</label>
       <input
         type="text"
         id="lastName"
         name="lastName"
         formControlName="surname"
         required
+        class="fancy-input"
       />
-      <div *ngIf="isSurnameInvalid" class="error-message">
+      <div *ngIf="isSurnameInvalid" class="error-message fancy-error">
         Last name is required, must start with capital letter.
       </div>
 
-      <label for="city">City:</label>
+      <label for="city" class="fancy-label-1">City:</label>
       <input
         type="text"
         id="city"
         name="city"
         formControlName="city"
         required
+        class="fancy-input"
       />
-      <div *ngIf="isCityInvalid" class="error-message">
+      <div *ngIf="isCityInvalid" class="error-message fancy-error">
         City is required, must start with capital letter.
       </div>
 
-      <label for="country">Country:</label>
+      <label for="country" class="fancy-label-1">Country:</label>
       <input
         type="text"
         id="country"
         name="country"
         formControlName="country"
         required
+        class="fancy-input"
       />
-      <div *ngIf="isCountryInvalid" class="error-message">
+      <div *ngIf="isCountryInvalid" class="error-message fancy-error">
         Country is required, must start with capital letter.
       </div>
 
-      <label for="phoneNumber">Phone Number:</label>
+      <label for="phoneNumber" class="fancy-label-1">Phone Number:</label>
       <input
         type="tel"
         id="phoneNumber"
         name="phoneNumber"
         formControlName="phoneNumber"
         required
+        class="fancy-input"
       />
-      <div *ngIf="isNumberInvalid" class="error-message">
+      <div *ngIf="isNumberInvalid" class="error-message fancy-error">
         Phone number is required, must contain 9 or 10 digits.
       </div>
     </form>
 
-    <label for="occupation">Employment:</label>
-    <select id="occupation" required [(ngModel)]="selected">
+    <label for="occupation" class="fancy-label-1">Employment:</label>
+    <select
+      id="occupation"
+      required
+      [(ngModel)]="selected"
+      class="fancy-select"
+    >
       <option *ngFor="let employment of employments" [value]="employment.value">
         {{ employment.label }}
       </option>
     </select>
 
     <form [formGroup]="userForm">
-      <label for="companyInfo">Company Information:</label>
+      <label for="companyInfo" class="fancy-label-1"
+        >Company Information:</label
+      >
       <textarea
         id="companyInfo"
         name="companyInfo"
         formControlName="infoAboutInstitution"
         rows="4"
+        class="fancy-textarea"
       ></textarea>
-      <div *ngIf="areInfoInvalid" class="error-message">
+      <div *ngIf="areInfoInvalid" class="error-message fancy-error">
         Company information are required.
       </div>
 
-      <button type="button" (click)="updateProfile()">
+      <button type="button" (click)="updateProfile()" class="fancy-btn">
         {{ editMode ? "Save Changes" : "Edit Profile" }}
       </button>
     </form>
