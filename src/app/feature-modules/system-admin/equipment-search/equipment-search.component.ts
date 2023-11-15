@@ -10,6 +10,10 @@ import { SystemAdminService } from '../system-admin.service';
 export class EquipmentSearchComponent {
   name: string;
   equipment: Equipment[]=[];
+  filterType: string;
+  filterCompanyName: string;
+  filterCompanyGradeFrom: number = 0;
+  filterCompanyGradeTo: number = 10;
 
   constructor(private service: SystemAdminService){}
 
@@ -19,4 +23,46 @@ export class EquipmentSearchComponent {
     });
   }
 
+  onFilter(): void{
+    if(!this.filterType && !this.filterCompanyName && this.filterCompanyGradeFrom == 0 && this.filterCompanyGradeTo == 10)
+    {
+      this.service.searchEquipment(this.name).subscribe(result => {
+        this.equipment = result;
+      });
+    }else
+    if(this.filterType)
+    {
+      this.equipment = this.equipment.filter(n => n.type.includes(this.filterType));
+    }
+
+    if(this.filterCompanyName)
+    {
+      let list: Equipment[] = [];
+      this.equipment.forEach(e => {
+        if( e.companies)
+          e.companies.forEach(c => {
+            if(c.name.includes(this.filterCompanyName) && list.filter(n => n.equipment_id == e.equipment_id).length == 0)
+            list.push(e);
+          });
+      });
+      this.equipment = list;
+    }
+
+ 
+      let list: Equipment[] = [];
+      this.equipment.forEach(e => {
+        if( e.companies)
+          e.companies.forEach(c => {
+            if(c.averageGrade >= this.filterCompanyGradeFrom && c.averageGrade <= this.filterCompanyGradeTo  && list.filter(n => n.equipment_id == e.equipment_id).length == 0)
+            list.push(e);
+          });
+      });
+    this.equipment = list;
+  }
+
+  onReset(): void{
+    this.service.searchEquipment(this.name).subscribe(result => {
+      this.equipment = result;
+    });
+  }
 }

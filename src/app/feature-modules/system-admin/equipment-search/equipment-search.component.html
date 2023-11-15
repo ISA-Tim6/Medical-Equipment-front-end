@@ -20,7 +20,7 @@
 
     <div *ngIf="equipment.length > 0">
         <h4>Equipment</h4>
-        <table>
+        <table border="1">
             <tr>
                 <th>Name</th>
                 <th>Type</th>
@@ -32,7 +32,7 @@
                 <td>{{e.description}}</td>
                 <td>
                     <p>Companies that have {{e.name}}</p>
-                    <table>
+                    <table border="1">
                         <tr>
                             <th>Name</th>
                         </tr>
@@ -43,5 +43,36 @@
                 </td>
             </tr>
         </table>
+    </div>
+
+    <div>
+        <h5>Filters</h5>
+        <table>
+            <tr>
+                <td>Type: </td>
+                <td>
+                    <input type="text" [(ngModel)]="filterType" placeholder="type">
+                </td>
+            </tr>
+            <tr>
+                <td>Company name: </td>
+                <td>
+                    <input type="text" [(ngModel)]="filterCompanyName" placeholder="company name">
+                </td>
+            </tr>
+            <tr>
+                <td>Company average grade: </td>
+                <td>
+                    <span>
+                        <input type="number" [(ngModel)]="filterCompanyGradeFrom" min="0" max="10" placeholder="from">
+                        <input type="number" [(ngModel)]="filterCompanyGradeTo" min="0" max="10" placeholder="to">
+                    </span>
+                </td>
+            </tr>
+        </table>
+        <div>
+            <button (click)="onFilter()">Filter</button>
+            <button (click)="onReset()">Reset filters</button>
+        </div>
     </div>
 </div>
