@@ -9,6 +9,7 @@ import { CompanyAdminProfileComponent } from './feature-modules/stakeholders/com
 import { CompanyProfileComponent } from './feature-modules/company-profile/company-profile.component';
 import { CompaniesOverviewComponent } from './feature-modules/companies-overview/companies-overview.component';
 import { CompanyOverviewComponent } from './feature-modules/company-overview/company-overview.component';
+import { EquipmentSearchComponent } from './feature-modules/system-admin/equipment-search/equipment-search.component';
 const routes: Routes = [
   {
     path: 'user-profile',
@@ -37,7 +38,8 @@ const routes: Routes = [
   {
     path:'companies',
     component:CompaniesOverviewComponent
-  }
+  },
+  { path: 'equipment-search', component: EquipmentSearchComponent}
 ];
 
 @NgModule({

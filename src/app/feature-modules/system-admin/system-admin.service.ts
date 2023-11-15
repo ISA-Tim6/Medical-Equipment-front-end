@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/env/environment';
 import { User } from '../stakeholders/model/user.model';
 import { CompanyAdmin } from './model/company-admin-model';
+import { Equipment } from '../company-profile/model/equipment.model';
 
 @Injectable({
   providedIn: 'root'
@@ -27,5 +28,9 @@ export class SystemAdminService {
 
   addCompanyAdmin(admin: CompanyAdmin, company_id: number): Observable<CompanyAdmin>{
     return this.http.post<CompanyAdmin>(environment.apiHost+"companyAdmin/create/" + company_id, admin)
+  }
+
+  searchEquipment(name: string): Observable<Equipment[]>{
+    return this.http.get<Equipment[]>(environment.apiHost + 'equipment/searchEquipment/'+ name);
   }
 }
