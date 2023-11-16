@@ -15,7 +15,7 @@ export class CompanyAdminProfileComponent implements OnInit{
 
   edit:string="Edit";
   disabledStatus:Boolean=true;
-  id:number=1;
+  id:number=2;
   companyAdmin:CompanyAdmin={
     user_id:0,
     email: '',
