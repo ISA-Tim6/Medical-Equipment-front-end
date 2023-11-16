@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { StakeholdersService } from '../stakeholders.service';
-import { Category, Employment, User } from '../model/user.model';
+import { Category, Employment, RegistratedUser } from '../model/user.model';
 
 @Component({
   selector: 'app-user-profile',
@@ -20,7 +20,7 @@ export class UserProfileComponent implements OnChanges, OnInit {
     { value: 1, label: 'SISTEM_ADMIN' },
   ];
   selected: string = this.employments[0].value.toString();
-  user: User = {
+  user: RegistratedUser = {
     email: '',
     password: '',
     name: '',
@@ -50,19 +50,19 @@ export class UserProfileComponent implements OnChanges, OnInit {
     confirmPassword: new FormControl('', [Validators.required]),
     name: new FormControl('', [
       Validators.required,
-      Validators.pattern(/^[A-Z][a-z ]*$/),
+      Validators.pattern(/^[A-Z][A-Za-z ]*$/),
     ]),
     surname: new FormControl('', [
       Validators.required,
-      Validators.pattern(/^[A-Z][a-z ]*$/),
+      Validators.pattern(/^[A-Z][A-Za-z ]*$/),
     ]),
     city: new FormControl('', [
       Validators.required,
-      Validators.pattern(/^[A-Z][a-z ]*$/),
+      Validators.pattern(/^[A-Z][A-Za-z ]*$/),
     ]),
     country: new FormControl('', [
       Validators.required,
-      Validators.pattern(/^[A-Z][a-z ]*$/),
+      Validators.pattern(/^[A-Z][A-Za-z ]*$/),
     ]),
     phoneNumber: new FormControl('', [
       Validators.required,
@@ -73,7 +73,7 @@ export class UserProfileComponent implements OnChanges, OnInit {
 
   ngOnInit(): void {
     this.service.getUser().subscribe({
-      next: (result: User) => {
+      next: (result: RegistratedUser) => {
         console.log(result);
         this.user = result;
         this.selected =
@@ -101,7 +101,7 @@ export class UserProfileComponent implements OnChanges, OnInit {
   updateProfile(): void {
     if (this.isInputValid) {
       var oldUsername = this.user.username;
-      const user: User = {
+      const user: RegistratedUser = {
         user_id: this.user!.user_id,
         email: this.user!.email,
         password: this.userForm.value.password || '',
@@ -118,7 +118,7 @@ export class UserProfileComponent implements OnChanges, OnInit {
         category: this.user!.category,
       };
       this.service.updateUser(user, oldUsername).subscribe({
-        next: (result: User) => {
+        next: (result: RegistratedUser) => {
           if (result == null) alert('Please enter valid data.');
           else {
             this.user = result;
