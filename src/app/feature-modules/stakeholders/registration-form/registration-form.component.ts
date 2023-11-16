@@ -66,13 +66,17 @@ export class RegistrationFormComponent implements OnChanges {
       this.user.infoAboutInstitution=this.registrationForm.get('infoAboutInstitution')!.value || "";
       
       this.userService.registerUser(this.user).subscribe((response:any)=>{
-          if (response.status == "success") {
+          if (response.status === "success") {
             alert("Email successfully sent.")
-          } else {
-            alert("Error.")
-          }
+          } 
           this.registrationForm.reset();
+        },
+        (error: HttpErrorResponse) => {
+          console.error("Registration failed:", error);
+          alert("Invalid data.")
         }
+
+        
       );
  
   }
