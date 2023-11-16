@@ -3,12 +3,12 @@
     <hr>
     <table>
         <tr *ngFor="let c of companies">
-            <td (onClick)="showDetails(c)">
+            <td (click)="showDetails(c)">
                 <span>Name:</span> {{c.name}}
                 <br>
                 <span>Average grade: </span>{{c.averageGrade}}
                 <br>
-                <span>City:</span> {{c.address.city}}
+                <span>Address:</span> {{c.address.country}},{{c.address.city}},{{c.address.street}},{{c.address.streetNumber}}
                 <br>
             </td>
         </tr>

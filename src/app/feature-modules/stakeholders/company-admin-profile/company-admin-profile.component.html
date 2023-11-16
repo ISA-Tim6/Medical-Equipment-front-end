@@ -1,26 +1,32 @@
 <div>
-    <p>Company admin profile:</p>
+    <p>Company admin profile</p>
     <hr>
     <div>
         <div>
-            Name:
+            <label><b>Name:</b></label>
             <input
             disabled={{disabledStatus}}
             type="text"
             [(ngModel)]="companyAdmin.name"
           />
+          <span *ngIf="disabledStatus==false && invalidName" style="color: red">
+            Invalid name!
+          </span>
         <div>
     </div>
     <div>
-        Surname:
+        <label><b>Surname:</b></label>
         <input
         disabled={{disabledStatus}}
         type="text"
         [(ngModel)]="companyAdmin.surname"
         />
+        <span *ngIf="disabledStatus==false && invalidSurname" style="color: red">
+            Invalid surname!
+          </span>
     </div>
     <div>
-        Username:
+        <label><b>Username:</b></label>
         <input
         disabled={{disabledStatus}}
         type="text"
@@ -28,7 +34,7 @@
         />
     </div>
     <div>
-        Password:
+        <label><b>Password:</b></label>
         <input
         disabled={{disabledStatus}}
         type="text"
@@ -36,7 +42,7 @@
         />
     </div>
     <div>
-        Phone number:
+        <label><b>Phone number:</b></label>
         <input
         type="text"
         disabled={{disabledStatus}}
@@ -44,7 +50,7 @@
         />
     </div>
     <div>
-        Email:
+        <label><b>Email:</b></label>
         <input
         type="text"
         disabled={{disabledStatus}}
@@ -52,7 +58,7 @@
         />
     </div>
     <div>
-        City:
+        <label><b>City:</b></label>
         <input
         type="text"
         disabled={{disabledStatus}}
@@ -60,7 +66,7 @@
         />
     </div>
     <div>
-        Country:
+        <label><b>Country:</b></label>
         <input
         type="text"
         disabled={{disabledStatus}}
@@ -68,7 +74,7 @@
         />
     </div>
     <div>
-        Information about instituion:
+        <label><b>Information about institution:</b></label>
         <input
         type="text"
         disabled={{disabledStatus}}

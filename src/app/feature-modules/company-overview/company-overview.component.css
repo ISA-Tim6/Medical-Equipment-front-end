@@ -1,0 +1,36 @@
+td{
+    align-items: center;
+    text-align: center;
+    border: 1px solid blue;
+    background-color: beige;
+}
+.div-equipment-header{
+    text-align: center;
+    font-weight: bold;
+    font-style: weight;
+}
+.span-equipment{
+    border: 1px solid blue;
+    width: 50px;
+}
+th{
+    text-align: left;
+    background-color:azure;
+}
+
+
+.div-equipment{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+table{
+    width: 250px;
+}
+
+p{
+    color: Blue;
+    font-size: 5vh;
+}
