@@ -1,17 +1,58 @@
-<div>
-    <p>All companies</p>
-    <hr>
-    <table>
-        <tr *ngFor="let c of companies">
-            <td (click)="showDetails(c)">
-                <span>Name:</span> {{c.name}}
-                <br>
-                <span>Average grade: </span>{{c.averageGrade}}
-                <br>
-                <span>Address:</span> {{c.address.country}},{{c.address.city}},{{c.address.street}},{{c.address.streetNumber}}
-                <br>
-            </td>
-        </tr>
+<div class="search-container">
+  <h2 class="search-heading">All companies / Company Search</h2>
+  <p>Please select the parameter you want to search by:</p>
+  <select id="search-parameter" [(ngModel)]="selectedOption">
+    <option value="Name">Name</option>
+    <option value="City">City</option>
+  </select>
 
-    </table>
+  <label for="parameter-value">Enter parameter value:</label>
+  <input
+    type="text"
+    id="parameter-value"
+    class="fancy-input"
+    [(ngModel)]="parameter"
+  />
+
+  <button class="fancy-search-btn" (click)="search()">Search</button>
+  <button class="fancy-reset-btn" (click)="reset()">Reset</button>
+  <br /><br /><br /><br />
+  <label for="minRating">Minimalna ocjena:</label>
+  <input
+    type="number"
+    id="minRating"
+    name="minRating"
+    [(ngModel)]="minRating"
+  />
+
+  <label for="maxRating">Maksimalna ocjena:</label>
+  <input
+    type="number"
+    id="maxRating"
+    name="maxRating"
+    [(ngModel)]="maxRating"
+  />
+  <br />
+  <button
+    class="fancy-filter-btn"
+    [disabled]="filterDisabled"
+    (click)="filter()"
+  >
+    Filter
+  </button>
+
+  <table>
+    <tr *ngFor="let c of companies">
+      <td (click)="showDetails(c)">
+        <span>Name:</span> {{ c.name }}
+        <br />
+        <span>Average grade: </span>{{ c.averageGrade }}
+        <br />
+        <span>Address:</span> {{ c.address.country }},{{ c.address.city }},{{
+          c.address.street
+        }},{{ c.address.streetNumber }}
+        <br />
+      </td>
+    </tr>
+  </table>
 </div>

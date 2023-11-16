@@ -11,7 +11,12 @@ import { CompaniesOverviewComponent } from './feature-modules/companies-overview
 import { CompanyOverviewComponent } from './feature-modules/company-overview/company-overview.component';
 
 @NgModule({
-  declarations: [AppComponent, CompanyProfileComponent, CompaniesOverviewComponent, CompanyOverviewComponent],
+  declarations: [
+    AppComponent,
+    CompanyProfileComponent,
+    CompaniesOverviewComponent,
+    CompanyOverviewComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -19,7 +24,7 @@ import { CompanyOverviewComponent } from './feature-modules/company-overview/com
     StakeholdersModule,
     ReactiveFormsModule,
     FormsModule,
-    SystemAdminModule
+    SystemAdminModule,
   ],
   exports: [AppComponent],
   providers: [],

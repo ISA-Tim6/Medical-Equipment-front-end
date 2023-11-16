@@ -1,6 +1,6 @@
-import { User } from "../../stakeholders/model/user.model";
-import { Company } from "./company.model";
+import { User } from '../../stakeholders/model/main-user.model';
+import { Company } from './company.model';
 
-export interface CompanyAdmin extends User{
-    company: Company
+export interface CompanyAdmin extends User {
+  company: Company;
 }

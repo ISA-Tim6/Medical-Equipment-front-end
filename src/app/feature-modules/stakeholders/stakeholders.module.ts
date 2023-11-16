@@ -7,7 +7,11 @@ import { FormsModule } from '@angular/forms';
 import { CompanyAdminProfileComponent } from './company-admin-profile/company-admin-profile.component';
 
 @NgModule({
-  declarations: [UserProfileComponent, RegistrationFormComponent, CompanyAdminProfileComponent],
+  declarations: [
+    UserProfileComponent,
+    RegistrationFormComponent,
+    CompanyAdminProfileComponent,
+  ],
   imports: [CommonModule, ReactiveFormsModule, FormsModule],
   exports: [UserProfileComponent, RegistrationFormComponent],
 })

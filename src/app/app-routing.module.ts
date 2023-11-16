@@ -16,24 +16,27 @@ const routes: Routes = [
     component: UserProfileComponent,
   },
 
+
   {path: 'company-form', component: CompanyFormComponent},
   {path: 'system-admin-form', component: SystemAdminFormComponent},
   {path: 'company-admin-form', component: CompanyAdminFormComponent},
+
   {
     path: 'registration',
     component: RegistrationFormComponent,
   },
+
   {
     path: 'company-admin-profile',
-    component: CompanyAdminProfileComponent
+    component: CompanyAdminProfileComponent,
   },
   {
-    path:'company/:company_id/:user_id',
-    component:CompanyProfileComponent
+    path: 'company/:company_id/:user_id',
+    component: CompanyProfileComponent,
   },
   {
-    path:'company/:company_id',
-    component:CompanyOverviewComponent
+    path: 'company/:company_id',
+    component: CompanyOverviewComponent,
   },
   {
     path:'companies',

@@ -8,11 +8,7 @@ import { environment } from 'src/env/environment';
   providedIn: 'root',
 })
 export class UserService {
-  //apiHost: string = 'http://localhost:81/';
-  //headers: HttpHeaders = new HttpHeaders({'Access-Control-Allow-Origin': '*' });
-
   constructor(private http: HttpClient) {}
-
 
   registerUser(user: RegistratedUser): Observable<any> {
     console.log(user.infoAboutInstitution);

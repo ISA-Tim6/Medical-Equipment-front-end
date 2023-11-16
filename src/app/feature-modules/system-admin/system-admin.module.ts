@@ -6,6 +6,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SystemAdminFormComponent } from './system-admin-form/system-admin-form.component';
 import { CompanyAdminFormComponent } from './company-admin-form/company-admin-form.component';
 import { EquipmentSearchComponent } from './equipment-search/equipment-search.component';
+import { StakeholdersModule } from '../stakeholders/stakeholders.module';
+
 
 @NgModule({
   declarations: [
@@ -14,10 +16,6 @@ import { EquipmentSearchComponent } from './equipment-search/equipment-search.co
     CompanyAdminFormComponent,
     EquipmentSearchComponent
   ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule
-  ]
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, StakeholdersModule],
 })
-export class SystemAdminModule { }
+export class SystemAdminModule {}
