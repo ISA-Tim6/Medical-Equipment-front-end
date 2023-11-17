@@ -6,6 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./login-form.component.css']
 })
 export class LoginFormComponent {
-  isPasswordVisible: boolean;
 
 }
