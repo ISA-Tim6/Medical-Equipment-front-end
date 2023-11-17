@@ -67,4 +67,10 @@ export class CompanyService {
       environment.apiHost + 'company/searchByCity/' + city
     );
   }
+
+  searchByNameAndCity(name: string, city: string): Observable<Company[]> {
+    return this.http.get<any>(
+      environment.apiHost + 'company/searchByNameAndCity/' + name + '/' + city
+    );
+  }
 }
