@@ -1,4 +1,14 @@
 p{
     font-size: 5vh;
-    color: Blue;
+    color:orangered;
+}
+
+.fields{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 50px;
+}
+.all-fields{
+    width: 500px;
 }

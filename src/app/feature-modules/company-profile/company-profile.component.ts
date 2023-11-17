@@ -7,6 +7,7 @@ import { Equipment } from './model/equipment.model';
 import { CompanyAdmin } from '../stakeholders/model/company-admin.model';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup,FormControl,Validators } from '@angular/forms';
+import { EquipmentSearchComponent } from '../system-admin/equipment-search/equipment-search.component';
 
 @Component({
   selector: 'app-company-profile',
@@ -57,6 +58,8 @@ export class CompanyProfileComponent implements OnInit{
 
   OnPlus():void{
     this.equipmentFormVisible=!this.equipmentFormVisible;
+    this.equipmentForm.reset;
+
   }
   OnMinus(equipment:Equipment):void{
 
@@ -74,13 +77,15 @@ export class CompanyProfileComponent implements OnInit{
       description:this.equipmentForm.value.description||"",
       type:this.equipmentForm.value.type||""
     }
-
+    if(this.isValidEquipmentName() && this.isValidEquipmentDescription() && this.isValidEquipmentType()){
     this.service.addEquipment(equipment,this.id).subscribe({
       next: (result: Company) => {
         this.company = result;
         this.company.company_id=this.id;
+        this.equipmentFormVisible=!this.equipmentFormVisible;
       },
     });
+  }
   }
 
   OnEdit():void{
@@ -88,18 +93,34 @@ export class CompanyProfileComponent implements OnInit{
     if(this.edit=="Edit"){
       this.edit="Confirm";
     }else{
+      if(this.isValidName()){
       this.edit="Edit";
       this.company.company_id=this.id;
       this.service.updateCompany(this.company).subscribe({
         next: (result: Company) => {
           this.company = result;
           this.company.company_id=this.id;
+          alert("Company information are changed")
         },
       });
     }
+    }
   }
 
-    
+  isValidName(){
+    return this.company.name!="";
+  }
+
+  isValidEquipmentName(){
+    return this.equipmentForm.value.name!="";
+  }
+  isValidEquipmentDescription(){
+    return this.equipmentForm.value.description!="";
+  }
+  isValidEquipmentType(){
+    return this.equipmentForm.value.type!="";
+  }
+
 
 
 }

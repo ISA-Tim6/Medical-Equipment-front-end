@@ -1,88 +1,125 @@
 <div>
     <p>Company admin profile</p>
     <hr>
-    <div>
-        <div>
-            <label><b>Name:</b></label>
+    <div class="all-fields">
+        <div class="fields">
+          <div><label><b>Name:</b></label></div>
+            <div>
             <input
             disabled={{disabledStatus}}
             type="text"
+            name="name"
             [(ngModel)]="companyAdmin.name"
           />
-          <span *ngIf="disabledStatus==false && invalidName" style="color: red">
+          <span *ngIf="disabledStatus==false && isValidName()==false " style="color: red">
             Invalid name!
           </span>
-        <div>
+        </div>
     </div>
-    <div>
+    <div  class="fields">
+        <div>
         <label><b>Surname:</b></label>
+        </div>
+        <div>
         <input
         disabled={{disabledStatus}}
         type="text"
+        name="surname"
         [(ngModel)]="companyAdmin.surname"
         />
-        <span *ngIf="disabledStatus==false && invalidSurname" style="color: red">
+        <span *ngIf="disabledStatus==false && isValidSurname()==false " style="color: red">
             Invalid surname!
           </span>
+        </div>
     </div>
-    <div>
+    <div class="fields">
+        <div>
         <label><b>Username:</b></label>
+        </div>
+        <div>
         <input
         disabled={{disabledStatus}}
         type="text"
+        name="username"
         [(ngModel)]="companyAdmin.username"
         />
+        <span *ngIf="disabledStatus==false && isUsernameValid()==false" style="color: red">
+            Invalid surname!
+          </span>
+        </div>
     </div>
-    <div>
-        <label><b>Password:</b></label>
+    <div class="fields">
+       <div><label><b>Password:</b></label></div>
         <input
         disabled={{disabledStatus}}
         type="text"
         [(ngModel)]="companyAdmin.password"
         />
+        <span *ngIf="disabledStatus==false && isLongPassword()==false" style="color: red">
+            Password must contain minimum 5 characters!
+          </span>
     </div>
-    <div>
-        <label><b>Phone number:</b></label>
+    <div class="fields">
+       <div><label><b>Phone number:</b></label></div>
+       <div>
         <input
         type="text"
         disabled={{disabledStatus}}
         [(ngModel)]="companyAdmin.phoneNumber"
         />
+        <span *ngIf="disabledStatus==false && isPhoneNumberValid()==false" style="color: red">
+            Invalid phone number format!
+          </span>
+       </div>
     </div>
-    <div>
-        <label><b>Email:</b></label>
+    <div class="fields">
+       <div><label><b>Email:</b></label></div>
+       <div>
         <input
         type="text"
         disabled={{disabledStatus}}
         [(ngModel)]="companyAdmin.email"
         />
+        <span *ngIf="disabledStatus==false && isValidEmail()==false" style="color: red">
+            Invalid email format!
+          </span>
+       </div>
     </div>
-    <div>
-        <label><b>City:</b></label>
+    <div class="fields">
+     <div><label><b>City:</b></label></div>
+     <div>
         <input
         type="text"
         disabled={{disabledStatus}}
         [(ngModel)]="companyAdmin.city"
         />
+     </div>
     </div>
-    <div>
-        <label><b>Country:</b></label>
+    <div class="fields">
+     <div><label><b>Country:</b></label></div>
+     <div>
         <input
         type="text"
         disabled={{disabledStatus}}
         [(ngModel)]="companyAdmin.country"
         />
+     </div>
     </div>
-    <div>
-        <label><b>Information about institution:</b></label>
+    <div class="fields">
+      <div><label><b>Information about institution:</b></label></div>
+      <div>
         <input
         type="text"
         disabled={{disabledStatus}}
         [(ngModel)]="companyAdmin.infoAboutInstitution"
         />
+      </div>
     </div>
     <span>
-    <button (click)="updateUser()" >{{edit}}</button>
+    <button (click)="updateUser()" >{{edit}}</button><span *ngIf="disabledStatus==false && isAllValid()==false " style="color: red">
+        Invalid input data! Please correct them!
+      </span>
+    <br>
     <button (click)="onSeeCompanyProfile()">See company profile</button>
     </span>
 

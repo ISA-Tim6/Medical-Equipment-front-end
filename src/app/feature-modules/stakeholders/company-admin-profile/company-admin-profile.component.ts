@@ -31,16 +31,6 @@ export class CompanyAdminProfileComponent implements OnInit{
     loggedBefore: false,
     company_id:1
   };
-
-  invalidName:Boolean=false;
-  invalidSurname:Boolean=false;
-  invalidEmail:Boolean=false;
-  invalidUsername:Boolean=false;
-  invalidPassword:Boolean=false;
-  invalidCity:Boolean=false;
-  invalidCountry:Boolean=false;
-  invalidPhoneNumber:Boolean=false;
-
   ngOnInit(): void {
     this.service.getCompanyAdmin(this.id).subscribe({
       next: (result: CompanyAdmin) => {
@@ -72,6 +62,7 @@ export class CompanyAdminProfileComponent implements OnInit{
         infoAboutInstitution: this.companyAdmin.infoAboutInstitution,
         loggedBefore: this.companyAdmin.loggedBefore
       }
+      if(this.isAllValid()){
     this.service.updateCompanyAdmin(companyAdminUser).subscribe({
       next: (result: CompanyAdmin) => {
         console.log(result);
@@ -82,6 +73,7 @@ export class CompanyAdminProfileComponent implements OnInit{
         this.edit="Edit";
       },
     });
+  }
       
     }
 
@@ -90,6 +82,53 @@ export class CompanyAdminProfileComponent implements OnInit{
   onSeeCompanyProfile():void{
     this.router.navigate([`company/${this.companyAdmin.company_id}/${this.id}`]);
 
+  }
+
+  public isValidName(){
+    let sampleRegEx: RegExp = /[A-Z][A-Za-z]+/;
+    return sampleRegEx.test(this.companyAdmin.name);
+  }
+
+  public isValidSurname(){
+    let sampleRegEx: RegExp = /[A-Z][A-Za-z]+/;
+    return sampleRegEx.test(this.companyAdmin.surname);
+  }
+
+  public isValidEmail() {
+    let sampleRegEx: RegExp =
+      /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+    return sampleRegEx.test(this.companyAdmin.email);
+  }
+
+  public isLongPassword() {
+    let isLong: boolean = false;
+    if (this.companyAdmin.password.length >= 5) isLong = true;
+
+    return isLong;
+  }
+
+  public isUsernameValid(){
+    if (this.companyAdmin.username!="")
+      return true;
+    else
+      return false;
+  }
+
+  isPhoneNumberValid(){
+    let isValidPhoneNumber:boolean=false;
+    let sampleRegEx: RegExp = /[0-9]+/;
+    if(sampleRegEx.test(this.companyAdmin.phoneNumber))
+      if(this.companyAdmin.phoneNumber.length>3)
+        isValidPhoneNumber=true;
+
+    return isValidPhoneNumber;
+  }
+
+
+
+  isAllValid(){
+    return this.isValidName()&& this.isValidSurname()&& this.isUsernameValid() && this.isLongPassword()
+    && this.isPhoneNumberValid() && this.isValidEmail();
   }
 
 }
