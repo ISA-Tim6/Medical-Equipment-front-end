@@ -12,7 +12,7 @@ export class UserService {
 
   registerUser(user: RegistratedUser): Observable<any> {
     console.log(user.infoAboutInstitution);
-    return this.http.post<any>(environment.apiHost + 'registerUser', user);
+    return this.http.post<any>(environment.apiHost + 'auth/registerUser', user);
   }
   
 }

@@ -9,6 +9,7 @@ import { SystemAdminModule } from './feature-modules/system-admin/system-admin.m
 import { CompanyProfileComponent } from './feature-modules/company-profile/company-profile.component';
 import { CompaniesOverviewComponent } from './feature-modules/companies-overview/companies-overview.component';
 import { CompanyOverviewComponent } from './feature-modules/company-overview/company-overview.component';
+import { LoginFormComponent } from './feature-modules/login-form/login-form.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { CompanyOverviewComponent } from './feature-modules/company-overview/com
     CompanyProfileComponent,
     CompaniesOverviewComponent,
     CompanyOverviewComponent,
+    LoginFormComponent,
   ],
   imports: [
     BrowserModule,

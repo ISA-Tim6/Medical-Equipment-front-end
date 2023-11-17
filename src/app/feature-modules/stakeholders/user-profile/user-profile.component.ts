@@ -34,6 +34,7 @@ export class UserProfileComponent implements OnChanges, OnInit {
     loggedBefore: false,
     category: Category.REGULAR,
     penals: 0,
+    isActive:false
   };
 
   constructor(private service: StakeholdersService) {}
@@ -116,6 +117,7 @@ export class UserProfileComponent implements OnChanges, OnInit {
         loggedBefore: this.user!.loggedBefore,
         penals: this.user!.penals,
         category: this.user!.category,
+        isActive:false
       };
       this.service.updateUser(user, oldUsername).subscribe({
         next: (result: RegistratedUser) => {
