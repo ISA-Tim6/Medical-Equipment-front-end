@@ -10,6 +10,7 @@ import { CompanyProfileComponent } from './feature-modules/company-profile/compa
 import { CompaniesOverviewComponent } from './feature-modules/companies-overview/companies-overview.component';
 import { CompanyOverviewComponent } from './feature-modules/company-overview/company-overview.component';
 import { EquipmentSearchComponent } from './feature-modules/system-admin/equipment-search/equipment-search.component';
+import { LoginFormComponent } from './feature-modules/login-form/login-form.component';
 const routes: Routes = [
   {
     path: 'user-profile',
@@ -42,7 +43,12 @@ const routes: Routes = [
     path:'companies',
     component:CompaniesOverviewComponent
   },
-  { path: 'equipment-search', component: EquipmentSearchComponent}
+  { path: 'equipment-search', component: EquipmentSearchComponent},
+  {
+    path:'login',
+    component:LoginFormComponent
+  },
+
 ];
 
 @NgModule({
