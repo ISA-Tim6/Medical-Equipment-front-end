@@ -17,6 +17,22 @@
         [(ngModel)]="company.averageGrade"
         />
     </div>
+    <div>
+        Opening hours:
+        <input
+        disabled={{disabledStatus}}
+        type="time"
+        [(ngModel)]="company.openingHours"
+        />
+    </div>
+    <div>
+        Closing hours:
+        <input
+        disabled={{disabledStatus}}
+        type="time"
+        [(ngModel)]="company.closingHours"
+        />
+    </div>
     <div>Address:</div>                                                     
     <div>
         City
@@ -112,5 +128,58 @@
             </form>
         </div>
     </div>
+
+    <p>Equipment search</p>
+<div>
+    <table>
+        <tr>
+            <td>
+                <label>Search by name: </label>
+            </td>
+            <td>
+                <input type="text" placeholder="search by name" [(ngModel)]="name">
+            </td>
+        </tr>
+        <tr>
+            <td>
+            </td>
+            <td>
+                <button (click)="onSearch()">Search</button>
+            </td>
+        </tr>
+    </table>
+
+    <div *ngIf="equipmentList.length > 0">
+        <h4>Equipment</h4>
+        <table border="1">
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Description</th>
+            </tr>
+            <tr *ngFor="let e of equipmentList">
+                <td>{{e.name}}</td>
+                <td>{{e.type}}</td>
+                <td>{{e.description}}</td>
+            </tr>
+        </table>
+    </div>
+
+    <div>
+        <h5>Filters</h5>
+        <table>
+            <tr>
+                <td>Type: </td>
+                <td>
+                    <input type="text" [(ngModel)]="filterType" placeholder="type">
+                </td>
+            </tr>
+        </table>
+        <div>
+            <button (click)="onFilter()">Filter</button>
+            <button (click)="onReset()">Reset filters</button>
+        </div>
+    </div>
+</div>
 </div>
 

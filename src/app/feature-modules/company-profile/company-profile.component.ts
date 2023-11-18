@@ -30,7 +30,10 @@ export class CompanyProfileComponent implements OnInit{
     description:"",
     type:"",
     equipment_id:0
-  }
+  };
+  name: string;
+  filterType: string;
+  equipmentList: Equipment[]=[];
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params=>{
@@ -40,6 +43,7 @@ export class CompanyProfileComponent implements OnInit{
       next: (result: Company) => {
         this.company = result;
         this.company.company_id=this.id;
+        this.equipmentList = this.company.equipment || [];
 
         this.service.getOtherCompanyAdminsForCompany(this.id,this.user_id).subscribe({
           next:(result:CompanyAdmin[])=>{
@@ -99,7 +103,30 @@ export class CompanyProfileComponent implements OnInit{
     }
   }
 
-    
+  onSearch(): void{
+    this.service.searchEquipmentByCompany(this.name, this.company.company_id || 0).subscribe(result => {
+      this.equipmentList = result;
+    });
+  }
 
+  onFilter(): void{
+    if(!this.filterType)
+    {
+      this.service.searchEquipmentByCompany(this.name, this.company.company_id || 0).subscribe(result => {
+        this.equipmentList = result;
+      });
+    }else
+    if(this.filterType)
+    {
+      this.equipmentList = this.equipmentList.filter(n => n.type.includes(this.filterType));
+    }
+  }
+
+  onReset(): void{
+    this.service.searchEquipmentByCompany(this.name, this.company.company_id || 0).subscribe(result => {
+      this.equipmentList = result;
+    });
+  }
+  
 
 }

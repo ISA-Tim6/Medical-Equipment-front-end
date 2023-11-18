@@ -21,6 +21,8 @@ export class CompanyFormComponent {
     country: new FormControl('', [Validators.required]),
     longitude: new FormControl(0, [Validators.required]),
     latitude: new FormControl(0, [Validators.required]),
+    openingHours: new FormControl('', [Validators.required]),
+    closingHours: new FormControl('', [Validators.required])
   });
 
   onSave(): void{
@@ -32,13 +34,26 @@ export class CompanyFormComponent {
       longitude: this.companyForm.value.longitude || 0,
       latitude: this.companyForm.value.latitude || 0,
     }
+    
     const company: Company = {
       name: this.companyForm.value.name || '',
-      address: address
+      address: address,
+      openingHours: this.companyForm.value.openingHours || '',
+      closingHours: this.companyForm.value.closingHours || ''
     }
 
-    this.service.addCompany(company).subscribe(result => {
-      
-    });
+    if(this.isValid())
+    {
+      this.service.addCompany(company).subscribe(result => {
+        this.companyForm.reset();
+        alert("Company saved");
+      });
+    }else{
+      alert("Field can't be empty");
+    }
+  }
+
+  isValid(): boolean{
+    return this.companyForm.valid;
   }
 }

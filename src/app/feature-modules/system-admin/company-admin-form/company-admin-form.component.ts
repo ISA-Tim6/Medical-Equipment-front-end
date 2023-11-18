@@ -32,29 +32,41 @@ export class CompanyAdminFormComponent implements OnInit {
     country: new FormControl('', [Validators.required]),
     phoneNumber: new FormControl('', [Validators.required]),
     infoAboutInstitution: new FormControl('', [Validators.required]),
-    company: new FormControl(this.companies[0], [Validators.required]),
+    company: new FormControl(this.companies[0], [Validators.required])
   });
 
   onSave(): void {
-    const user: CompanyAdmin = {
-      email: this.adminForm.value.email || '',
-      username: this.adminForm.value.username || '',
-      password: this.adminForm.value.password || '',
-      name: this.adminForm.value.name || '',
-      surname: this.adminForm.value.surname || '',
-      city: this.adminForm.value.city || '',
-      country: this.adminForm.value.country || '',
-      phoneNumber: this.adminForm.value.phoneNumber || '',
-      employment: Employment.SISTEM_ADMIN,
-      infoAboutInstitution: this.adminForm.value.infoAboutInstitution || '',
-      loggedBefore: false,
-      company: this.selectedCompany,
-    };
 
-    this.service
-      .addCompanyAdmin(user, this.selectedCompany.company_id || 0)
-      .subscribe({});
+    if(this.adminForm.controls.email.valid && this.adminForm.controls.username.valid && this.adminForm.controls.password.valid && this.adminForm.controls.name.valid
+      && this.adminForm.controls.surname.valid && this.adminForm.controls.city.valid && this.adminForm.controls.country.valid && this.adminForm.controls.phoneNumber.valid
+      && this.adminForm.controls.infoAboutInstitution.valid) 
+    {
+      const user: CompanyAdmin = {
+        email: this.adminForm.value.email || '',
+        username: this.adminForm.value.username || '',
+        password: this.adminForm.value.password || '',
+        name: this.adminForm.value.name || '',
+        surname: this.adminForm.value.surname || '',
+        city: this.adminForm.value.city || '',
+        country: this.adminForm.value.country || '',
+        phoneNumber: this.adminForm.value.phoneNumber || '',
+        employment: Employment.SISTEM_ADMIN,
+        infoAboutInstitution: this.adminForm.value.infoAboutInstitution || '',
+        loggedBefore: false,
+        company: this.selectedCompany,
+      };
+  
+      this.service
+        .addCompanyAdmin(user, this.selectedCompany.company_id || 0)
+        .subscribe( (result) => {
+            this.adminForm.reset();
+            alert("Company admin saved!");
+        });
+    }else{
+      alert("Fields can't be empty");
+    }
   }
 
   onSelectCompany($event: any): void {}
+
 }

@@ -24,20 +24,28 @@ export class SystemAdminFormComponent {
   });
 
   onSave(): void {
-    const user: User = {
-      email: this.adminForm.value.email || '',
-      username: this.adminForm.value.username || '',
-      password: this.adminForm.value.password || '',
-      name: this.adminForm.value.name || '',
-      surname: this.adminForm.value.surname || '',
-      city: this.adminForm.value.city || '',
-      country: this.adminForm.value.country || '',
-      phoneNumber: this.adminForm.value.phoneNumber || '',
-      employment: Employment.SISTEM_ADMIN,
-      infoAboutInstitution: this.adminForm.value.infoAboutInstitution || '',
-      loggedBefore: false,
-    };
-
-    this.service.addSystemAdmin(user).subscribe({});
+    if(this.adminForm.valid)
+    {
+      const user: User = {
+        email: this.adminForm.value.email || '',
+        username: this.adminForm.value.username || '',
+        password: this.adminForm.value.password || '',
+        name: this.adminForm.value.name || '',
+        surname: this.adminForm.value.surname || '',
+        city: this.adminForm.value.city || '',
+        country: this.adminForm.value.country || '',
+        phoneNumber: this.adminForm.value.phoneNumber || '',
+        employment: Employment.SISTEM_ADMIN,
+        infoAboutInstitution: this.adminForm.value.infoAboutInstitution || '',
+        loggedBefore: false,
+      };
+  
+      this.service.addSystemAdmin(user).subscribe( result => {
+        this.adminForm.reset();
+        alert("System admin saved!");
+      });
+    }else{
+      alert("Fields can't be empty");
+    }
   }
 }

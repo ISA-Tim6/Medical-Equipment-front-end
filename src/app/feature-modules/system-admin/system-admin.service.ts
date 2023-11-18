@@ -30,14 +30,8 @@ export class SystemAdminService {
     );
   }
 
-  addCompanyAdmin(
-    admin: CompanyAdmin,
-    company_id: number
-  ): Observable<CompanyAdmin> {
-    return this.http.post<CompanyAdmin>(
-      environment.apiHost + 'companyAdmin/create/' + company_id,
-      admin
-    );
+  addCompanyAdmin(admin: CompanyAdmin,company_id: number): Observable<CompanyAdmin> {
+    return this.http.post<CompanyAdmin>(environment.apiHost + 'companyAdmin/create/' + company_id,admin);
   }
 
   searchEquipment(name: string): Observable<Equipment[]>{

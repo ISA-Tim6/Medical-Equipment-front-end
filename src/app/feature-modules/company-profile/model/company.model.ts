@@ -7,4 +7,6 @@ export interface Company {
 	averageGrade:number;
 	address:Address;
 	equipment?:Equipment[];
+	openingHours: string;
+	closingHours: string;
 }
