@@ -69,7 +69,7 @@ export class CompanyAdminFormComponent implements OnInit {
         employment: Employment.COMPANY_ADMIN,
         infoAboutInstitution: this.adminForm.value.infoAboutInstitution || '',
         loggedBefore: false,
-        company: this.selectedCompany,
+        company: this.adminForm.value.company || this.companies[0]
       };
   
       this.service
