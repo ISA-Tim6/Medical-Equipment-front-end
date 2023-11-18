@@ -69,16 +69,27 @@ export class CompanyAdminProfileComponent implements OnInit{
           next: (result: number) => {
            if(result==-1 || result==this.companyAdmin.user_id)
             {
-              this.service.updateCompanyAdmin(companyAdminUser).subscribe({
-                next: (result: CompanyAdmin) => {
-                  console.log(result);
-                  this.companyAdmin = result;
-                  this.companyAdmin.user_id=this.id;
-                  alert("Your profile is changed!")
-                  this.disabledStatus=true;
-                  this.edit="Edit";
-                },
+              
+              this.service.getUserByEmail(this.companyAdmin.email).subscribe({
+                next:(result:number)=>{
+                  if(result==-1 || result==this.companyAdmin.user_id){
+                    this.service.updateCompanyAdmin(companyAdminUser).subscribe({
+                      next: (result: CompanyAdmin) => {
+                        console.log(result);
+                        this.companyAdmin = result;
+                        this.companyAdmin.user_id=this.id;
+                        alert("Your profile is changed!")
+                        this.disabledStatus=true;
+                        this.edit="Edit";
+                      },
+                    });
+                  }else{
+                    alert("Email is already in use");
+                  }
+                }
               });
+
+               
             }else{
              alert("Username is already in use");
             }
