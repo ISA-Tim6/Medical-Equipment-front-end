@@ -79,7 +79,7 @@
                 <label>Company: </label>
             </td>
             <td>
-                <select (change)="onSelectCompany" [(ngModel)]="selectedCompany">
+                <select (change)="onSelectCompany" formControlName="company">
                     <option *ngFor="let c of companies" [ngValue]="c">{{c.name}}</option>
                 </select>
             </td>

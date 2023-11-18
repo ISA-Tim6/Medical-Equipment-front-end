@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Equipment } from '../../company-profile/model/equipment.model';
 import { SystemAdminService } from '../system-admin.service';
 import { LowerCasePipe } from '@angular/common';
@@ -8,8 +8,8 @@ import { LowerCasePipe } from '@angular/common';
   templateUrl: './equipment-search.component.html',
   styleUrls: ['./equipment-search.component.css']
 })
-export class EquipmentSearchComponent {
-  name: string;
+export class EquipmentSearchComponent implements OnInit{
+  name: string = '';
   equipment: Equipment[]=[];
   filterType: string;
   filterCompanyName: string;
@@ -17,6 +17,9 @@ export class EquipmentSearchComponent {
   filterCompanyGradeTo: number = 10;
 
   constructor(private service: SystemAdminService){}
+  ngOnInit(): void {
+    this.onSearch();
+  }
 
   onSearch(): void{
     this.service.searchEquipment(this.name).subscribe(result => {
