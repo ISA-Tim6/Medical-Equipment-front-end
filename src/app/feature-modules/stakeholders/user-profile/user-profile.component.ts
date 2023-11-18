@@ -16,8 +16,9 @@ import { Category, Employment, RegistratedUser } from '../model/user.model';
 })
 export class UserProfileComponent implements OnChanges, OnInit {
   employments = [
-    { value: 0, label: 'COMPANY_ADMIN' },
-    { value: 1, label: 'SISTEM_ADMIN' },
+    { value: 2, label: 'DOCTOR' },
+    { value: 3, label: 'PHARMACIST' },
+    { value: 4, label: 'OTHER' },
   ];
   selected: string = this.employments[0].value.toString();
   user: RegistratedUser = {

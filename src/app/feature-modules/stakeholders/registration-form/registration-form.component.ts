@@ -31,8 +31,9 @@ export class RegistrationFormComponent implements OnChanges {
   }
   public repeat = '';
   employments = [
-    { value: 0, label: 'COMPANY_ADMIN' },
-    { value: 1, label: 'SISTEM_ADMIN' },
+    { value: 2, label: 'DOCTOR' },
+    { value: 3, label: 'PHARMACIST' },
+    { value: 4, label: 'OTHER' },
   ];
   
   
@@ -45,7 +46,7 @@ export class RegistrationFormComponent implements OnChanges {
     city: new FormControl('',[Validators.required]),
     country: new FormControl('',[Validators.required]),
     phoneNumber: new FormControl('',[Validators.required]),
-    employment: new FormControl('COMPANY_ADMIN'),
+    employment: new FormControl('DOCTOR'),
     infoAboutInstitution: new FormControl('',[Validators.required]),
   })
   
@@ -76,7 +77,7 @@ export class RegistrationFormComponent implements OnChanges {
       city: this.registrationForm.value.city || '',
       country: this.registrationForm.value.country || '',
       phoneNumber: this.registrationForm.value.phoneNumber || '',
-      employment: this.registrationForm.value.employment ? parseInt(this.selected, 2) : 0,
+      employment: this.registrationForm.value.employment ? parseInt(this.selected, 10) : 0,
       infoAboutInstitution: this.registrationForm.value.infoAboutInstitution || '',
       loggedBefore: this.user!.loggedBefore,
       penals: this.user!.penals,
@@ -84,7 +85,6 @@ export class RegistrationFormComponent implements OnChanges {
       isActive:false
     };
       this.user.infoAboutInstitution=this.registrationForm.get('infoAboutInstitution')!.value || "";
-      this.user.employment=this.selected;
       this.userService.registerUser(this.user).subscribe((response:any)=>{
           if (response.status === "success") {
             alert("Email successfully sent.")

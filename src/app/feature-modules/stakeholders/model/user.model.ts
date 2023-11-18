@@ -16,8 +16,9 @@ export interface RegistratedUser {
   isActive:boolean;
 }
 export enum Employment {
-  COMPANY_ADMIN,
-  SISTEM_ADMIN,
+  DOCTOR,
+	PHARMACIST,
+	OTHER
 }
 
 export enum Category {
