@@ -190,16 +190,16 @@
           Phone number is required!
         </span>
       </div>
-
+      
       <div [formGroup]="registrationForm">
-        <label for="employment"><b>Employment: </b></label>
-        <!--<input type="text" placeholder="Enter Employment" name="profession" id="profession" oninput="this.className = ''" required formControlName="employment" [(ngModel)]="user.employment">-->
-
-        <select formControlName="employment" id="employment">
-          <option
-            *ngFor="let employment of employments"
-            [value]="employment.value"
-          >
+        <label for="occupation">Employment:</label>
+        <select (change)="onSelectEmployment($event)"
+        id="occupation"
+        required
+        class="fancy-select"
+        formControlName="employment"
+        >
+          <option *ngFor="let employment of employments" [ngValue]="employment">
             {{ employment.label }}
           </option>
         </select>
@@ -207,10 +207,11 @@
           *ngIf="employment && employment.invalid && employment.touched"
           style="color: red"
         >
-          Profession is required!
+          Employment is required!
         </span>
       </div>
       <br />
+
       <div [formGroup]="registrationForm">
         <label for="infoAboutInstitution"><b>Information</b></label>
         <input
@@ -239,7 +240,7 @@
 </form>
 <button
   class="registerbtn"
-  (click)="registerUser($event)"
+  (click)="registerUser()"
   [disabled]="registrationForm.invalid && !isAllValid()"
 >
   Register

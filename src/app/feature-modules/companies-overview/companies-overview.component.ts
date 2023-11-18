@@ -9,8 +9,8 @@ import { CompanyService } from '../services/company.service';
   styleUrls: ['./companies-overview.component.css'],
 })
 export class CompaniesOverviewComponent implements OnInit {
-  selectedOption: string;
-  parameter: string;
+  name: string = '';
+  city: string = '';
   minRating: number = 0;
   maxRating: number = 0;
   filterDisabled: boolean = true;
@@ -36,39 +36,47 @@ export class CompaniesOverviewComponent implements OnInit {
 
   search(): void {
     if (
-      this.parameter != '' &&
-      this.parameter != undefined &&
-      this.parameter != null &&
-      this.selectedOption != '' &&
-      this.selectedOption != undefined &&
-      this.selectedOption != null
+      this.name != '' &&
+      this.name != undefined &&
+      this.name != null &&
+      this.city != '' &&
+      this.city != undefined &&
+      this.city != null
     ) {
-      if (this.selectedOption == 'Name') {
-        this.service.searchByName(this.parameter).subscribe({
-          next: (result: Company[]) => {
-            this.companies = result;
-            this.filterDisabled = false;
-            this.searchedCompanies = this.companies;
-          },
-        });
-      } else {
-        this.service.searchByCity(this.parameter).subscribe({
-          next: (result: Company[]) => {
-            this.companies = result;
-            this.filterDisabled = false;
-            this.searchedCompanies = this.companies;
-          },
-        });
-      }
-    } else alert('You need to enter a parameter for search.');
+      this.service.searchByNameAndCity(this.name, this.city).subscribe({
+        next: (result: Company[]) => {
+          this.companies = result;
+          this.filterDisabled = false;
+          this.searchedCompanies = this.companies;
+        },
+      });
+    } else if (this.name != '' && this.name != undefined && this.name != null) {
+      this.service.searchByName(this.name).subscribe({
+        next: (result: Company[]) => {
+          this.companies = result;
+          this.filterDisabled = false;
+          this.searchedCompanies = this.companies;
+        },
+      });
+    } else if (this.city != '' && this.city != undefined && this.city != null) {
+      this.service.searchByCity(this.city).subscribe({
+        next: (result: Company[]) => {
+          this.companies = result;
+          this.filterDisabled = false;
+          this.searchedCompanies = this.companies;
+        },
+      });
+    } else {
+      alert('Please enter name/city to search companies.');
+    }
   }
 
   reset(): void {
     this.service.getCompanies().subscribe({
       next: (result: Company[]) => {
         this.companies = result;
-        this.parameter = '';
-        this.selectedOption = '';
+        this.name = '';
+        this.city = '';
         this.filterDisabled = true;
         this.minRating = 0;
         this.maxRating = 0;

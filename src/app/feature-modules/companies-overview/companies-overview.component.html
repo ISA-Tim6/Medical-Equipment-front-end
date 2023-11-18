@@ -1,23 +1,15 @@
 <div class="search-container">
   <h2 class="search-heading">All companies / Company Search</h2>
-  <p>Please select the parameter you want to search by:</p>
-  <select id="search-parameter" [(ngModel)]="selectedOption">
-    <option value="Name">Name</option>
-    <option value="City">City</option>
-  </select>
-
-  <label for="parameter-value">Enter parameter value:</label>
-  <input
-    type="text"
-    id="parameter-value"
-    class="fancy-input"
-    [(ngModel)]="parameter"
-  />
+  <p>Please enter parameters you want to search by:</p>
+  <label>Enter company name:</label>
+  <input type="text" class="fancy-input" [(ngModel)]="name" />
+  <label>Enter company city:</label>
+  <input type="text" class="fancy-input" [(ngModel)]="city" />
 
   <button class="fancy-search-btn" (click)="search()">Search</button>
   <button class="fancy-reset-btn" (click)="reset()">Reset</button>
   <br /><br /><br /><br />
-  <label for="minRating">Minimalna ocjena:</label>
+  <label for="minRating">Min rating:</label>
   <input
     type="number"
     id="minRating"
@@ -25,7 +17,7 @@
     [(ngModel)]="minRating"
   />
 
-  <label for="maxRating">Maksimalna ocjena:</label>
+  <label for="maxRating">Max rating:</label>
   <input
     type="number"
     id="maxRating"
