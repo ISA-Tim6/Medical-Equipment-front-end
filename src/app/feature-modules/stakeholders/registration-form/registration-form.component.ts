@@ -10,7 +10,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
-import { RegistratedUser } from '../model/user.model';
+import { Category, RegistratedUser } from '../model/user.model';
 
 @Component({
   selector: 'app-registration-form',
@@ -18,16 +18,23 @@ import { RegistratedUser } from '../model/user.model';
   styleUrls: ['./registration-form.component.css'],
 })
 export class RegistrationFormComponent implements OnChanges {
+  selected:any;
+  parts:any;
+  onSelectEmployment(e:any): void {
+    console.log(e.target.value);
+    this.parts=e.target.value.split(":");
+    this.selected=this.parts[0];
+  }
   constructor(private userService: UserService, private router: Router) {}
   ngOnChanges(changes: SimpleChanges): void {
     throw new Error('Method not implemented.');
   }
   public repeat = '';
-  selected: string = '';
   employments = [
-    { value: '0', label: 'COMPANY_ADMIN' },
-    { value: '1', label: 'SISTEM_ADMIN' },
+    { value: 0, label: 'COMPANY_ADMIN' },
+    { value: 1, label: 'SISTEM_ADMIN' },
   ];
+  
   
   registrationForm= new FormGroup({
     email: new FormControl('',[Validators.required]),
@@ -38,34 +45,46 @@ export class RegistrationFormComponent implements OnChanges {
     city: new FormControl('',[Validators.required]),
     country: new FormControl('',[Validators.required]),
     phoneNumber: new FormControl('',[Validators.required]),
+    employment: new FormControl('COMPANY_ADMIN'),
     infoAboutInstitution: new FormControl('',[Validators.required]),
   })
   
-   user : RegistratedUser= {
-    email: this.registrationForm.value.email || "",
-    username:this.registrationForm.value.username || "",
-    password: this.registrationForm.value.password || "",
-    name: this.registrationForm.value.name || "",
-    surname: this.registrationForm.value.surname || "",
-    city: this.registrationForm.value.city || "",
-    country: this.registrationForm.value.country || "",
-    phoneNumber: this.registrationForm.value.phoneNumber || "",
-    employment: this.selected
-                ? parseInt(this.selected, 2)
-                : 0,
-    infoAboutInstitution: this.registrationForm.value.infoAboutInstitution || "",
+  user: RegistratedUser = {
+    email: '',
+    password: '',
+    name: '',
+    username: '',
+    surname: '',
+    city: '',
+    country: '',
+    phoneNumber: '',
+    employment: this.employments[0].value,
+    infoAboutInstitution: '',
     loggedBefore: false,
+    category: Category.REGULAR,
     penals: 0,
-    category: 0,
     isActive:false
   };
 
-  public registerUser(event: Event) {
-    event.preventDefault();
-
-      
+  public registerUser():void {
+    const user: RegistratedUser = {
+      email: this.registrationForm.value.email || '',
+      password: this.registrationForm.value.password || '',
+      name: this.registrationForm.value.name || '',
+      username: this.registrationForm.value.username || '',
+      surname: this.registrationForm.value.surname || '',
+      city: this.registrationForm.value.city || '',
+      country: this.registrationForm.value.country || '',
+      phoneNumber: this.registrationForm.value.phoneNumber || '',
+      employment: this.registrationForm.value.employment ? parseInt(this.selected, 2) : 0,
+      infoAboutInstitution: this.registrationForm.value.infoAboutInstitution || '',
+      loggedBefore: this.user!.loggedBefore,
+      penals: this.user!.penals,
+      category: this.user!.category,
+      isActive:false
+    };
       this.user.infoAboutInstitution=this.registrationForm.get('infoAboutInstitution')!.value || "";
-      
+      this.user.employment=this.selected;
       this.userService.registerUser(this.user).subscribe((response:any)=>{
           if (response.status === "success") {
             alert("Email successfully sent.")
@@ -81,7 +100,6 @@ export class RegistrationFormComponent implements OnChanges {
       );
  
   }
-
 
   get name() {
     return this.registrationForm.get('name');
@@ -133,13 +151,6 @@ export class RegistrationFormComponent implements OnChanges {
     return sampleRegEx.test(email);
   }
 
-  public isLongPassword(password: string) {
-    let isLong: boolean = false;
-    if (password.length >= 5) isLong = true;
-
-    return isLong;
-  }
-
   repeatPassword(e: any) {
     this.repeat = e.target.value;
   }
@@ -188,8 +199,6 @@ export class RegistrationFormComponent implements OnChanges {
 
     if (this.isValidEmail(this.user.email)) emailValid = true;
 
-    if (this.isLongPassword(this.user.password)) longPasswordValid = true;
-
     if (this.isPasswordCorrect()) passwordCorrect = true;
 
     if (this.isPhoneNumberValid()) phoneValid = true;
@@ -198,9 +207,9 @@ export class RegistrationFormComponent implements OnChanges {
       nameValid &&
       surnameValid &&
       emailValid &&
-      longPasswordValid &&
       passwordCorrect &&
       phoneValid;
     return allIsValid;
   }
+ 
 }

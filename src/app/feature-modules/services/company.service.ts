@@ -68,7 +68,14 @@ export class CompanyService {
     );
   }
 
+
   searchEquipmentByCompany(name: string, company_id: number): Observable<Equipment[]>{
     return this.http.get<Equipment[]>(environment.apiHost + 'equipment/searchEquipmentByCompany/'+ name + "/"+ company_id);
+  }
+  searchByNameAndCity(name: string, city: string): Observable<Company[]> {
+    return this.http.get<any>(
+      environment.apiHost + 'company/searchByNameAndCity/' + name + '/' + city
+    );
+
   }
 }
