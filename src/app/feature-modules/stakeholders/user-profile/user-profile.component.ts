@@ -122,8 +122,8 @@ export class UserProfileComponent implements OnChanges, OnInit {
         isActive: false,
       };
       this.service.getByUsername(user.username).subscribe({
-        next: (result: User) => {
-          if (result == null || result.user_id == user.user_id) {
+        next: (result: number) => {
+          if (result == -1 || result == user.user_id) {
             this.service.updateUser(user, oldUsername).subscribe({
               next: (result: RegistratedUser) => {
                 if (result == null) alert('Please enter valid data.');

@@ -15,7 +15,7 @@ export class StakeholdersService {
     return this.http.get<RegistratedUser>(environment.apiHost + 1);
   }
 
-  getByUsername(username: string): Observable<User> {
+  getByUsername(username: string): Observable<any> {
     return this.http.get<User>(
       environment.apiHost + 'user/username/' + username
     );
