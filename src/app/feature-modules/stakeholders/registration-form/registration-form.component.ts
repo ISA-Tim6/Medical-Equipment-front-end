@@ -23,7 +23,7 @@ export class RegistrationFormComponent implements OnChanges {
   onSelectEmployment(e:any): void {
     console.log(e.target.value);
     this.parts=e.target.value.split(":");
-    this.selected=this.parts[0];
+    this.selected=parseInt(this.parts[0])+2;
   }
   constructor(private userService: UserService, private router: Router) {}
   ngOnChanges(changes: SimpleChanges): void {
@@ -77,7 +77,7 @@ export class RegistrationFormComponent implements OnChanges {
       city: this.registrationForm.value.city || '',
       country: this.registrationForm.value.country || '',
       phoneNumber: this.registrationForm.value.phoneNumber || '',
-      employment: this.registrationForm.value.employment ? parseInt(this.selected, 10) : 0,
+      employment: this.registrationForm.value.employment ? parseInt(this.registrationForm.value.employment, 10) : 2,
       infoAboutInstitution: this.registrationForm.value.infoAboutInstitution || '',
       loggedBefore: this.user!.loggedBefore,
       penals: this.user!.penals,
@@ -85,6 +85,7 @@ export class RegistrationFormComponent implements OnChanges {
       isActive:false
     };
       this.user.infoAboutInstitution=this.registrationForm.get('infoAboutInstitution')!.value || "";
+      this.user.employment=this.selected;
       this.userService.registerUser(this.user).subscribe((response:any)=>{
           if (response.status === "success") {
             alert("Email successfully sent.")

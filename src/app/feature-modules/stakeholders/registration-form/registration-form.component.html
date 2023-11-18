@@ -191,13 +191,14 @@
         </span>
       </div>
       
-      <div [formGroup]="registrationForm">
+      <div  [formGroup]="registrationForm">
         <label for="occupation">Employment:</label>
-        <select (change)="onSelectEmployment($event)"
+        <select 
         id="occupation"
         required
         class="fancy-select"
         formControlName="employment"
+        (change)="onSelectEmployment($event)"
         >
           <option *ngFor="let employment of employments" [ngValue]="employment">
             {{ employment.label }}
