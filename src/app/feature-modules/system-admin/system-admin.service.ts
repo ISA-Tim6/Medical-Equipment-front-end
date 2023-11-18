@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Company } from './model/company.model';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/env/environment';
 import { User } from '../stakeholders/model/main-user.model';
 import { CompanyAdmin } from './model/company-admin-model';
@@ -36,5 +36,13 @@ export class SystemAdminService {
 
   searchEquipment(name: string): Observable<Equipment[]>{
     return this.http.get<Equipment[]>(environment.apiHost + 'equipment/searchEquipment/'+ name);
+  }
+
+  findByUsername(username: string): Observable<Number>{
+    return this.http.get<Number>(environment.apiHost + 'user/username/'+ username);
+  }
+
+  findByEmail(email: string): Observable<Number>{
+    return this.http.get<Number>(environment.apiHost + 'user/' + email);
   }
 }

@@ -4,6 +4,7 @@ import { SystemAdminService } from '../system-admin.service';
 import { Employment } from '../../stakeholders/model/main-user.model';
 import { Company } from '../model/company.model';
 import { CompanyAdmin } from '../model/company-admin-model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-company-admin-form',
@@ -72,15 +73,29 @@ export class CompanyAdminFormComponent implements OnInit {
         company: this.adminForm.value.company || this.companies[0]
       };
   
-      this.service
-        .addCompanyAdmin(user, this.selectedCompany.company_id || 0)
-        .subscribe( (result) => {
-            this.adminForm.reset();
-            alert("Company admin saved!");
-        });
-    }else{
-      alert("Fields can't be empty");
-    }
+      this.service.findByEmail(this.adminForm.value.email || '').subscribe( result => {
+        if(result != -1)
+          {
+            alert("Email already in use");
+          }else{
+            this.service.findByUsername(this.adminForm.value.username || '').subscribe( res => {
+              if(res != -1)
+              {
+                alert("Username already in use");
+              }else{
+                this.service
+                  .addCompanyAdmin(user, this.adminForm.value.company?.company_id || 0)
+                  .subscribe( (result) => {
+                      this.adminForm.reset();
+                      alert("Company admin saved!");
+                  });
+                }
+              });
+            }
+          });
+        }else{
+          alert("Fields can't be empty");
+        }
   }
 
   onSelectCompany($event: any): void {}
@@ -107,5 +122,4 @@ export class CompanyAdminFormComponent implements OnInit {
       /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
     return sampleRegEx.test(this.adminForm.controls.email.value || '');
   }
-
 }

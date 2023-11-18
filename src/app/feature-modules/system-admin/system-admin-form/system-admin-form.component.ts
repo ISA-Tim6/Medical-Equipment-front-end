@@ -56,9 +56,23 @@ export class SystemAdminFormComponent {
         loggedBefore: false,
       };
   
-      this.service.addSystemAdmin(user).subscribe( result => {
-        this.adminForm.reset();
-        alert("System admin saved!");
+      this.service.findByEmail(user.email).subscribe(result => {
+        if(result != -1)
+        {
+          alert("Email already in use");
+        }else{
+          this.service.findByUsername(user.username).subscribe(res => {
+            if(res != -1)
+            {
+              alert("Username already in use");
+            }else{
+              this.service.addSystemAdmin(user).subscribe( result => {
+                this.adminForm.reset();
+                alert("System admin saved!");
+              });
+            }
+          });
+        }
       });
     }else{
       alert("Fields can't be empty");
