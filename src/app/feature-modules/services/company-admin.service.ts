@@ -31,6 +31,14 @@ export class CompanyAdminService {
     
   }
 
+  getUserByUsername(username:string): Observable<any>{
+    return this.http.get<any>(environment.apiHost+"user/username/"+username);   
+  }
+
+  getUserByEmail(email:string): Observable<any>{
+    return this.http.get<any>(environment.apiHost+"user/"+email);   
+  }
+
 
 
 }
