@@ -13,6 +13,7 @@ export interface RegistratedUser {
   loggedBefore: boolean;
   penals?: number;
   category?: Category;
+  isActive:boolean;
 }
 export enum Employment {
   COMPANY_ADMIN,

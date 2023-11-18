@@ -1,0 +1,19 @@
+p{
+    color: orangered;
+    font-size: 5vh;
+}
+
+.address{
+    color: orangered;
+    font-size: 2vh;
+}
+.all-fields{
+    width: 500px;
+    border: orangered solid 0.5px;
+}
+.fields{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 50px;
+}

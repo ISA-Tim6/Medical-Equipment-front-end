@@ -1,0 +1,15 @@
+.saveButton{
+    background-color: orangered;
+    border-radius: 10px;
+    border-color: black;
+    color: black;
+    font-size: large;
+}
+
+.title{
+    color: orangered;
+}
+
+#adminForm{
+    margin: auto;
+}

@@ -37,6 +37,22 @@ export class CompanyAdminFormComponent implements OnInit {
 
   onSave(): void {
 
+    if(!this.isPhoneNumberValid())
+    {
+      alert("Phone number is not in correct format");
+      return;
+    }
+    if(!this.isLongPassword())
+    {
+      alert("Password must have at least 5 characters");
+      return;
+    }
+
+    if(!this.isValidEmail())
+    {
+      alert("Email is not in correct format");
+      return;
+    }
     if(this.adminForm.controls.email.valid && this.adminForm.controls.username.valid && this.adminForm.controls.password.valid && this.adminForm.controls.name.valid
       && this.adminForm.controls.surname.valid && this.adminForm.controls.city.valid && this.adminForm.controls.country.valid && this.adminForm.controls.phoneNumber.valid
       && this.adminForm.controls.infoAboutInstitution.valid) 
@@ -68,5 +84,28 @@ export class CompanyAdminFormComponent implements OnInit {
   }
 
   onSelectCompany($event: any): void {}
+
+  isPhoneNumberValid(){
+    let isValidPhoneNumber:boolean=false;
+    let sampleRegEx: RegExp = /[0-9]+/;
+    if(sampleRegEx.test(this.adminForm.controls.phoneNumber.value || ''))
+      if((this.adminForm.controls.phoneNumber.value || '').length>3)
+        isValidPhoneNumber=true;
+
+    return isValidPhoneNumber;
+  }
+
+  public isLongPassword() {
+    let isLong: boolean = false;
+    if ((this.adminForm.controls.password.value || '').length >= 5) isLong = true;
+
+    return isLong;
+  }
+
+  public isValidEmail() {
+    let sampleRegEx: RegExp =
+      /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+    return sampleRegEx.test(this.adminForm.controls.email.value || '');
+  }
 
 }

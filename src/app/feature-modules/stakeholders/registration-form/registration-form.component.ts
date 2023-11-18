@@ -56,7 +56,8 @@ export class RegistrationFormComponent implements OnChanges {
     infoAboutInstitution: this.registrationForm.value.infoAboutInstitution || "",
     loggedBefore: false,
     penals: 0,
-    category: 0
+    category: 0,
+    isActive:false
   };
 
   public registerUser(event: Event) {

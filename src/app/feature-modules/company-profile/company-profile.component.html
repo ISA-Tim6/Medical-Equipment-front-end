@@ -1,21 +1,30 @@
 <div>
-    <p>company-profile</p>
+    <p>Company profile</p>
     <hr>
-    <div>
-        Name:
+    <div class="all-fields">
+    <div class="fields">
+       <div><label><b>Name:</b></label></div>
+       <div>
         <input
         disabled={{disabledStatus}}
         type="text"
         [(ngModel)]="company.name"
         />
+        <span *ngIf="disabledStatus==false && isValidName()==false " style="color: red">
+            Invalid name!
+          </span>
+       </div>
     </div>
     <div>
-        Average grade:
+        <div class="fields">
+        <div><label><b>Average grade:</b></label></div>
         <input
         disabled={{disabledStatus}}
-        type="text"
+        type="number"
+        min="0"
         [(ngModel)]="company.averageGrade"
         />
+        </div>
     </div>
     <div>
         Opening hours:
@@ -36,40 +45,54 @@
     <div>Address:</div>                                                     
     <div>
         City
+    <p class="address">Address:</p>                                             
+    <div class="fields">
+        <div><label><b>City:</b></label></div>
+        <div>
         <input
         disabled={{disabledStatus}}
         type="text"
         [(ngModel)]="company.address.city"
         />
+        </div>
     </div>
-    <div>
-        Country
+    <div class="fields">
+        <div><label><b>Country:</b></label></div>
+        <div>
         <input
         disabled={{disabledStatus}}
         type="text"
         [(ngModel)]="company.address.country"
         />
+        </div>
     </div>
-    <div>
-        Street
+    <div class="fields">
+        <div><label><b>Street:</b></label></div>
+        <div>
         <input
         disabled={{disabledStatus}}
         type="text"
         [(ngModel)]="company.address.street"
         />
+        </div>
     </div>
-    <div>
-        Street number
+    <div class="fields">
+        <div><label><b>Street number:</b></label></div>
+        <div>
         <input
         disabled={{disabledStatus}}
         type="text"
         [(ngModel)]="company.address.streetNumber"
         />
+        </div>
     </div>
-    <button (click)="OnEdit()">{{edit}}</button>
+    </div>
+    <button (click)="OnEdit()">{{edit}}</button>   <span *ngIf="disabledStatus==false && isValidName()==false " style="color: red">
+        Invalid input! Please correct it!
+      </span>
     <div>
-        Other company admins:
-        <table>
+        <p class="address">Other admins:</p>
+        <table border="1">
             <thead>
                 <th>Name</th>
                 <th>Surname</th>
@@ -93,10 +116,10 @@
         </table>
     </div>
     <div>
-        Equipment:
+        <p class="address">Available equipment</p>
     </div>
     <div>
-        <table>
+        <table border="1">
             <thead>
                 <th>Name</th>
                 <th>Description</th>
@@ -117,12 +140,21 @@
             <form [formGroup]="equipmentForm" *ngIf="equipmentFormVisible">
                 <div>
                 <input type="text" required  placeholder="name" formControlName="name">
+                <span *ngIf="isValidEquipmentName()==false && equipmentForm.touched" style="color: red">
+                    Invalid name!
+                  </span>
                 </div>
                 <div>
                 <input type="text" required  placeholder="description" formControlName="description">
+                <span *ngIf="isValidEquipmentDescription()==false && equipmentForm.touched" style="color: red">
+                    Invalid description!
+                  </span>
                 </div>
                 <div>
                     <input type="text" required   placeholder="type" formControlName="type">
+                    <span *ngIf="isValidEquipmentType()==false && equipmentForm.touched" style="color: red">
+                        Invalid type!
+                      </span>
                     </div>
                 <button (click)="OnConfirm()">Confirm</button>
             </form>

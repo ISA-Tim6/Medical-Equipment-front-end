@@ -1,4 +1,4 @@
-<p>Equipment search</p>
+<h2 class="title">Equipment search</h2>
 <div>
     <table>
         <tr>
@@ -13,14 +13,14 @@
             <td>
             </td>
             <td>
-                <button (click)="onSearch()">Search</button>
+                <button (click)="onSearch()" class="button">Search</button>
             </td>
         </tr>
     </table>
 
     <div *ngIf="equipment.length > 0">
-        <h4>Equipment</h4>
-        <table border="1">
+        <h4 class="title">Equipment</h4>
+        <table class="table">
             <tr>
                 <th>Name</th>
                 <th>Type</th>
@@ -46,7 +46,7 @@
     </div>
 
     <div>
-        <h5>Filters</h5>
+        <h5 class="title">Filters</h5>
         <table>
             <tr>
                 <td>Type: </td>
@@ -71,8 +71,8 @@
             </tr>
         </table>
         <div>
-            <button (click)="onFilter()">Filter</button>
-            <button (click)="onReset()">Reset filters</button>
+            <button (click)="onFilter()" class="button">Filter</button>
+            <button (click)="onReset()" class="resetButton">Reset filters</button>
         </div>
     </div>
 </div>

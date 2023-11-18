@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Equipment } from '../../company-profile/model/equipment.model';
 import { SystemAdminService } from '../system-admin.service';
+import { LowerCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-equipment-search',
@@ -32,7 +33,7 @@ export class EquipmentSearchComponent {
     }else
     if(this.filterType)
     {
-      this.equipment = this.equipment.filter(n => n.type.includes(this.filterType));
+      this.equipment = this.equipment.filter(n => n.type.toLowerCase().includes(this.filterType.toLowerCase()));
     }
 
     if(this.filterCompanyName)
@@ -41,7 +42,7 @@ export class EquipmentSearchComponent {
       this.equipment.forEach(e => {
         if( e.companies)
           e.companies.forEach(c => {
-            if(c.name.includes(this.filterCompanyName) && list.filter(n => n.equipment_id == e.equipment_id).length == 0)
+            if((c.name).toLowerCase().includes(this.filterCompanyName.toLowerCase()) && list.filter(n => n.equipment_id == e.equipment_id).length == 0)
             list.push(e);
           });
       });

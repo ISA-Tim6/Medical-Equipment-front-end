@@ -1,33 +1,84 @@
 <form [formGroup]="companyForm">
-    <label>Name: </label>
-    <input type="text" formControlName="name">
+    <h2 class="title">Create new company</h2>
+    <table>
+        <tr>
+            <td>
+                <label>Name: </label>
+            </td>
+            <td>
+                <input type="text" formControlName="name">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Street: </label>
+            </td>
+            <td>
+                <input type="text" formControlName="street">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Street number: </label>
+            </td>
+            <td>
+                <input type="text" formControlName="streetNumber">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>City: </label>
+            </td>
+            <td>
+                <input type="text" formControlName="city">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Country: </label>
+            </td>
+            <td>
+                <input type="text" formControlName="country">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Longitude: </label>
+            </td>
+            <td>
+                <input type="number" formControlName="longitude">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Latitude: </label>
+            </td>
+            <td>
+                <input type="number" formControlName="latitude">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Opening hours</label>
+            </td>
+            <td>
+                <input type="time" formControlName="openingHours">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Closing hours</label>
+            </td>
+            <td>
+                <input type="time" formControlName="closingHours">
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <button (click)="onSave()" class="saveButton">Save</button>
+            </td>
+        </tr>
 
-    <div id="address">
-        <label>Street: </label>
-        <input type="text" formControlName="street">
-        <br>
-        <label>Street number: </label>
-        <input type="text" formControlName="streetNumber">
-        <br>
-        <label>City: </label>
-        <input type="text" formControlName="city">
-        <br>
-        <label>Country: </label>
-        <input type="text" formControlName="country">
-        <br>
-        <label>Longitude: </label>
-        <input type="number" formControlName="longitude">
-        <br>
-        <label>Latitude: </label>
-        <input type="number" formControlName="latitude">
-        <br>
-    </div>
-
-    <label>Opening hours</label>
-    <input type="time" formControlName="openingHours">
-    <br>
-    <label>Closing hours</label>
-    <input type="time" formControlName="closingHours">
-    <br>
-    <button (click)="onSave()">Save</button>
+    </table>
 </form>
