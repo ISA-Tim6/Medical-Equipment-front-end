@@ -3,6 +3,7 @@ import { CompanyAdmin } from '../model/company-admin.model';
 import { CompanyAdminService } from '../../services/company-admin.service';
 import { Router } from '@angular/router';
 import { UserCompanyAdmin } from '../model/user-company-admin.model';
+import { User } from '../model/main-user.model';
 
 @Component({
   selector: 'app-company-admin-profile',
@@ -63,16 +64,32 @@ export class CompanyAdminProfileComponent implements OnInit{
         loggedBefore: this.companyAdmin.loggedBefore
       }
       if(this.isAllValid()){
-    this.service.updateCompanyAdmin(companyAdminUser).subscribe({
-      next: (result: CompanyAdmin) => {
-        console.log(result);
-        this.companyAdmin = result;
-        this.companyAdmin.user_id=this.id;
-        alert("Your profile is changed!")
-        this.disabledStatus=true;
-        this.edit="Edit";
-      },
-    });
+        let moze:Boolean=false;
+        this.service.getUserByUsername(this.companyAdmin.username).subscribe({
+          next: (result: number) => {
+           if(result==-1 || result==this.companyAdmin.user_id)
+            {
+              this.service.updateCompanyAdmin(companyAdminUser).subscribe({
+                next: (result: CompanyAdmin) => {
+                  console.log(result);
+                  this.companyAdmin = result;
+                  this.companyAdmin.user_id=this.id;
+                  alert("Your profile is changed!")
+                  this.disabledStatus=true;
+                  this.edit="Edit";
+                },
+              });
+            }else{
+             alert("Username is already in use");
+            }
+          }
+        });
+
+
+
+  
+
+  
   }
       
     }
@@ -112,6 +129,36 @@ export class CompanyAdminProfileComponent implements OnInit{
       return true;
     else
       return false;
+  }
+
+  public isUsernameAlreadyInUse(){
+    this.service.getUserByUsername(this.companyAdmin.username).subscribe({
+      next: (result: User) => {
+        let u=result;
+       if(result==null && (u.user_id!=this.companyAdmin.user_id))
+        {
+          alert("Username is already in use");
+          return false;
+        }else{
+          return true;
+        }
+      }
+    });
+  }
+
+  public isEmailAlreadyInUse(){
+    this.service.getUserByEmail(this.companyAdmin.email).subscribe({
+      next: (result: User) => {
+        let u=result;
+       if(result==null && (u.user_id!=this.companyAdmin.user_id))
+        {
+          alert("Email is already in use");
+          return false;
+        }else{
+          return true;
+        }
+      }
+    });
   }
 
   isPhoneNumberValid(){

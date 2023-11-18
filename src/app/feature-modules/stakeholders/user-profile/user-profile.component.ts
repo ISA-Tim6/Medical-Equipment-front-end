@@ -8,6 +8,7 @@ import {
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { StakeholdersService } from '../stakeholders.service';
 import { Category, Employment, RegistratedUser } from '../model/user.model';
+import { User } from '../model/main-user.model';
 
 @Component({
   selector: 'app-user-profile',
@@ -35,7 +36,7 @@ export class UserProfileComponent implements OnChanges, OnInit {
     loggedBefore: false,
     category: Category.REGULAR,
     penals: 0,
-    isActive:false
+    isActive: false,
   };
 
   constructor(private service: StakeholdersService) {}
@@ -118,15 +119,21 @@ export class UserProfileComponent implements OnChanges, OnInit {
         loggedBefore: this.user!.loggedBefore,
         penals: this.user!.penals,
         category: this.user!.category,
-        isActive:false
+        isActive: false,
       };
-      this.service.updateUser(user, oldUsername).subscribe({
-        next: (result: RegistratedUser) => {
-          if (result == null) alert('Please enter valid data.');
-          else {
-            this.user = result;
-            this.editMode = false;
-          }
+      this.service.getByUsername(user.username).subscribe({
+        next: (result: number) => {
+          if (result == -1 || result == user.user_id) {
+            this.service.updateUser(user, oldUsername).subscribe({
+              next: (result: RegistratedUser) => {
+                if (result == null) alert('Please enter valid data.');
+                else {
+                  this.user = result;
+                  this.editMode = false;
+                }
+              },
+            });
+          } else alert('Username already exists.');
         },
       });
     } else alert('Please enter valid data.');
