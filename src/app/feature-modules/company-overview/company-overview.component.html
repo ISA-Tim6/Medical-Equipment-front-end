@@ -92,11 +92,13 @@
         <th>Name</th>
         <th>Type</th>
         <th>Description</th>
+        <th>Choose</th>
       </tr>
       <tr *ngFor="let e of equipmentList">
         <td>{{ e.name }}</td>
         <td>{{ e.type }}</td>
         <td>{{ e.description }}</td>
+        <td><button>Choose</button></td>
       </tr>
     </table>
   </div>
