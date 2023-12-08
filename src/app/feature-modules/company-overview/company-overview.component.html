@@ -1,58 +1,119 @@
-<p>Details about company<p>
-<hr>
-<br>
+<p>Details about company</p>
+<p></p>
+<hr />
+<br />
 <table>
-    <tr>
-        <th>Name</th>
-        <td>{{company.name}}</td>
-    </tr>
-    <tr>
-        <th>Average grade</th>
-        <td>{{company.averageGrade}}</td>
-    </tr>
-    <tr>
-        <th>Address</th>
-        <td>
-            <table>
-                <tr>
-                    <th>City</th>
-                    <td>{{company.address.city}}</td>
-                </tr>
-                <tr>
-                    <th>Country</th>
-                    <td>{{company.address.country}}</td>
-                </tr>
-                <tr>
-                    <th>Street</th>
-                    <td>{{company.address.street}}</td>
-                </tr>
-                <tr>
-                    <th>Street number</th>
-                    <td>{{company.address.streetNumber}}</td>
-                </tr>
-                <tr>
-                    <th>Longitude</th>
-                    <td>{{company.address.longitude}}</td>
-                </tr>
-                <tr>
-                    <th>Latitude</th>
-                    <td>{{company.address.latitude}}</td>
-                </tr>
-            </table>
-        </td>
-    </tr>
-    <tr>
-        <th>Equipment:</th>
-        <td>
-            <table>
-                <tr *ngFor="let e of company.equipment">
-                    <td>
-                        <div class="div-equipment"><div class="div-equipment-header">Name  </div><div class="span-equipment"> {{e.name}}</div></div>
-                        <div class="div-equipment"><div class="div-equipment-header">Description </div><div class="span-equipment">{{e.description}}</div></div>
-                        <div class="div-equipment"><div class="div-equipment-header">Type </div><div class="span-equipment">{{e.type}}</div></div>
-                    </td>
-                </tr>
-            </table>
-        </td>
-    </tr>
+  <tr>
+    <th>Name</th>
+    <td>{{ company.name }}</td>
+  </tr>
+  <tr>
+    <th>Average grade</th>
+    <td>{{ company.averageGrade }}</td>
+  </tr>
+  <tr>
+    <th>Address</th>
+    <td>
+      <table>
+        <tr>
+          <th>City</th>
+          <td>{{ company.address.city }}</td>
+        </tr>
+        <tr>
+          <th>Country</th>
+          <td>{{ company.address.country }}</td>
+        </tr>
+        <tr>
+          <th>Street</th>
+          <td>{{ company.address.street }}</td>
+        </tr>
+        <tr>
+          <th>Street number</th>
+          <td>{{ company.address.streetNumber }}</td>
+        </tr>
+        <tr>
+          <th>Longitude</th>
+          <td>{{ company.address.longitude }}</td>
+        </tr>
+        <tr>
+          <th>Latitude</th>
+          <td>{{ company.address.latitude }}</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <th>Equipment:</th>
+    <td>
+      <table>
+        <tr *ngFor="let e of company.equipment">
+          <td>
+            <div class="div-equipment">
+              <div class="div-equipment-header">Name</div>
+              <div class="span-equipment">{{ e.name }}</div>
+            </div>
+            <div class="div-equipment">
+              <div class="div-equipment-header">Description</div>
+              <div class="span-equipment">{{ e.description }}</div>
+            </div>
+            <div class="div-equipment">
+              <div class="div-equipment-header">Type</div>
+              <div class="span-equipment">{{ e.type }}</div>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
 </table>
+<p>Equipment search</p>
+<div>
+  <table>
+    <tr>
+      <td>
+        <label>Search by name: </label>
+      </td>
+      <td>
+        <input type="text" placeholder="search by name" [(ngModel)]="name" />
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>
+        <button (click)="onSearch()">Search</button>
+      </td>
+    </tr>
+  </table>
+
+  <div *ngIf="equipmentList.length > 0">
+    <h4>Equipment</h4>
+    <table border="1">
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+      <tr *ngFor="let e of equipmentList">
+        <td>{{ e.name }}</td>
+        <td>{{ e.type }}</td>
+        <td>{{ e.description }}</td>
+      </tr>
+    </table>
+  </div>
+
+  <div>
+    <h5>Filters</h5>
+    <table>
+      <tr>
+        <td>Type:</td>
+        <td>
+          <input type="text" [(ngModel)]="filterType" placeholder="type" />
+        </td>
+      </tr>
+    </table>
+    <div>
+      <button (click)="onFilter()">Filter</button>
+      <button (click)="onReset()">Reset filters</button>
+    </div>
+  </div>
+</div>
