@@ -11,6 +11,7 @@ import { CompaniesOverviewComponent } from './feature-modules/companies-overview
 import { CompanyOverviewComponent } from './feature-modules/company-overview/company-overview.component';
 import { EquipmentSearchComponent } from './feature-modules/system-admin/equipment-search/equipment-search.component';
 import { LoginFormComponent } from './feature-modules/login-form/login-form.component';
+import { HomePageComponent } from './feature-modules/home-page/home-page.component';
 const routes: Routes = [
   {
     path: 'user-profile',
@@ -47,6 +48,10 @@ const routes: Routes = [
   {
     path:'login',
     component:LoginFormComponent
+  },
+  {
+    path:'home-page',
+    component:HomePageComponent
   },
 
 ];

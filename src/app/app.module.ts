@@ -10,7 +10,15 @@ import { CompanyProfileComponent } from './feature-modules/company-profile/compa
 import { CompaniesOverviewComponent } from './feature-modules/companies-overview/companies-overview.component';
 import { CompanyOverviewComponent } from './feature-modules/company-overview/company-overview.component';
 import { LoginFormComponent } from './feature-modules/login-form/login-form.component';
+import { HomePageComponent } from './feature-modules/home-page/home-page.component';
 
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './interceptor/TokenInterceptor';
+import { FooService } from './feature-modules/services/foo.service';
+import { AuthService } from './auth/auth.service';
+import { ApiService } from './feature-modules/services/api.service';
+import { ConfigService } from './feature-modules/services/config.service';
+import { UserService } from './feature-modules/services/user.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,6 +26,7 @@ import { LoginFormComponent } from './feature-modules/login-form/login-form.comp
     CompaniesOverviewComponent,
     CompanyOverviewComponent,
     LoginFormComponent,
+    HomePageComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,7 +38,18 @@ import { LoginFormComponent } from './feature-modules/login-form/login-form.comp
     SystemAdminModule,
   ],
   exports: [AppComponent],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
+    FooService,
+    AuthService,
+    ApiService,
+    UserService,
+    ConfigService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
