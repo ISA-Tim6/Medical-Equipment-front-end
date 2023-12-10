@@ -160,6 +160,50 @@
             </form>
         </div>
     </div>
+    <br>
+    <p>Working time calendar</p>
+    <div>
+        <table>
+            <tr *ngFor="let e of company.workingTimeCalendar.appointments">
+                <td>{{e.date}}</td>
+                <td>{{e.time}}</td>
+                <td>{{e.duration}}</td>
+                <td>{{e.admin?.name}}</td>
+                <td>{{e.admin?.surname}}</td>
+                <td>{{e.appointmentStatus}}</td>
+            </tr>
+            <tr>
+                <button (click)="onAppointmentPlus()">+</button>
+            </tr>
+        </table>
+        <div *ngIf="appointmentFormVisible">
+            <h3>Choose date and time. Duration of every appointment is 1h.</h3>
+            <form [formGroup]="appointmentForm">
+                <table>
+                    <tr>
+                        <td>
+                            Date:
+                        </td>
+                        <td>
+                            <input type="date" formControlName="date"  min={{currentDate}}>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Time:
+                        </td>
+                        <td>
+                            <input type="time" formControlName="time">
+                        </td>
+                    </tr>
+                    <tr>
+                        <button (click)="onConfirmAppointment()">Confirm</button>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+    <br>
 
     <p>Equipment search</p>
 <div>
