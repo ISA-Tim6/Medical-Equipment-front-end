@@ -9,6 +9,7 @@ import { Equipment } from '../company-profile/model/equipment.model';
 import { CompanyUpdate } from '../company-profile/model/companyUpdate.model';
 import { Company } from '../company-profile/model/company.model';
 import { Appointment } from '../company-profile/model/appointment.model';
+import { compileClassMetadata } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root',
@@ -28,6 +29,13 @@ export class CompanyService {
       environment.apiHost + 'company/addEquipment/' + id,
       equipment
     );
+  }
+
+  updateEquipment(equipment:Equipment,equipment_id:number):Observable<any>{
+    return this.http.put<any>(
+      environment.apiHost+'equipment/updateEquipment/'+equipment_id,
+      equipment
+    )
   }
 
   addAppointment(appointment: Appointment, compamy_id: number,company_admin_id:number): Observable<any> {

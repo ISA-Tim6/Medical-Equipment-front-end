@@ -19,7 +19,8 @@ export class CompanyProfileComponent implements OnInit{
 
   constructor(private service: CompanyService,private activatedRoute:ActivatedRoute) {
   }
-
+  equipmentEdit:Boolean=false;
+  updatingEquipmentId:number=0;
   edit:string="Edit";
   id:number=0;
   user_id:number;
@@ -82,8 +83,13 @@ export class CompanyProfileComponent implements OnInit{
 
     this.service.removeEquipment(equipment,this.id).subscribe({
       next: (result: Company) => {
-        this.company = result;
-        this.company.company_id=this.id;
+        if(result!=null)
+        {
+          this.company = result;
+          this.company.company_id=this.id;
+        }else{
+          alert("Equipment can't be removed because there are reservations for it")
+        }
       },
     });
   }
@@ -96,15 +102,39 @@ export class CompanyProfileComponent implements OnInit{
       price:this.equipmentForm.value.price||0,
       quantity:this.equipmentForm.value.quantity||0
     }
-    if(this.isValidEquipmentName() && this.isValidEquipmentDescription() && this.isValidEquipmentType()){
-    this.service.addEquipment(equipment,this.id).subscribe({
-      next: (result: Company) => {
-        this.company = result;
-        this.company.company_id=this.id;
-        this.equipmentFormVisible=!this.equipmentFormVisible;
-      },
-    });
+
+    if(this.equipmentEdit==false){
+      if(this.isValidEquipmentName() && this.isValidEquipmentDescription() && this.isValidEquipmentType()){
+      this.service.addEquipment(equipment,this.id).subscribe({
+        next: (result: Company) => {
+          this.company = result;
+          this.company.company_id=this.id;
+          this.equipmentFormVisible=!this.equipmentFormVisible;
+          this.equipmentForm.reset();
+        },
+      });
+    }
   }
+
+  if(this.equipmentEdit==true){
+    if(this.isValidEquipmentName() && this.isValidEquipmentDescription() && this.isValidEquipmentType()){
+      this.service.updateEquipment(equipment,this.updatingEquipmentId).subscribe({
+        next: (result: Equipment) => {
+          this.service.getCompany(this.id).subscribe({
+            next: (result: Company) => {
+              this.company = result;
+              this.company.company_id=this.id;
+              this.equipmentList = this.company.equipment || [];
+              this.equipmentEdit=false;
+              this.equipmentForm.reset();
+            },
+          });
+        },
+      });
+    }
+  }
+
+
   }
 
   OnEdit():void{
@@ -210,4 +240,10 @@ export class CompanyProfileComponent implements OnInit{
     this.appointmentFormVisible=!this.appointmentFormVisible;
   }
 
+  OnEquipmentUpdate(e:Equipment,equipment_id:number):void{
+    this.updatingEquipmentId=equipment_id;
+    this.equipmentEdit=true;
+    this.equipmentFormVisible=true;
+    this.equipmentForm.patchValue(e);
+  }
 }
