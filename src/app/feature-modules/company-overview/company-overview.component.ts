@@ -3,6 +3,7 @@ import { Company } from '../company-profile/model/company.model';
 import { CompanyService } from '../services/company.service';
 import { ActivatedRoute } from '@angular/router';
 import { Equipment } from '../company-profile/model/equipment.model';
+import { Appointment } from '../company-profile/model/appointment.model';
 
 @Component({
   selector: 'app-company-overview',
@@ -14,7 +15,10 @@ export class CompanyOverviewComponent implements OnInit {
   company: Company;
   name: string;
   filterType: string;
+  isShowCalendarClicked: boolean = false;
   equipmentList: Equipment[] = [];
+  chosenEquipmentList: Equipment[] = [];
+  availableAppointments: Appointment[] = [];
   constructor(
     private service: CompanyService,
     private activatedRoute: ActivatedRoute
@@ -27,6 +31,10 @@ export class CompanyOverviewComponent implements OnInit {
           this.company = result;
           this.company.company_id = this.id;
           this.equipmentList = this.company.equipment || [];
+          this.availableAppointments =
+            this.company.workingTimeCalendar.appointments.filter(
+              (a) => a.appointmentStatus == 'AVAILABLE'
+            );
         },
       });
     });
@@ -61,4 +69,12 @@ export class CompanyOverviewComponent implements OnInit {
         this.equipmentList = result;
       });
   }
+
+  onChoose(equipment: Equipment): void {
+    this.chosenEquipmentList.push(equipment);
+  }
+  onShowCalendar(): void {
+    this.isShowCalendarClicked = true;
+  }
+  onReserve(appointment: Appointment): void {}
 }
