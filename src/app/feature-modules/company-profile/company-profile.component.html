@@ -27,24 +27,27 @@
         </div>
     </div>
     <div>
-        Opening hours:
+        <div class="fields">
+        <div><label><b>Opening hours:</b></label></div>
         <input
         disabled={{disabledStatus}}
         type="time"
         [(ngModel)]="company.openingHours"
         />
+        </div>
     </div>
     <div>
-        Closing hours:
+        <div class="fields">
+        <div><label><b>Closing hours:</b></label></div>
         <input
         disabled={{disabledStatus}}
         type="time"
         [(ngModel)]="company.closingHours"
         />
+        </div>
     </div>
-    <div>Address:</div>                                                     
+                                                     
     <div>
-        City
     <p class="address">Address:</p>                                             
     <div class="fields">
         <div><label><b>City:</b></label></div>
@@ -139,19 +142,31 @@
         <div>
             <form [formGroup]="equipmentForm" *ngIf="equipmentFormVisible">
                 <div>
-                <input type="text" required  placeholder="name" formControlName="name">
+                Name:<input type="text" class="inputEquipmentName" required  placeholder="name" formControlName="name">
                 <span *ngIf="isValidEquipmentName()==false && equipmentForm.touched" style="color: red">
                     Invalid name!
                   </span>
                 </div>
                 <div>
-                <input type="text" required  placeholder="description" formControlName="description">
+                Description:<input type="text" required  placeholder="description" formControlName="description">
                 <span *ngIf="isValidEquipmentDescription()==false && equipmentForm.touched" style="color: red">
                     Invalid description!
                   </span>
                 </div>
                 <div>
-                    <input type="text" required   placeholder="type" formControlName="type">
+                    Price:<input type="number" class="inputEquipment" required  placeholder="price" formControlName="price">
+                    <span *ngIf="isValidEquipmentPrice()==false && equipmentForm.touched" style="color: red">
+                        Invalid price!
+                      </span>
+                </div>
+                <div>
+                    Quantity:<input type="number" class="inputEquipmentQuantity" required  placeholder="quantity" formControlName="quantity">
+                    <span *ngIf="isValidEquipmentQuantity()==false && equipmentForm.touched" style="color: red">
+                        Invalid quantity!
+                      </span>
+                </div>
+                <div>
+                    Type:<input class="inputEquipment"  type="text" required   placeholder="type" formControlName="type">
                     <span *ngIf="isValidEquipmentType()==false && equipmentForm.touched" style="color: red">
                         Invalid type!
                       </span>
@@ -163,7 +178,27 @@
     <br>
     <p>Working time calendar</p>
     <div>
-        <table>
+        <table border="1">
+            <tr>
+                <th>
+                    Date
+                </th>
+                <th>
+                    Time
+                </th>
+                <th>
+                    Duration
+                </th>
+                <th>
+                    Admin's name
+                </th>
+                <th>
+                    Admin's surname
+                </th>
+                <th>
+                    Status
+                </th>
+            </tr>
             <tr *ngFor="let e of company.workingTimeCalendar.appointments">
                 <td>{{e.date}}</td>
                 <td>{{e.time}}</td>

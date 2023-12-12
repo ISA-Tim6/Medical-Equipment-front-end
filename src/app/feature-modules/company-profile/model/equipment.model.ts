@@ -5,5 +5,7 @@ export interface Equipment {
 	name:string;
     description:string;
 	type:string;
-    companies?: Company[];
+    companies?: Company[],
+    price:number,
+    quantity:number
 }

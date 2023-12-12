@@ -32,7 +32,9 @@ export class CompanyProfileComponent implements OnInit{
     name:"",
     description:"",
     type:"",
-    equipment_id:0
+    equipment_id:0,
+    price:0,
+    quantity:0
   };
   currentDate = new Date();
 
@@ -66,7 +68,9 @@ export class CompanyProfileComponent implements OnInit{
   equipmentForm= new FormGroup({
     name: new FormControl('',[Validators.required]),
      description: new FormControl('',[Validators.required]),
-     type: new FormControl('',[Validators.required])
+     type: new FormControl('',[Validators.required]),
+     price:new FormControl(0,[Validators.required]),
+     quantity:new FormControl(0,[Validators.required])
    })
 
   OnPlus():void{
@@ -88,7 +92,9 @@ export class CompanyProfileComponent implements OnInit{
      let equipment:Equipment={
       name:this.equipmentForm.value.name||"",
       description:this.equipmentForm.value.description||"",
-      type:this.equipmentForm.value.type||""
+      type:this.equipmentForm.value.type||"",
+      price:this.equipmentForm.value.price||0,
+      quantity:this.equipmentForm.value.quantity||0
     }
     if(this.isValidEquipmentName() && this.isValidEquipmentDescription() && this.isValidEquipmentType()){
     this.service.addEquipment(equipment,this.id).subscribe({
@@ -132,6 +138,14 @@ export class CompanyProfileComponent implements OnInit{
   }
   isValidEquipmentType(){
     return this.equipmentForm.value.type!="";
+  }
+
+  isValidEquipmentPrice(){
+    return this.equipmentForm.value.price||0>=1;
+  }
+
+  isValidEquipmentQuantity(){
+    return this.equipmentForm.value.quantity||0 >=1;
   }
   
   onSearch(): void{
