@@ -12,7 +12,7 @@ export class StakeholdersService {
   constructor(private http: HttpClient) {}
 
   getUser(): Observable<RegistratedUser> {
-    return this.http.get<RegistratedUser>(environment.apiHost + 1);
+    return this.http.get<RegistratedUser>(environment.apiHost +"registratedUser/" + 1);
   }
 
   getByUsername(username: string): Observable<any> {
@@ -26,7 +26,7 @@ export class StakeholdersService {
     oldUsername: string
   ): Observable<RegistratedUser> {
     return this.http.put<RegistratedUser>(
-      environment.apiHost + 'updateUser/' + oldUsername,
+      environment.apiHost + 'registratedUser/updateUser/' + oldUsername,
       user
     );
   }

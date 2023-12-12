@@ -1,24 +1,29 @@
 <div class="navbar">
-  <button [routerLink]="['user-profile']" class="navbar-btn">Profile</button>
-  <button [routerLink]="['registration']" class="navbar-btn">
-    Registration
-  </button>
+  <button *ngIf="isLoggedIn() && isRegisteredUser()" [routerLink]="['user-profile']" class="navbar-btn">Profile</button>
   <button [routerLink]="['equipment-search']" class="navbar-btn">
     Equipment search
   </button>
-  <button [routerLink]="['company-form']" class="navbar-btn">Company</button>
-  <button [routerLink]="['system-admin-form']" class="navbar-btn">
+  <button *ngIf="isLoggedIn()" [routerLink]="['company-form']" class="navbar-btn">Company</button>
+  <button *ngIf="isLoggedIn()" [routerLink]="['system-admin-form']" class="navbar-btn">
     System admin
   </button>
-  <button [routerLink]="['company-admin-form']" class="navbar-btn">
+  <button *ngIf="isLoggedIn()" [routerLink]="['company-admin-form']" class="navbar-btn">
     Company admin
   </button>
-  <button [routerLink]="['company-admin-profile']" class="navbar-btn">
+  <button *ngIf="isLoggedIn()" [routerLink]="['company-admin-profile']" class="navbar-btn">
     Company Admin Profile
   </button>
   <button [routerLink]="['companies']" class="navbar-btn">All companies</button>
-  <button [routerLink]="['login']" class="navbar-btn">
+  <button *ngIf="!isLoggedIn()" [routerLink]="['registration']" class="navbar-btn">
+    Registration
+  </button>
+  <button *ngIf="!isLoggedIn()" [routerLink]="['login']" class="navbar-btn">
     Login
+  </button>
+  <button *ngIf="isLoggedIn()" (click)="logout()" class="navbar-btn">
+    Logout
   </button>
 </div>
 <router-outlet></router-outlet>
+
+

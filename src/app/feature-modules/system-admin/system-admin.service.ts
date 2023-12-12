@@ -21,7 +21,7 @@ export class SystemAdminService {
   }
 
   addSystemAdmin(admin: User): Observable<User> {
-    return this.http.post<User>(environment.apiHost + 'saveUser', admin);
+    return this.http.post<User>(environment.apiHost + 'registratedUser/saveUser', admin);
   }
 
   getCompanies(): Observable<Company[]> {
