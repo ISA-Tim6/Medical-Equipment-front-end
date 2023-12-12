@@ -17,3 +17,15 @@ p{
     justify-content: space-between;
     gap: 50px;
 }
+
+.inputEquipment{
+    margin-left: 43px;
+}
+
+.inputEquipmentQuantity{
+    margin-left: 20px;
+}
+.inputEquipmentName{
+    margin-left: 36px;
+
+}
