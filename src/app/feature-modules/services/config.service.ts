@@ -16,11 +16,13 @@ export class ConfigService {
   }
 
   private _whoami_url = this._api_url+'/user' + '/whoami';
-
+  private _whoami_companyAdmin_url = this._api_url+'/companyAdmin' + '/whoami';
   get whoami_url(): string {
     return this._whoami_url;
   }
-
+  get whoami_companyAdmin_url(): string {
+    return this._whoami_companyAdmin_url;
+  }
   private _users_url = this._user_url + '/all';
 
   get users_url(): string {

@@ -49,7 +49,7 @@ export class UserProfileComponent implements OnChanges, OnInit {
 
   userForm = new FormGroup({
     username: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required]),
+    password: new FormControl(''),
     confirmPassword: new FormControl('', [Validators.required]),
     name: new FormControl('', [
       Validators.required,
@@ -93,7 +93,8 @@ export class UserProfileComponent implements OnChanges, OnInit {
     this.userForm.reset();
     this.userForm.patchValue(this.user);
     this.userForm.patchValue({
-      confirmPassword: this.user.password,
+      confirmPassword: "",
+      password:""
     });
     this.selected =
       this.employments
@@ -121,6 +122,14 @@ export class UserProfileComponent implements OnChanges, OnInit {
         category: this.user!.category,
         isActive: false,
       };
+      if((this.userForm.value.confirmPassword=="" || this.userForm.value.confirmPassword==undefined || this.userForm.value.confirmPassword==null)
+       && (this.userForm.value.password=="" || this.userForm.value.password==undefined || this.userForm.value.password==null)){
+        user.password=this.user.password;
+        console.log(user.password)
+        console.log(this.user.password)
+      }else if(!this.isPasswordInvalid && !this.isConfirmPasswordInvalid){
+          user.password=this.userForm.value.password || "";
+      }
       this.service.getByUsername(user.username).subscribe({
         next: (result: number) => {
           if (result == -1 || result == user.user_id) {
@@ -226,8 +235,6 @@ export class UserProfileComponent implements OnChanges, OnInit {
       !this.isNameInvalid &&
       !this.isSurnameInvalid &&
       !this.isUsernameInvalid &&
-      !this.isPasswordInvalid &&
-      !this.isConfirmPasswordInvalid &&
       !this.areInfoInvalid &&
       !this.isNumberInvalid &&
       !this.isCityInvalid &&

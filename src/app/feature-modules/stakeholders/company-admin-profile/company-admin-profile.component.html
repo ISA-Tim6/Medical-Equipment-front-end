@@ -48,17 +48,7 @@
           </span>
         </div>
     </div>
-    <div class="fields">
-       <div><label><b>Password:</b></label></div>
-        <input
-        disabled={{disabledStatus}}
-        type="text"
-        [(ngModel)]="companyAdmin.password"
-        />
-        <span *ngIf="disabledStatus==false && isLongPassword()==false" style="color: red">
-            Password must contain minimum 5 characters!
-          </span>
-    </div>
+ 
     <div class="fields">
        <div><label><b>Phone number:</b></label></div>
        <div>
@@ -119,6 +109,8 @@
       </span>
     <br>
     <button (click)="onSeeCompanyProfile()">See company profile</button>
+    <br>
+    <button (click)="onChangePassword()">Change password</button>
     </span>
 
 
