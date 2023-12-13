@@ -77,12 +77,10 @@
        <div>
         <input
         type="text"
-        disabled={{disabledStatus}}
+        disabled="true"
         [(ngModel)]="companyAdmin.email"
         />
-        <span *ngIf="disabledStatus==false && isValidEmail()==false" style="color: red">
-            Invalid email format!
-          </span>
+        
        </div>
     </div>
     <div class="fields">
