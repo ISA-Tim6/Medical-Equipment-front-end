@@ -31,7 +31,8 @@ export class CompaniesOverviewComponent implements OnInit {
   id: number;
 
   showDetails(c: Company): void {
-    this.router.navigate([`company/${c.company_id}`]);
+    //this.router.navigate([`company/${c.company_id}`]);
+    this.router.navigate([`companyProfile/${c.company_id}/${2}`]);
   }
 
   search(): void {

@@ -8,6 +8,7 @@ import { CompanyAdmin } from '../stakeholders/model/company-admin.model';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup,FormControl,Validators } from '@angular/forms';
 import { EquipmentSearchComponent } from '../system-admin/equipment-search/equipment-search.component';
+import { Appointment } from './model/appointment.model';
 
 @Component({
   selector: 'app-company-profile',
@@ -25,13 +26,23 @@ export class CompanyProfileComponent implements OnInit{
   company:Company;
   disabledStatus:Boolean=true;
   equipmentFormVisible:Boolean=false;
+  appointmentFormVisible:Boolean=false;
   admins:CompanyAdmin[];
   equipment:Equipment={
     name:"",
     description:"",
     type:"",
-    equipment_id:0
+    equipment_id:0,
+    price:0,
+    quantity:0
   };
+  currentDate = new Date();
+
+  appointmentForm = new FormGroup({
+    time: new FormControl('', [Validators.required]),
+    date: new FormControl()
+  });
+
   name: string;
   filterType: string;
   equipmentList: Equipment[]=[];
@@ -57,7 +68,9 @@ export class CompanyProfileComponent implements OnInit{
   equipmentForm= new FormGroup({
     name: new FormControl('',[Validators.required]),
      description: new FormControl('',[Validators.required]),
-     type: new FormControl('',[Validators.required])
+     type: new FormControl('',[Validators.required]),
+     price:new FormControl(0,[Validators.required]),
+     quantity:new FormControl(0,[Validators.required])
    })
 
   OnPlus():void{
@@ -79,7 +92,9 @@ export class CompanyProfileComponent implements OnInit{
      let equipment:Equipment={
       name:this.equipmentForm.value.name||"",
       description:this.equipmentForm.value.description||"",
-      type:this.equipmentForm.value.type||""
+      type:this.equipmentForm.value.type||"",
+      price:this.equipmentForm.value.price||0,
+      quantity:this.equipmentForm.value.quantity||0
     }
     if(this.isValidEquipmentName() && this.isValidEquipmentDescription() && this.isValidEquipmentType()){
     this.service.addEquipment(equipment,this.id).subscribe({
@@ -124,6 +139,14 @@ export class CompanyProfileComponent implements OnInit{
   isValidEquipmentType(){
     return this.equipmentForm.value.type!="";
   }
+
+  isValidEquipmentPrice(){
+    return this.equipmentForm.value.price||0>=1;
+  }
+
+  isValidEquipmentQuantity(){
+    return this.equipmentForm.value.quantity||0 >=1;
+  }
   
   onSearch(): void{
     this.service.searchEquipmentByCompany(this.name, this.company.company_id || 0).subscribe(result => {
@@ -151,5 +174,40 @@ export class CompanyProfileComponent implements OnInit{
     });
   }
   
+  onConfirmAppointment():void{
+    const appointment: Appointment = {
+      date: this.appointmentForm.value.date,
+      time: this.appointmentForm.value.time || '',
+      duration:60
+    }
+    this.service.addAppointment(appointment,this.id,this.user_id).subscribe(result => {
+      if(result==2)
+      {
+        
+        this.service.getCompany(this.id).subscribe({
+          next: (result: Company) => {
+            this.company = result;
+            this.equipmentList = this.company.equipment || [];
+          },
+        });
+
+
+
+      }else if(result==1)
+      {
+        alert("Outside working hours!")
+      }
+      else if(result==0)
+      {
+        alert("There is overlap between appointments")
+      }
+    });
+    
+  }
+
+  onAppointmentPlus():void{
+    this.appointmentForm.reset();
+    this.appointmentFormVisible=!this.appointmentFormVisible;
+  }
 
 }
