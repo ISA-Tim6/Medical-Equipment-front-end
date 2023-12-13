@@ -19,6 +19,8 @@ export class CompanyProfileComponent implements OnInit{
 
   constructor(private service: CompanyService,private activatedRoute:ActivatedRoute) {
   }
+  minTime:string;
+  maxTime:string;
   equipmentEdit:Boolean=false;
   updatingEquipmentId:number=0;
   edit:string="Edit";
@@ -57,6 +59,9 @@ export class CompanyProfileComponent implements OnInit{
         this.company = result;
         this.company.company_id=this.id;
         this.equipmentList = this.company.equipment || [];
+        this.minTime=result.openingHours
+        this.maxTime=result.closingHours;
+        
 
         this.service.getOtherCompanyAdminsForCompany(this.id,this.user_id).subscribe({
           next:(result:CompanyAdmin[])=>{

@@ -225,7 +225,7 @@
                             Date:
                         </td>
                         <td>
-                            <input type="date" formControlName="date"  min={{currentDate}}>
+                            <input type="date" formControlName="date" min="{{currentDate | date:'yyyy-MM-dd'}}">
                         </td>
                     </tr>
                     <tr>
@@ -233,7 +233,7 @@
                             Time:
                         </td>
                         <td>
-                            <input type="time" formControlName="time">
+                            <input type="time" formControlName="time" min="08:00:00" max="10:00:00">
                         </td>
                     </tr>
                     <tr>

@@ -4,6 +4,8 @@ import { CompanyAdminService } from '../../services/company-admin.service';
 import { Router } from '@angular/router';
 import { UserCompanyAdmin } from '../model/user-company-admin.model';
 import { User } from '../model/main-user.model';
+import { AuthService } from 'src/app/auth/auth.service';
+import { RegistratedUser } from '../model/user.model';
 
 @Component({
   selector: 'app-company-admin-profile',
@@ -12,11 +14,12 @@ import { User } from '../model/main-user.model';
 })
 export class CompanyAdminProfileComponent implements OnInit{
 
-  constructor(private service: CompanyAdminService ,private router: Router) {}
+  constructor(private service: CompanyAdminService ,private router: Router,private authService:AuthService) {}
 
   edit:string="Edit";
   disabledStatus:Boolean=true;
   id:number=2;
+  user:RegistratedUser;
   companyAdmin:CompanyAdmin={
     user_id:0,
     email: '',
@@ -32,7 +35,13 @@ export class CompanyAdminProfileComponent implements OnInit{
     loggedBefore: false,
     company_id:1
   };
+
+  user1:User;
   ngOnInit(): void {
+
+    let a:RegistratedUser=this.authService.getUser();
+    console.log(a);
+
     this.service.getCompanyAdmin(this.id).subscribe({
       next: (result: CompanyAdmin) => {
         console.log(result);
