@@ -2,6 +2,7 @@ import {HttpClient, HttpHeaders, HttpRequest, HttpResponse, HttpParams} from '@a
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {catchError, filter, map} from 'rxjs/operators';
+import { CompanyAdmin } from '../stakeholders/model/company-admin.model';
 
 export enum RequestMethod {
   Get = 'GET',
@@ -37,7 +38,18 @@ export class ApiService {
     return this.http.get(path, options)
       .pipe(catchError(this.checkError.bind(this)));
   }
+  getAdmin(path: string, args?: any): Observable<any> {
+    const options = {
+      headers: this.headers,
+    };
 
+    if (args) {
+     // options['params'] = this.serialize(args);
+    }
+
+    return this.http.get(path, options)
+      .pipe(catchError(this.checkError.bind(this)));
+  }
   post(path: string, body: any, customHeaders?: HttpHeaders): Observable<any> {
     return this.request(path, body, RequestMethod.Post, customHeaders);
   }

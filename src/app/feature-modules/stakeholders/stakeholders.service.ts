@@ -7,6 +7,7 @@ import { User } from './model/main-user.model';
 import { ApiService } from '../services/api.service';
 import { ConfigService } from '../services/config.service';
 import { UserService } from '../services/user.service';
+import { CompanyAdmin } from './model/company-admin.model';
 
 @Injectable({
   providedIn: 'root',
@@ -27,7 +28,16 @@ export class StakeholdersService {
         );
     }
 
-
+    getCompanyAdmin(): Observable<CompanyAdmin> {
+      return this.apiService.getAdmin(this.config.whoami_companyAdmin_url)
+        .pipe(
+          switchMap(user => {
+            console.log(user);
+            this.currentUser = user;
+            return this.http.get<CompanyAdmin>(environment.apiHost + "companyAdmin/" + this.currentUser.id);
+          })
+        );
+    }
 
   getByUsername(username: string): Observable<any> {
     return this.http.get<User>(

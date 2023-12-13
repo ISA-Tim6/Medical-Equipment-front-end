@@ -28,7 +28,14 @@ export class UserService {
         return user;
       }));
   }
-
+  getMyInfoCompanyAdmin() {
+    return this.apiService.get(this.config.whoami_companyAdmin_url)
+      .pipe(map(user => {
+        console.log(user);
+        this.currentUser = user;
+        return user;
+      }));
+  }
   getAll() {
     return this.apiService.get(this.config.users_url);
   }

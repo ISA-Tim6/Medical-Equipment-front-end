@@ -75,7 +75,8 @@ export class LoginFormComponent implements OnInit {
     this.authService.login(this.form.value)
       .subscribe((data: any) => {
         console.log(data);
-          this.userService.getMyInfo().subscribe();
+          //this.userService.getMyInfo().subscribe();
+          //this.userService.getMyInfoCompanyAdmin().subscribe();
           this.router.navigate([this.returnUrl]);
         },
         (        error: any) => {

@@ -4,6 +4,8 @@ import { CompanyAdminService } from '../../services/company-admin.service';
 import { Router } from '@angular/router';
 import { UserCompanyAdmin } from '../model/user-company-admin.model';
 import { User } from '../model/main-user.model';
+import { StakeholdersService } from '../stakeholders.service';
+import { RegistratedUser } from '../model/user.model';
 
 @Component({
   selector: 'app-company-admin-profile',
@@ -11,9 +13,10 @@ import { User } from '../model/main-user.model';
   styleUrls: ['./company-admin-profile.component.css']
 })
 export class CompanyAdminProfileComponent implements OnInit{
+  selected: any;
 
-  constructor(private service: CompanyAdminService ,private router: Router) {}
-
+  constructor(private service: CompanyAdminService ,private router: Router, private stakeHolderService: StakeholdersService) {}
+  user:User;
   edit:string="Edit";
   disabledStatus:Boolean=true;
   id:number=2;
@@ -33,13 +36,21 @@ export class CompanyAdminProfileComponent implements OnInit{
     company_id:1
   };
   ngOnInit(): void {
-    this.service.getCompanyAdmin(this.id).subscribe({
+    this.stakeHolderService.getCompanyAdmin().subscribe({
       next: (result: CompanyAdmin) => {
         console.log(result);
-        this.companyAdmin = result;
-        this.companyAdmin.user_id=this.id;
+        this.companyAdmin=result;
+        this.id=this.companyAdmin.user_id;
+        /*this.service.getCompanyAdmin(this.id).subscribe({
+          next: (result: CompanyAdmin) => {
+            console.log(result);
+            this.companyAdmin = result;
+            this.companyAdmin.user_id=this.id;
+          },
+        });*/
       },
     });
+    
   }
 
   updateUser():void{
