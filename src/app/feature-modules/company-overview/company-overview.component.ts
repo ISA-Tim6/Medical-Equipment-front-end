@@ -4,6 +4,9 @@ import { CompanyService } from '../services/company.service';
 import { ActivatedRoute } from '@angular/router';
 import { Equipment } from '../company-profile/model/equipment.model';
 import { Appointment } from '../company-profile/model/appointment.model';
+import { Item } from './model/item.model';
+import { Reservation } from '../company-profile/model/reservation.model';
+import { RegistratedUser } from '../stakeholders/model/user.model';
 
 @Component({
   selector: 'app-company-overview',
@@ -12,12 +15,19 @@ import { Appointment } from '../company-profile/model/appointment.model';
 })
 export class CompanyOverviewComponent implements OnInit {
   id: number;
+  user: RegistratedUser;
   company: Company;
   name: string;
   filterType: string;
   isShowCalendarClicked: boolean = false;
+  isExtraTermClicked: boolean = false;
+  item: Item;
+  added: boolean = false;
+  canAdd: boolean = false;
+  currentDate = new Date();
+
   equipmentList: Equipment[] = [];
-  chosenEquipmentList: Equipment[] = [];
+  chosenItemsList: Item[] = [];
   availableAppointments: Appointment[] = [];
   constructor(
     private service: CompanyService,
@@ -71,10 +81,64 @@ export class CompanyOverviewComponent implements OnInit {
   }
 
   onChoose(equipment: Equipment): void {
-    this.chosenEquipmentList.push(equipment);
+    const item: Item = {
+      equipment: equipment,
+      quantity: 1,
+    };
+    this.added = false;
+    this.canAdd = true;
+    //ne zab da pormijenim quantity u equipmentu
+
+    this.chosenItemsList.forEach((item1) => {
+      if (item1.equipment.equipment_id == equipment.equipment_id) {
+        item1.quantity += 1;
+
+        if (equipment.quantity - item1.quantity >= 0) {
+          this.canAdd = false;
+          this.added = true;
+        } else {
+          item1.quantity -= 1;
+          this.added = false;
+          alert('Not enough equipment in this company.');
+          this.canAdd = false;
+        }
+      }
+    });
+    if (!this.added && this.canAdd) {
+      this.chosenItemsList.push(item);
+    }
+    //sad napraviti rezervaciju i stavku, pa u tome azurirati equipment, ali ovo treba na reserve
   }
   onShowCalendar(): void {
     this.isShowCalendarClicked = true;
   }
-  onReserve(appointment: Appointment): void {}
+  async onReserve(appointment: Appointment): Promise<void> {
+    if (this.chosenItemsList.length > 0) {
+      for (let item of this.chosenItemsList) {
+        item.equipment.quantity -= item.quantity;
+        const retItem = await this.service.addItem(item); //prvo kreiraj itemse
+        const retEquipment = await this.service.updateEquipment(item.equipment);
+      }
+      console.log(appointment);
+      var reservation: Reservation = {
+        user: this.user,
+        items: [],
+        appointment: appointment,
+        //qr_code: 1,
+        reservationStatus: 'NEW',
+      };
+      reservation.appointment = appointment;
+      reservation.items = this.chosenItemsList;
+      reservation.user = this.user;
+      reservation.reservationStatus = 'NEW';
+      const retReservation = await this.service.addReservation(reservation);
+      this.chosenItemsList = [];
+      //azurirati quantity u equpimentu
+    } else {
+      alert("You didn't choose equipment.");
+    }
+  }
+  onExtraAppointment(): void {
+    this.isExtraTermClicked = true;
+  }
 }

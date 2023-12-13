@@ -122,49 +122,65 @@
 
 <p>Your equipment to buy:</p>
 
-<div *ngIf="chosenEquipmentList.length > 0">
+<div *ngIf="chosenItemsList.length > 0">
   <h4>Equipment</h4>
   <table border="1">
     <tr>
       <th>Name</th>
       <th>Type</th>
       <th>Description</th>
+      <th>Quantity</th>
     </tr>
-    <tr *ngFor="let e of chosenEquipmentList">
-      <td>{{ e.name }}</td>
-      <td>{{ e.type }}</td>
-      <td>{{ e.description }}</td>
+    <tr *ngFor="let e of chosenItemsList">
+      <td>{{ e.equipment.name }}</td>
+      <td>{{ e.equipment.type }}</td>
+      <td>{{ e.equipment.description }}</td>
+      <td>{{ e.quantity }}</td>
     </tr>
   </table>
-  <button *ngIf="chosenEquipmentList.length > 0" (click)="onShowCalendar()">
+  <button *ngIf="chosenItemsList.length > 0" (click)="onShowCalendar()">
     Show appointments
   </button>
 
-  <div *ngIf="isShowCalendarClicked">
-    <p>Available appointments</p>
-    <div>
-      <table border="1">
-        <tr>
-          <th>Date</th>
-          <th>Time</th>
-          <th>Duration</th>
-          <th>Admin's name</th>
-          <th>Admin's surname</th>
-          <th>Status</th>
-          <th>Reserve</th>
-        </tr>
-        <tr *ngFor="let e of availableAppointments">
-          <td>{{ e.date }}</td>
-          <td>{{ e.time }}</td>
-          <td>{{ e.duration }}</td>
-          <td>{{ e.admin?.name }}</td>
-          <td>{{ e.admin?.surname }}</td>
-          <td>{{ e.appointmentStatus }}</td>
-          <td><button (click)="onReserve(e)">Reserve</button></td>
-        </tr>
-      </table>
-    </div>
+  <div class="grid-div" *ngIf="isShowCalendarClicked">
+    <div class="grid-item appointments">
+      <div>
+        <p>
+          Available appointments
+          <button class="fancy-button" (click)="onExtraAppointment()">
+            Extraordinary appointment
+          </button>
+        </p>
 
-    <div></div>
+        <div>
+          <table border="1">
+            <tr>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Duration</th>
+              <th>Admin's name</th>
+              <th>Admin's surname</th>
+              <th>Status</th>
+              <th>Reserve</th>
+            </tr>
+            <tr *ngFor="let e of availableAppointments">
+              <td>{{ e.date }}</td>
+              <td>{{ e.time }}</td>
+              <td>{{ e.duration }}</td>
+              <td>{{ e.admin?.name }}</td>
+              <td>{{ e.admin?.surname }}</td>
+              <td>{{ e.appointmentStatus }}</td>
+              <td><button (click)="onReserve(e)">Reserve</button></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="grid-item extra-appointment">
+      <div class="extra-term" *ngIf="isExtraTermClicked">
+        <p>Please enter date you want to take the equipment:</p>
+        <input type="date" min="{{ currentDate | date : 'yyyy-MM-dd' }}" />
+      </div>
+    </div>
   </div>
 </div>
