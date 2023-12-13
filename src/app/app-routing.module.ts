@@ -17,10 +17,9 @@ const routes: Routes = [
     component: UserProfileComponent,
   },
 
-
-  {path: 'company-form', component: CompanyFormComponent},
-  {path: 'system-admin-form', component: SystemAdminFormComponent},
-  {path: 'company-admin-form', component: CompanyAdminFormComponent},
+  { path: 'company-form', component: CompanyFormComponent },
+  { path: 'system-admin-form', component: SystemAdminFormComponent },
+  { path: 'company-admin-form', component: CompanyAdminFormComponent },
 
   {
     path: 'registration',
@@ -36,19 +35,18 @@ const routes: Routes = [
     component: CompanyProfileComponent,
   },
   {
-    path: 'company/:company_id',
+    path: 'companyProfile/:company_id/:user_id',
     component: CompanyOverviewComponent,
   },
   {
-    path:'companies',
-    component:CompaniesOverviewComponent
+    path: 'companies',
+    component: CompaniesOverviewComponent,
   },
-  { path: 'equipment-search', component: EquipmentSearchComponent},
+  { path: 'equipment-search', component: EquipmentSearchComponent },
   {
-    path:'login',
-    component:LoginFormComponent
+    path: 'login',
+    component: LoginFormComponent,
   },
-
 ];
 
 @NgModule({

@@ -25,7 +25,7 @@ export class CompanyOverviewComponent implements OnInit {
   added: boolean = false;
   canAdd: boolean = false;
   currentDate = new Date();
-
+  user_id: number;
   equipmentList: Equipment[] = [];
   chosenItemsList: Item[] = [];
   availableAppointments: Appointment[] = [];
@@ -36,6 +36,7 @@ export class CompanyOverviewComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
       this.id = params['company_id'];
+      this.user_id = params['user_id'];
       this.service.getCompany(this.id).subscribe({
         next: (result: Company) => {
           this.company = result;
@@ -88,25 +89,29 @@ export class CompanyOverviewComponent implements OnInit {
     this.added = false;
     this.canAdd = true;
     //ne zab da pormijenim quantity u equipmentu
+    if (equipment.quantity > 0) {
+      this.chosenItemsList.forEach((item1) => {
+        if (item1.equipment.equipment_id == equipment.equipment_id) {
+          item1.quantity += 1;
 
-    this.chosenItemsList.forEach((item1) => {
-      if (item1.equipment.equipment_id == equipment.equipment_id) {
-        item1.quantity += 1;
-
-        if (equipment.quantity - item1.quantity >= 0) {
-          this.canAdd = false;
-          this.added = true;
-        } else {
-          item1.quantity -= 1;
-          this.added = false;
-          alert('Not enough equipment in this company.');
-          this.canAdd = false;
+          if (equipment.quantity - item1.quantity >= 0) {
+            this.canAdd = false;
+            this.added = true;
+          } else {
+            item1.quantity -= 1;
+            this.added = false;
+            alert('Not enough equipment in this company.');
+            this.canAdd = false;
+          }
         }
+      });
+      if (!this.added && this.canAdd) {
+        this.chosenItemsList.push(item);
       }
-    });
-    if (!this.added && this.canAdd) {
-      this.chosenItemsList.push(item);
+    } else {
+      alert('Not enough equipment in this company.');
     }
+
     //sad napraviti rezervaciju i stavku, pa u tome azurirati equipment, ali ovo treba na reserve
   }
   onShowCalendar(): void {
@@ -115,8 +120,9 @@ export class CompanyOverviewComponent implements OnInit {
   async onReserve(appointment: Appointment): Promise<void> {
     if (this.chosenItemsList.length > 0) {
       for (let item of this.chosenItemsList) {
+        console.log(this.chosenItemsList.length);
         item.equipment.quantity -= item.quantity;
-        const retItem = await this.service.addItem(item); //prvo kreiraj itemse
+        //const retItem = await this.service.addItem(item); //prvo kreiraj itemse
         const retEquipment = await this.service.updateEquipment(item.equipment);
       }
       console.log(appointment);
@@ -132,7 +138,24 @@ export class CompanyOverviewComponent implements OnInit {
       reservation.user = this.user;
       reservation.reservationStatus = 'NEW';
       const retReservation = await this.service.addReservation(reservation);
+      appointment.appointmentStatus = 'RESERVED';
+
+      const retAppointment = await this.service.updateAppointment(
+        appointment,
+        this.id,
+        this.user_id
+      );
       this.chosenItemsList = [];
+      //samo available appoint
+      this.availableAppointments.forEach((ap) => {
+        if (ap.appointment_id == appointment.appointment_id) {
+          ap.appointmentStatus = 'RESERVED';
+        }
+      });
+      this.availableAppointments = this.availableAppointments.filter(
+        (a) => a.appointmentStatus == 'AVAILABLE'
+      );
+      this.isShowCalendarClicked = false;
       //azurirati quantity u equpimentu
     } else {
       alert("You didn't choose equipment.");
