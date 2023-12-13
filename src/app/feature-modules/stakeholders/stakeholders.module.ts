@@ -5,14 +5,17 @@ import { RegistrationFormComponent } from './registration-form/registration-form
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { CompanyAdminProfileComponent } from './company-admin-profile/company-admin-profile.component';
+import { FullCalendarModule} from '@fullcalendar/angular'
+import { CompanyCalendarComponent } from './company-calendar/company-calendar.component';
 
 @NgModule({
   declarations: [
     UserProfileComponent,
     RegistrationFormComponent,
     CompanyAdminProfileComponent,
+    CompanyCalendarComponent,
   ],
-  imports: [CommonModule, ReactiveFormsModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, FullCalendarModule],
   exports: [UserProfileComponent, RegistrationFormComponent],
 })
 export class StakeholdersModule {}

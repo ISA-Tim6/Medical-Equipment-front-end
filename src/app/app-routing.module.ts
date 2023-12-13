@@ -12,6 +12,7 @@ import { CompanyOverviewComponent } from './feature-modules/company-overview/com
 import { EquipmentSearchComponent } from './feature-modules/system-admin/equipment-search/equipment-search.component';
 import { LoginFormComponent } from './feature-modules/login-form/login-form.component';
 import { HomePageComponent } from './feature-modules/home-page/home-page.component';
+import { CompanyCalendarComponent } from './feature-modules/stakeholders/company-calendar/company-calendar.component';
 const routes: Routes = [
   {
     path: 'user-profile',
@@ -53,7 +54,11 @@ const routes: Routes = [
     path:'home-page',
     component:HomePageComponent
   },
-
+  {
+    path:'company-calendar/:company_id',
+    component:CompanyCalendarComponent
+  },
+ 
 ];
 
 @NgModule({

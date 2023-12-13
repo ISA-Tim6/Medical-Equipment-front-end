@@ -1,4 +1,4 @@
-import { Component,OnInit } from '@angular/core';
+import { Component,OnInit, ViewChild } from '@angular/core';
 import { CompanyAdmin } from '../model/company-admin.model';
 import { CompanyAdminService } from '../../services/company-admin.service';
 import { Router } from '@angular/router';
@@ -189,4 +189,7 @@ export class CompanyAdminProfileComponent implements OnInit{
     && this.isPhoneNumberValid() && this.isValidEmail();
   }
 
+  openCalendar(): void{
+    this.router.navigate([`company-calendar/` + this.companyAdmin.company_id]);
+  }
 }
