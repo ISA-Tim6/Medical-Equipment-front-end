@@ -21,7 +21,7 @@ export class CompanyAdminProfileComponent implements OnInit{
   disabledStatus:Boolean=true;
   id:number=2;
   companyAdmin:CompanyAdmin={
-    user_id:0,
+    id:0,
     email: '',
     password: '',
     name: '',
@@ -40,7 +40,8 @@ export class CompanyAdminProfileComponent implements OnInit{
       next: (result: CompanyAdmin) => {
         console.log(result);
         this.companyAdmin=result;
-        this.id=this.companyAdmin.user_id;
+        this.id=this.companyAdmin.id;
+        console.log(this.id);
         /*this.service.getCompanyAdmin(this.id).subscribe({
           next: (result: CompanyAdmin) => {
             console.log(result);
@@ -61,7 +62,7 @@ export class CompanyAdminProfileComponent implements OnInit{
     }else
     {
       let companyAdminUser:UserCompanyAdmin={
-        user_id: this.companyAdmin.user_id,
+        user_id: this.companyAdmin.id,
         email: this.companyAdmin.email,
         username: this.companyAdmin.username,
         password: this.companyAdmin.password,
@@ -78,17 +79,17 @@ export class CompanyAdminProfileComponent implements OnInit{
         let moze:Boolean=false;
         this.service.getUserByUsername(this.companyAdmin.username).subscribe({
           next: (result: number) => {
-           if(result==-1 || result==this.companyAdmin.user_id)
+           if(result==-1 || result==this.companyAdmin.id)
             {
               
               this.service.getUserByEmail(this.companyAdmin.email).subscribe({
                 next:(result:number)=>{
-                  if(result==-1 || result==this.companyAdmin.user_id){
+                  if(result==-1 || result==this.companyAdmin.id){
                     this.service.updateCompanyAdmin(companyAdminUser).subscribe({
                       next: (result: CompanyAdmin) => {
                         console.log(result);
                         this.companyAdmin = result;
-                        this.companyAdmin.user_id=this.id;
+                        this.companyAdmin.id=this.id;
                         alert("Your profile is changed!")
                         this.disabledStatus=true;
                         this.edit="Edit";
@@ -157,7 +158,7 @@ export class CompanyAdminProfileComponent implements OnInit{
     this.service.getUserByUsername(this.companyAdmin.username).subscribe({
       next: (result: User) => {
         let u=result;
-       if(result==null && (u.user_id!=this.companyAdmin.user_id))
+       if(result==null && (u.user_id!=this.companyAdmin.id))
         {
           alert("Username is already in use");
           return false;
@@ -172,7 +173,7 @@ export class CompanyAdminProfileComponent implements OnInit{
     this.service.getUserByEmail(this.companyAdmin.email).subscribe({
       next: (result: User) => {
         let u=result;
-       if(result==null && (u.user_id!=this.companyAdmin.user_id))
+       if(result==null && (u.user_id!=this.companyAdmin.id))
         {
           alert("Email is already in use");
           return false;

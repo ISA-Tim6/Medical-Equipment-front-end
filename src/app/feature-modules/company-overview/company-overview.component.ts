@@ -143,7 +143,6 @@ export class CompanyOverviewComponent implements OnInit {
       const retAppointment = await this.service.updateAppointment(
         appointment,
         this.id,
-        this.user_id
       );
       this.chosenItemsList = [];
       //samo available appoint

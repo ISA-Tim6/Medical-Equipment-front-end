@@ -129,16 +129,13 @@ export class CompanyService {
 
   updateAppointment(
     appointment: Appointment,
-    compamy_id: number,
-    company_admin_id: number
+    compamy_id: number
   ): Promise<Appointment | undefined> {
     return this.http
       .put<Appointment>(
         environment.apiHost +
           'company/updateAppointment/' +
-          compamy_id +
-          '/' +
-          company_admin_id,
+          compamy_id ,
         appointment
       )
       .toPromise();
