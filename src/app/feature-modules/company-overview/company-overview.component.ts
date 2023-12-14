@@ -7,6 +7,7 @@ import { Appointment } from '../company-profile/model/appointment.model';
 import { Item } from './model/item.model';
 import { Reservation } from '../company-profile/model/reservation.model';
 import { RegistratedUser } from '../stakeholders/model/user.model';
+import { timeout } from 'rxjs';
 
 @Component({
   selector: 'app-company-overview',
@@ -24,6 +25,16 @@ export class CompanyOverviewComponent implements OnInit {
   item: Item;
   added: boolean = false;
   canAdd: boolean = false;
+  extraDate: Date;
+  extraApp: Appointment = {
+    appointment_id: 0,
+    appointmentStatus: 'RESERVED',
+    duration: 60,
+    date: new Date(),
+    time: '',
+    end: '',
+  };
+  freeSlots: string[] = [];
   currentDate = new Date();
   user_id: number;
   equipmentList: Equipment[] = [];
@@ -107,6 +118,7 @@ export class CompanyOverviewComponent implements OnInit {
       });
       if (!this.added && this.canAdd) {
         this.chosenItemsList.push(item);
+        alert('Successfully added item.');
       }
     } else {
       alert('Not enough equipment in this company.');
@@ -157,11 +169,80 @@ export class CompanyOverviewComponent implements OnInit {
       );
       this.isShowCalendarClicked = false;
       //azurirati quantity u equpimentu
+      alert('Sucessfully reserved!');
     } else {
       alert("You didn't choose equipment.");
     }
   }
   onExtraAppointment(): void {
     this.isExtraTermClicked = true;
+  }
+  onFindFreeSlots(): void {
+    if (this.extraDate) {
+      this.service
+        .findFreeSlots(this.company.company_id!, this.extraDate.toString())
+        .subscribe((result) => {
+          this.freeSlots = result;
+        });
+    } else alert('Please enter date.');
+  }
+  async onCreateExtraTerm(term: string): Promise<void> {
+    //
+    if (this.extraDate) {
+      const appointment: Appointment = {
+        date: new Date(this.extraDate),
+        time: term || '',
+        duration: 60,
+        appointmentStatus: 'RESERVED',
+      };
+      const appId = await this.service.addExtraordinaryAppointment(
+        appointment,
+        this.id
+      );
+      if ((appId as number) > 0) {
+        alert('Sucessfully reserved extra-term!');
+        this.isShowCalendarClicked = false;
+        this.freeSlots = [];
+
+        for (let item of this.chosenItemsList) {
+          console.log(this.chosenItemsList.length);
+          item.equipment.quantity -= item.quantity;
+          //const retItem = await this.service.addItem(item); //prvo kreiraj itemse
+          const retEquipment = await this.service.updateEquipment(
+            item.equipment
+          );
+        }
+        this.extraApp.appointment_id = appId;
+        var reservation: Reservation = {
+          user: this.user,
+          items: [],
+          appointment: this.extraApp,
+          //qr_code: 1,
+          reservationStatus: 'NEW',
+        };
+        reservation.appointment = this.extraApp;
+        reservation.items = this.chosenItemsList;
+        reservation.user = this.user;
+        reservation.reservationStatus = 'NEW';
+        const retReservation = await this.service.addReservation(reservation);
+
+        this.isShowCalendarClicked = false;
+        this.service.getCompany(this.id).subscribe({
+          next: (result: Company) => {
+            this.company = result;
+            this.company.company_id = this.id;
+            this.equipmentList = this.company.equipment || [];
+            this.availableAppointments =
+              this.company.workingTimeCalendar.appointments.filter(
+                (a) => a.appointmentStatus == 'AVAILABLE'
+              );
+          },
+        });
+
+        //azurirati quantity u equpimentu
+        this.chosenItemsList = [];
+        alert('Sucessfully reserved!');
+      }
+    }
   }
 }

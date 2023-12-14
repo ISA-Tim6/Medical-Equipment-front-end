@@ -143,4 +143,24 @@ export class CompanyService {
       )
       .toPromise();
   }
+
+  findFreeSlots(company_id: number, date: string): Observable<string[]> {
+    return this.http.get<any>(
+      environment.apiHost + 'company/findFreeSlots/' + company_id + '/' + date
+    );
+  }
+
+  addExtraordinaryAppointment(
+    appointment: Appointment,
+    compamy_id: number
+  ): Promise<number | undefined> {
+    return this.http
+      .put<any>(
+        environment.apiHost +
+          'company/addExtraordinaryAppointment/' +
+          compamy_id,
+        appointment
+      )
+      .toPromise();
+  }
 }
