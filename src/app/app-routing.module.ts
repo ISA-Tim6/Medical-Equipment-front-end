@@ -13,6 +13,8 @@ import { EquipmentSearchComponent } from './feature-modules/system-admin/equipme
 import { LoginFormComponent } from './feature-modules/login-form/login-form.component';
 import { HomePageComponent } from './feature-modules/home-page/home-page.component';
 import { CompanyCalendarComponent } from './feature-modules/stakeholders/company-calendar/company-calendar.component';
+import { CompanyAdminChangePasswordComponent } from './feature-modules/stakeholders/company-admin-change-password/company-admin-change-password.component';
+
 const routes: Routes = [
   {
     path: 'user-profile',
@@ -22,6 +24,7 @@ const routes: Routes = [
   { path: 'company-form', component: CompanyFormComponent },
   { path: 'system-admin-form', component: SystemAdminFormComponent },
   { path: 'company-admin-form', component: CompanyAdminFormComponent },
+  {path: 'company-admin-password/:id',component: CompanyAdminChangePasswordComponent},
 
   {
     path: 'registration',

@@ -4,7 +4,9 @@ import { CompanyAdminService } from '../../services/company-admin.service';
 import { Router } from '@angular/router';
 import { UserCompanyAdmin } from '../model/user-company-admin.model';
 import { User } from '../model/main-user.model';
+
 import { StakeholdersService } from '../stakeholders.service';
+
 import { RegistratedUser } from '../model/user.model';
 
 @Component({
@@ -15,13 +17,16 @@ import { RegistratedUser } from '../model/user.model';
 export class CompanyAdminProfileComponent implements OnInit{
   selected: any;
 
+
   constructor(private service: CompanyAdminService ,private router: Router, private stakeHolderService: StakeholdersService) {}
   user:User;
+
   edit:string="Edit";
   disabledStatus:Boolean=true;
   id:number=2;
+  
   companyAdmin:CompanyAdmin={
-    user_id:0,
+    id:0,
     email: '',
     password: '',
     name: '',
@@ -35,12 +40,19 @@ export class CompanyAdminProfileComponent implements OnInit{
     loggedBefore: false,
     company_id:1
   };
+
+  user1:User;
   ngOnInit(): void {
+
     this.stakeHolderService.getCompanyAdmin().subscribe({
       next: (result: CompanyAdmin) => {
         console.log(result);
         this.companyAdmin=result;
-        this.id=this.companyAdmin.user_id;
+        this.id=this.companyAdmin.id;
+
+        if(this.companyAdmin.loggedBefore==false){
+          this.router.navigate([`company-admin-password/${this.id}`]);
+        }
         /*this.service.getCompanyAdmin(this.id).subscribe({
           next: (result: CompanyAdmin) => {
             console.log(result);
@@ -61,7 +73,7 @@ export class CompanyAdminProfileComponent implements OnInit{
     }else
     {
       let companyAdminUser:UserCompanyAdmin={
-        user_id: this.companyAdmin.user_id,
+        user_id: this.companyAdmin.id,
         email: this.companyAdmin.email,
         username: this.companyAdmin.username,
         password: this.companyAdmin.password,
@@ -78,17 +90,17 @@ export class CompanyAdminProfileComponent implements OnInit{
         let moze:Boolean=false;
         this.service.getUserByUsername(this.companyAdmin.username).subscribe({
           next: (result: number) => {
-           if(result==-1 || result==this.companyAdmin.user_id)
+           if(result==-1 || result==this.companyAdmin.id)
             {
               
               this.service.getUserByEmail(this.companyAdmin.email).subscribe({
                 next:(result:number)=>{
-                  if(result==-1 || result==this.companyAdmin.user_id){
+                  if(result==-1 || result==this.companyAdmin.id){
                     this.service.updateCompanyAdmin(companyAdminUser).subscribe({
                       next: (result: CompanyAdmin) => {
                         console.log(result);
                         this.companyAdmin = result;
-                        this.companyAdmin.user_id=this.id;
+                        this.companyAdmin.id=this.id;
                         alert("Your profile is changed!")
                         this.disabledStatus=true;
                         this.edit="Edit";
@@ -157,7 +169,7 @@ export class CompanyAdminProfileComponent implements OnInit{
     this.service.getUserByUsername(this.companyAdmin.username).subscribe({
       next: (result: User) => {
         let u=result;
-       if(result==null && (u.user_id!=this.companyAdmin.user_id))
+       if(result==null && (u.user_id!=this.companyAdmin.id))
         {
           alert("Username is already in use");
           return false;
@@ -172,7 +184,7 @@ export class CompanyAdminProfileComponent implements OnInit{
     this.service.getUserByEmail(this.companyAdmin.email).subscribe({
       next: (result: User) => {
         let u=result;
-       if(result==null && (u.user_id!=this.companyAdmin.user_id))
+       if(result==null && (u.user_id!=this.companyAdmin.id))
         {
           alert("Email is already in use");
           return false;
@@ -200,7 +212,14 @@ export class CompanyAdminProfileComponent implements OnInit{
     && this.isPhoneNumberValid() && this.isValidEmail();
   }
 
+<<<<<<< HEAD
   openCalendar(): void{
     this.router.navigate([`company-calendar/` + this.companyAdmin.company_id]);
   }
+=======
+  onChangePassword():void{
+    this.router.navigate([`company-admin-password/${this.id}`]);
+  }
+
+>>>>>>> 31869034382f7d77228a3be3cd94654c647a8aa3
 }

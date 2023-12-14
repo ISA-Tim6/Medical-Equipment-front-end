@@ -127,13 +127,18 @@
                 <th>Name</th>
                 <th>Description</th>
                 <th>Type</th>
+                <th>Price</th>
+                <th>Quantity</th>
                 <th></th>
             </thead>
             <tr *ngFor="let e of company.equipment">
                 <td>{{e.name}}</td>
                 <td>{{e.description}}</td>
                 <td>{{e.type}}</td>
+                <td>{{e.price}}</td>
+                <td>{{e.quantity}}</td>
                 <td><button (click)="OnMinus(e)">-</button></td>
+                <td><button (click)="OnEquipmentUpdate(e,e.equipment_id||0)">Update</button></td>
             </tr>
             <tr>
                 <button (click)="OnPlus()">+</button>
@@ -220,7 +225,7 @@
                             Date:
                         </td>
                         <td>
-                            <input type="date" formControlName="date"  min={{currentDate}}>
+                            <input type="date" formControlName="date" min="{{currentDate | date:'yyyy-MM-dd'}}">
                         </td>
                     </tr>
                     <tr>
@@ -228,7 +233,7 @@
                             Time:
                         </td>
                         <td>
-                            <input type="time" formControlName="time">
+                            <input type="time" formControlName="time" min="08:00:00" max="10:00:00">
                         </td>
                     </tr>
                     <tr>

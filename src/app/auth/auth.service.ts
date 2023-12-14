@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable ,BehaviorSubject} from 'rxjs';
+import { RegistratedUser } from '../feature-modules/stakeholders/model/user.model';
+import { User } from '../feature-modules/stakeholders/model/main-user.model';
 
 @Injectable({
   providedIn: 'root'

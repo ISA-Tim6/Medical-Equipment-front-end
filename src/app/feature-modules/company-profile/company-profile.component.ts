@@ -21,6 +21,7 @@ export class CompanyProfileComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {}
 
+<<<<<<< HEAD
   edit: string = 'Edit';
   id: number = 0;
   user_id: number;
@@ -36,6 +37,29 @@ export class CompanyProfileComponent implements OnInit {
     equipment_id: 0,
     price: 0,
     quantity: 0,
+=======
+  constructor(private service: CompanyService,private activatedRoute:ActivatedRoute) {
+  }
+  minTime:string;
+  maxTime:string;
+  equipmentEdit:Boolean=false;
+  updatingEquipmentId:number=0;
+  edit:string="Edit";
+  id:number=0;
+  user_id:number;
+  company:Company;
+  disabledStatus:Boolean=true;
+  equipmentFormVisible:Boolean=false;
+  appointmentFormVisible:Boolean=false;
+  admins:CompanyAdmin[];
+  equipment:Equipment={
+    name:"",
+    description:"",
+    type:"",
+    equipment_id:0,
+    price:0,
+    quantity:0
+>>>>>>> 31869034382f7d77228a3be3cd94654c647a8aa3
   };
   currentDate = new Date();
 
@@ -49,10 +73,113 @@ export class CompanyProfileComponent implements OnInit {
   equipmentList: Equipment[] = [];
 
   ngOnInit(): void {
+<<<<<<< HEAD
     this.activatedRoute.params.subscribe((params) => {
       this.id = params['company_id'];
       this.user_id = params['user_id'];
       this.service.getCompany(this.id).subscribe({
+=======
+    this.activatedRoute.params.subscribe(params=>{
+      this.id=params['company_id'];
+      this.user_id=params['user_id'];
+    this.service.getCompany(this.id).subscribe({
+      next: (result: Company) => {
+        this.company = result;
+        this.company.company_id=this.id;
+        this.equipmentList = this.company.equipment || [];
+        this.minTime=result.openingHours
+        this.maxTime=result.closingHours;
+        
+
+        this.service.getOtherCompanyAdminsForCompany(this.id,this.user_id).subscribe({
+          next:(result:CompanyAdmin[])=>{
+            this.admins=result;
+          }
+        })
+      },
+    });
+  })}
+  equipmentForm= new FormGroup({
+    name: new FormControl('',[Validators.required]),
+     description: new FormControl('',[Validators.required]),
+     type: new FormControl('',[Validators.required]),
+     price:new FormControl(0,[Validators.required]),
+     quantity:new FormControl(0,[Validators.required])
+   })
+
+  OnPlus():void{
+    this.equipmentFormVisible=!this.equipmentFormVisible;
+    this.equipmentForm.reset;
+
+  }
+  OnMinus(equipment:Equipment):void{
+
+    this.service.removeEquipment(equipment,this.id).subscribe({
+      next: (result: Company) => {
+        if(result!=null)
+        {
+          this.company = result;
+          this.company.company_id=this.id;
+        }else{
+          alert("Equipment can't be removed because there are reservations for it")
+        }
+      },
+    });
+  }
+
+  OnConfirm():void{
+     let equipment:Equipment={
+      name:this.equipmentForm.value.name||"",
+      description:this.equipmentForm.value.description||"",
+      type:this.equipmentForm.value.type||"",
+      price:this.equipmentForm.value.price||0,
+      quantity:this.equipmentForm.value.quantity||0
+    }
+
+    if(this.equipmentEdit==false){
+      if(this.isValidEquipmentName() && this.isValidEquipmentDescription() && this.isValidEquipmentType()){
+      this.service.addEquipment(equipment,this.id).subscribe({
+        next: (result: Company) => {
+          this.company = result;
+          this.company.company_id=this.id;
+          this.equipmentFormVisible=!this.equipmentFormVisible;
+          this.equipmentForm.reset();
+        },
+      });
+    }
+  }
+
+  if(this.equipmentEdit==true){
+    if(this.isValidEquipmentName() && this.isValidEquipmentDescription() && this.isValidEquipmentType()){
+      this.service.updateEquipment(equipment,this.updatingEquipmentId).subscribe({
+        next: (result: Equipment) => {
+          this.service.getCompany(this.id).subscribe({
+            next: (result: Company) => {
+              this.company = result;
+              this.company.company_id=this.id;
+              this.equipmentList = this.company.equipment || [];
+              this.equipmentEdit=false;
+              this.equipmentForm.reset();
+            },
+          });
+        },
+      });
+    }
+  }
+
+
+  }
+
+  OnEdit():void{
+    this.disabledStatus=!this.disabledStatus;
+    if(this.edit=="Edit"){
+      this.edit="Confirm";
+    }else{
+      if(this.isValidName()){
+      this.edit="Edit";
+      this.company.company_id=this.id;
+      this.service.updateCompany(this.company).subscribe({
+>>>>>>> 31869034382f7d77228a3be3cd94654c647a8aa3
         next: (result: Company) => {
           this.company = result;
           this.company.company_id = this.id;
@@ -212,4 +339,14 @@ export class CompanyProfileComponent implements OnInit {
     this.appointmentForm.reset();
     this.appointmentFormVisible = !this.appointmentFormVisible;
   }
+<<<<<<< HEAD
+=======
+
+  OnEquipmentUpdate(e:Equipment,equipment_id:number):void{
+    this.updatingEquipmentId=equipment_id;
+    this.equipmentEdit=true;
+    this.equipmentFormVisible=true;
+    this.equipmentForm.patchValue(e);
+  }
+>>>>>>> 31869034382f7d77228a3be3cd94654c647a8aa3
 }

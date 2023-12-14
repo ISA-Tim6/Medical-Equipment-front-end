@@ -39,6 +39,11 @@ export class CompanyAdminService {
     return this.http.get<any>(environment.apiHost+"user/"+email);   
   }
 
+  changePassword(id:number,password:string):Observable<any>{
+    return this.http.put<any>(environment.apiHost+"companyAdmin/changePassword/"+id,password);
+
+  }
+
 
 
 }
