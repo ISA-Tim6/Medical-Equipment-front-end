@@ -45,4 +45,8 @@ export class SystemAdminService {
   findByEmail(email: string): Observable<Number>{
     return this.http.get<Number>(environment.apiHost + 'user/' + email);
   }
+
+  changePassword(admin_id: number, password: string): Observable<User>{
+    return this.http.put<User>(environment.apiHost + 'user/changePassword/' + admin_id, password);
+  }
 }

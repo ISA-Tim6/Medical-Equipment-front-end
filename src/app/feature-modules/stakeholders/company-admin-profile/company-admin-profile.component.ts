@@ -212,14 +212,11 @@ export class CompanyAdminProfileComponent implements OnInit{
     && this.isPhoneNumberValid() && this.isValidEmail();
   }
 
-<<<<<<< HEAD
   openCalendar(): void{
     this.router.navigate([`company-calendar/` + this.companyAdmin.company_id]);
   }
-=======
+
   onChangePassword():void{
     this.router.navigate([`company-admin-password/${this.id}`]);
   }
-
->>>>>>> 31869034382f7d77228a3be3cd94654c647a8aa3
 }

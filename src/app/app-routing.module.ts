@@ -14,6 +14,7 @@ import { LoginFormComponent } from './feature-modules/login-form/login-form.comp
 import { HomePageComponent } from './feature-modules/home-page/home-page.component';
 import { CompanyCalendarComponent } from './feature-modules/stakeholders/company-calendar/company-calendar.component';
 import { CompanyAdminChangePasswordComponent } from './feature-modules/stakeholders/company-admin-change-password/company-admin-change-password.component';
+import { SystemAdminHomePageComponent } from './feature-modules/system-admin/system-admin-home-page/system-admin-home-page.component';
 
 const routes: Routes = [
   {
@@ -60,7 +61,10 @@ const routes: Routes = [
     path:'company-calendar/:company_id',
     component:CompanyCalendarComponent
   },
-
+  {
+    path:'system-admin-home-page',
+    component:SystemAdminHomePageComponent
+  },
 ];
 
 @NgModule({

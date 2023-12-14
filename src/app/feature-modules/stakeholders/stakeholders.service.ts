@@ -42,6 +42,17 @@ export class StakeholdersService {
         );
     }
 
+    getSystemAdmin(): Observable<User> {
+      return this.apiService.get(this.config.whoami_url)
+        .pipe(
+          switchMap(user => {
+            console.log(user);
+            this.currentUser = user;
+            return this.http.get<User>(environment.apiHost + "user/systemAdmin/" + this.currentUser.user_id);
+          })
+        );
+    }
+
   getByUsername(username: string): Observable<any> {
     return this.http.get<User>(
       environment.apiHost + 'user/username/' + username

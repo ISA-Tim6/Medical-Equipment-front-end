@@ -1,0 +1,23 @@
+<div *ngIf="systemAdmin">
+    <div class="change-password-div" *ngIf="!systemAdmin.loggedBefore">
+        <p>Please set your password!</p>
+        <div>
+            <label>Input new password:</label>
+            <input type="password" [(ngModel)]="newPassword" name="password">
+            <span *ngIf="!isLongPassword()" style="color: red">
+                Invalid password!
+              </span>
+        </div>
+        <div>
+            <label>Repeat password:</label>
+            <input type="password" [(ngModel)]="repeatedPassword" name="repeatedPassword">
+            <span *ngIf="!isRepetedPasswodCorrect() " style="color: red">
+                Invalid password!
+              </span>
+        </div>
+        <button (click)="OnConfirm()">Confirm</button>
+    </div>
+    <div *ngIf="systemAdmin.loggedBefore">
+
+    </div>
+</div>

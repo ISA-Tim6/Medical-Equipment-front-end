@@ -9,12 +9,10 @@ import { Equipment } from '../company-profile/model/equipment.model';
 import { CompanyUpdate } from '../company-profile/model/companyUpdate.model';
 import { Company } from '../company-profile/model/company.model';
 import { Appointment } from '../company-profile/model/appointment.model';
-<<<<<<< HEAD
 import { Item } from '../company-overview/model/item.model';
 import { Reservation } from '../company-profile/model/reservation.model';
-=======
 import { compileClassMetadata } from '@angular/compiler';
->>>>>>> 31869034382f7d77228a3be3cd94654c647a8aa3
+
 
 @Injectable({
   providedIn: 'root',
@@ -36,14 +34,7 @@ export class CompanyService {
     );
   }
 
-<<<<<<< HEAD
-  addAppointment(
-    appointment: Appointment,
-    compamy_id: number,
-    company_admin_id: number
-  ): Observable<any> {
-=======
-  updateEquipment(equipment:Equipment,equipment_id:number):Observable<any>{
+  updateEquipmentWithId(equipment:Equipment,equipment_id:number):Observable<any>{
     return this.http.put<any>(
       environment.apiHost+'equipment/updateEquipment/'+equipment_id,
       equipment
@@ -51,7 +42,6 @@ export class CompanyService {
   }
 
   addAppointment(appointment: Appointment, compamy_id: number,company_admin_id:number): Observable<any> {
->>>>>>> 31869034382f7d77228a3be3cd94654c647a8aa3
     return this.http.put<any>(
       environment.apiHost +
         'company/addAppointment/' +
