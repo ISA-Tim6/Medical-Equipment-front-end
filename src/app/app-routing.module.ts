@@ -36,7 +36,7 @@ const routes: Routes = [
     component: CompanyProfileComponent,
   },
   {
-    path: 'companyProfile/:company_id',
+    path: 'companyProfile/:company_id/:user_id',
     component: CompanyOverviewComponent,
   },
   {

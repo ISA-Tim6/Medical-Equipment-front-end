@@ -8,6 +8,7 @@ import { Item } from './model/item.model';
 import { Reservation } from '../company-profile/model/reservation.model';
 import { RegistratedUser } from '../stakeholders/model/user.model';
 import { timeout } from 'rxjs';
+import { StakeholdersService } from '../stakeholders/stakeholders.service';
 
 @Component({
   selector: 'app-company-overview',
@@ -42,7 +43,8 @@ export class CompanyOverviewComponent implements OnInit {
   availableAppointments: Appointment[] = [];
   constructor(
     private service: CompanyService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private stakeholderService: StakeholdersService,
   ) {}
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
@@ -57,6 +59,11 @@ export class CompanyOverviewComponent implements OnInit {
             this.company.workingTimeCalendar.appointments.filter(
               (a) => a.appointmentStatus == 'AVAILABLE'
             );
+            this.stakeholderService.getUser().subscribe({
+              next: (result: RegistratedUser) => {
+                this.user=result
+                console.log(this.user);
+              }})
         },
       });
     });
@@ -155,6 +162,7 @@ export class CompanyOverviewComponent implements OnInit {
       const retAppointment = await this.service.updateAppointment(
         appointment,
         this.id,
+        this.user_id
       );
       this.chosenItemsList = [];
       //samo available appoint
