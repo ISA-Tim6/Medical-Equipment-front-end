@@ -22,7 +22,6 @@ export class CompanyCalendarComponent {
   company: Company;
   openingHours: string = '';
   closingHours: string = '';
-  EventsNotDisplayed: any[] = [];
   Events: any[] = [];
   businessHours: any[] = [];
   activeView: string = 'dayGridMonth';
@@ -117,6 +116,24 @@ export class CompanyCalendarComponent {
       this.Events.push(e);
     });
 
+    this.companyCalendar.reservations.forEach(r => {
+      //var a = this.companyCalendar.workingTimeCalendarDto.appointments[0];
+      var appointment_date = formatDate(r.appointment.date, 'yyyy-MM-dd', 'en-US').toString() + 'T' + this.formatTime(r.appointment.time, false);
+      var appointment_end = formatDate(r.appointment.date, 'yyyy-MM-dd', 'en-US').toString() + 'T' + this.formatTime(r.appointment.time, true);
+      
+      var e = {
+        title: r.user.name.concat(' ').concat(r.user.surname),
+        //start: '2023-12-12T10:30:00',
+        start: appointment_date.toString(),
+        end: appointment_end.toString(),
+        //end: '2023-12-12T11:30:00',
+        rendering: 'background',
+        color: 'red',
+        display: 'block',
+        description: 'Reserved'
+      }
+      this.Events.push(e);
+    });
   }
 
   formatTime(time: string, end: boolean): string {
