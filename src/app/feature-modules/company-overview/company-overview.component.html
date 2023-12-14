@@ -179,7 +179,25 @@
     <div class="grid-item extra-appointment">
       <div class="extra-term" *ngIf="isExtraTermClicked">
         <p>Please enter date you want to take the equipment:</p>
-        <input type="date" min="{{ currentDate | date : 'yyyy-MM-dd' }}" />
+        <input
+          type="date"
+          min="{{ currentDate | date : 'yyyy-MM-dd' }}"
+          [(ngModel)]="extraDate"
+        />
+        <button (click)="onFindFreeSlots()">Find free slots</button>
+      </div>
+      <div *ngIf="isExtraTermClicked">
+        <table border="1">
+          <tr>
+            <th>Start time</th>
+            <th>Duration</th>
+          </tr>
+          <tr *ngFor="let e of freeSlots">
+            <td>{{ e }}</td>
+            <td>60 min</td>
+            <td><button (click)="onCreateExtraTerm(e)">Reserve</button></td>
+          </tr>
+        </table>
       </div>
     </div>
   </div>
