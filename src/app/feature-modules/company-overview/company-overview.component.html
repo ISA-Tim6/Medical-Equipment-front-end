@@ -66,8 +66,8 @@
     </td>
   </tr>
 </table>
-<p>Equipment search</p>
-<div>
+<p *ngIf="isRegisteredUser()">Equipment search</p>
+<div *ngIf="isRegisteredUser()">
   <table>
     <tr>
       <td>
@@ -92,13 +92,13 @@
         <th>Name</th>
         <th>Type</th>
         <th>Description</th>
-        <th>Choose</th>
+        <th *ngIf="isRegisteredUser()">Choose</th>
       </tr>
       <tr *ngFor="let e of equipmentList">
         <td>{{ e.name }}</td>
         <td>{{ e.type }}</td>
         <td>{{ e.description }}</td>
-        <td><button (click)="onChoose(e)">Choose</button></td>
+        <td *ngIf="isRegisteredUser()"><button (click)="onChoose(e)">Choose</button></td>
       </tr>
     </table>
   </div>
@@ -120,7 +120,7 @@
   </div>
 </div>
 
-<p>Your equipment to buy:</p>
+<p *ngIf="isRegisteredUser()">Your equipment to buy:</p>
 
 <div *ngIf="chosenItemsList.length > 0">
   <h4>Equipment</h4>
@@ -147,7 +147,7 @@
       <div>
         <p>
           Available appointments
-          <button class="fancy-button" (click)="onExtraAppointment()">
+          <button class="fancy-button" (click)="onExtraAppointment()" *ngIf="isRegisteredUser()">
             Extraordinary appointment
           </button>
         </p>

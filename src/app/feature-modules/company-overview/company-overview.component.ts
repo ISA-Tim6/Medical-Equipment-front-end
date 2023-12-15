@@ -9,6 +9,7 @@ import { Reservation } from '../company-profile/model/reservation.model';
 import { RegistratedUser } from '../stakeholders/model/user.model';
 import { timeout } from 'rxjs';
 import { StakeholdersService } from '../stakeholders/stakeholders.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-company-overview',
@@ -45,6 +46,7 @@ export class CompanyOverviewComponent implements OnInit {
     private service: CompanyService,
     private activatedRoute: ActivatedRoute,
     private stakeholderService: StakeholdersService,
+    private authService: AuthService
   ) {}
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
@@ -68,7 +70,10 @@ export class CompanyOverviewComponent implements OnInit {
       });
     });
   }
-
+  isRegisteredUser(): boolean {
+    const userRoles = this.authService.getUserRoles();
+    return userRoles !== null && userRoles.includes('ROLE_REGISTRATED_USER');
+  }
   onSearch(): void {
     this.service
       .searchEquipmentByCompany(this.name, this.company.company_id || 0)

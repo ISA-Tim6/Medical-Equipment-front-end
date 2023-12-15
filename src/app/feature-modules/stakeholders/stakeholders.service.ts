@@ -8,6 +8,8 @@ import { ApiService } from '../services/api.service';
 import { ConfigService } from '../services/config.service';
 import { UserService } from '../services/user.service';
 import { CompanyAdmin } from './model/company-admin.model';
+import { Reservation } from '../company-profile/model/reservation.model';
+import { Appointment } from '../company-profile/model/appointment.model';
 
 @Injectable({
   providedIn: 'root',
@@ -52,6 +54,13 @@ export class StakeholdersService {
     return this.http.put<RegistratedUser>(
       environment.apiHost + 'registratedUser/updateUser/' + oldUsername,
       user
+    );
+  }
+  getAllFutureReservations(
+    id: number,
+  ): Observable<Appointment[]> {
+    return this.http.get<any>(
+      environment.apiHost + 'reservation/getFutureReservation/' + id
     );
   }
 }

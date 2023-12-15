@@ -9,6 +9,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { StakeholdersService } from '../stakeholders.service';
 import { Category, Employment, RegistratedUser } from '../model/user.model';
 import { User } from '../model/main-user.model';
+import { Reservation } from '../../company-profile/model/reservation.model';
+import { Appointment } from '../../company-profile/model/appointment.model';
 
 @Component({
   selector: 'app-user-profile',
@@ -22,6 +24,8 @@ export class UserProfileComponent implements OnChanges, OnInit {
     { value: 4, label: 'OTHER' },
   ];
   selected: string = this.employments[0].value.toString();
+  isShowAppointment:boolean=false;
+  reservations:Appointment[]=[];
   user: RegistratedUser = {
     email: '',
     password: '',
@@ -83,6 +87,12 @@ export class UserProfileComponent implements OnChanges, OnInit {
           this.employments
             .find((emp) => emp.label == this.user.employment.toString())
             ?.value.toString() || '';
+        this.service.getAllFutureReservations(this.user.user_id as number).subscribe({
+          next:(result:Appointment[])=>{
+            this.reservations=result;
+            console.log(this.reservations.length)
+          }
+        })
       },
     });
   }
@@ -241,7 +251,9 @@ export class UserProfileComponent implements OnChanges, OnInit {
       !this.isCountryInvalid
     );
   }
-
+  onShowFutureAppointments(): void {
+    this.isShowAppointment = true;
+  }
   getCategory(category: Category | undefined): string {
     if (category === undefined) {
       return 'N/A';
