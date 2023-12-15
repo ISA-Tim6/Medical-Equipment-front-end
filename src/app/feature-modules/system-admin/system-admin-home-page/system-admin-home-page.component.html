@@ -18,6 +18,102 @@
         <button (click)="OnConfirm()">Confirm</button>
     </div>
     <div *ngIf="systemAdmin.loggedBefore">
+        <div>
+            <h2 class="title">System admin</h2>
+    <table>
+        <tr>
+            <td>
+                <label>Name:</label>
+            </td>
+            <td>
+                <input type="text" [(ngModel)] = "systemAdmin.name" disabled>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Surname:</label>
+            </td>
+            <td>
+                <input type="text" [(ngModel)] = "systemAdmin.surname" disabled>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Username:</label>
+            </td>
+            <td>
+                <input type="text" [(ngModel)] = "systemAdmin.username" disabled>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Email:</label>
+            </td>
+            <td>
+                <input type="text" [(ngModel)] = "systemAdmin.email" disabled>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Phone number:</label>
+            </td>
+            <td>
+                <input type="text" [(ngModel)] = "systemAdmin.phoneNumber" disabled>
+            </td>
+        </tr>
+        <tr> 
+            <td>
+                <label>City:</label>
+            </td>
+            <td>
+                <input type="text" [(ngModel)] = "systemAdmin.city" disabled>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Country:</label>
+            </td>
+            <td>
+                <input type="text" [(ngModel)] = "systemAdmin.country" disabled>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Information about company:</label>
+            </td>
+            <td>
+                <input type="text" [(ngModel)] = "systemAdmin.infoAboutInstitution" disabled>
+            </td>
+        </tr>
+    </table>
+        </div>
+        <div>
+            <button (click)="onAddCompany()">Add company</button>
+            <button (click)="onAddCompanyAdmin()">Add company admin</button>
+            <button (click)="onAddSystemAdmin()">Add system admin</button>
+        </div>
 
+        <div>
+            <button (click)="onChangePassword()">Change password</button>
+        </div>
+        <br>
+        <div class="change-password-div" *ngIf="changePassword">
+            <p>Change your password</p>
+            <div>
+                <label>Input new password:</label>
+                <input type="password" [(ngModel)]="newPassword" name="password">
+                <span *ngIf="!isLongPassword()" style="color: red">
+                    Invalid password!
+                  </span>
+            </div>
+            <div>
+                <label>Repeat password:</label>
+                <input type="password" [(ngModel)]="repeatedPassword" name="repeatedPassword">
+                <span *ngIf="!isRepetedPasswodCorrect() " style="color: red">
+                    Invalid password!
+                  </span>
+            </div>
+            <button (click)="OnConfirm()">Confirm</button>
+        </div>
     </div>
 </div>
