@@ -8,6 +8,11 @@ import { UserCompanyAdmin } from '../stakeholders/model/user-company-admin.model
 import { Equipment } from '../company-profile/model/equipment.model';
 import { CompanyUpdate } from '../company-profile/model/companyUpdate.model';
 import { Company } from '../company-profile/model/company.model';
+import { Appointment } from '../company-profile/model/appointment.model';
+import { Item } from '../company-overview/model/item.model';
+import { Reservation } from '../company-profile/model/reservation.model';
+import { compileClassMetadata } from '@angular/compiler';
+
 
 @Injectable({
   providedIn: 'root',
@@ -26,6 +31,24 @@ export class CompanyService {
     return this.http.put<any>(
       environment.apiHost + 'company/addEquipment/' + id,
       equipment
+    );
+  }
+
+  updateEquipmentWithId(equipment:Equipment,equipment_id:number):Observable<any>{
+    return this.http.put<any>(
+      environment.apiHost+'equipment/updateEquipment/'+equipment_id,
+      equipment
+    )
+  }
+
+  addAppointment(appointment: Appointment, compamy_id: number,company_admin_id:number): Observable<any> {
+    return this.http.put<any>(
+      environment.apiHost +
+        'company/addAppointment/' +
+        compamy_id +
+        '/' +
+        company_admin_id,
+      appointment
     );
   }
 
@@ -68,14 +91,81 @@ export class CompanyService {
     );
   }
 
-
-  searchEquipmentByCompany(name: string, company_id: number): Observable<Equipment[]>{
-    return this.http.get<Equipment[]>(environment.apiHost + 'equipment/searchEquipmentByCompany/'+ name + "/"+ company_id);
+  searchEquipmentByCompany(
+    name: string,
+    company_id: number
+  ): Observable<Equipment[]> {
+    return this.http.get<Equipment[]>(
+      environment.apiHost +
+        'equipment/searchEquipmentByCompany/' +
+        name +
+        '/' +
+        company_id
+    );
   }
   searchByNameAndCity(name: string, city: string): Observable<Company[]> {
     return this.http.get<any>(
       environment.apiHost + 'company/searchByNameAndCity/' + name + '/' + city
     );
+  }
 
+  addItem(item: Item): Promise<Item | undefined> {
+    return this.http
+      .post<Item>(environment.apiHost + 'item/saveItem/', item)
+      .toPromise();
+  }
+  addReservation(reservation: Reservation): Promise<Reservation | undefined> {
+    return this.http
+      .post<Reservation>(
+        environment.apiHost + 'reservation/saveReservation/',
+        reservation
+      )
+      .toPromise();
+  }
+
+  updateEquipment(equipment: Equipment): Promise<Equipment | undefined> {
+    return this.http
+      .put<Equipment>(
+        environment.apiHost + 'equipment/updateEquipment/',
+        equipment
+      )
+      .toPromise();
+  }
+
+  updateAppointment(
+    appointment: Appointment,
+    compamy_id: number,
+    company_admin_id: number
+  ): Promise<Appointment | undefined> {
+    return this.http
+      .put<Appointment>(
+        environment.apiHost +
+          'company/updateAppointment/' +
+          compamy_id +
+          '/' +
+          company_admin_id,
+        appointment
+      )
+      .toPromise();
+  }
+
+  findFreeSlots(company_id: number, date: string): Observable<string[]> {
+    return this.http.get<any>(
+      environment.apiHost + 'company/findFreeSlots/' + company_id + '/' + date
+    );
+  }
+
+  addExtraordinaryAppointment(
+    appointment: Appointment,
+    compamy_id: number
+  ): Promise<number | undefined> {
+    return this.http
+      .put<any>(
+        environment.apiHost +
+          'company/addExtraordinaryAppointment/' +
+          compamy_id,
+        appointment
+      )
+      .toPromise();
   }
 }

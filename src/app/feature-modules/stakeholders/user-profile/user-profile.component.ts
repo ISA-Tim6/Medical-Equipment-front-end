@@ -9,6 +9,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { StakeholdersService } from '../stakeholders.service';
 import { Category, Employment, RegistratedUser } from '../model/user.model';
 import { User } from '../model/main-user.model';
+import { Reservation } from '../../company-profile/model/reservation.model';
+import { Appointment } from '../../company-profile/model/appointment.model';
 
 @Component({
   selector: 'app-user-profile',
@@ -22,6 +24,8 @@ export class UserProfileComponent implements OnChanges, OnInit {
     { value: 4, label: 'OTHER' },
   ];
   selected: string = this.employments[0].value.toString();
+  isShowAppointment:boolean=false;
+  reservations:Appointment[]=[];
   user: RegistratedUser = {
     email: '',
     password: '',
@@ -49,7 +53,7 @@ export class UserProfileComponent implements OnChanges, OnInit {
 
   userForm = new FormGroup({
     username: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required]),
+    password: new FormControl(''),
     confirmPassword: new FormControl('', [Validators.required]),
     name: new FormControl('', [
       Validators.required,
@@ -83,6 +87,12 @@ export class UserProfileComponent implements OnChanges, OnInit {
           this.employments
             .find((emp) => emp.label == this.user.employment.toString())
             ?.value.toString() || '';
+        this.service.getAllFutureReservations(this.user.user_id as number).subscribe({
+          next:(result:Appointment[])=>{
+            this.reservations=result;
+            console.log(this.reservations.length)
+          }
+        })
       },
     });
   }
@@ -93,7 +103,8 @@ export class UserProfileComponent implements OnChanges, OnInit {
     this.userForm.reset();
     this.userForm.patchValue(this.user);
     this.userForm.patchValue({
-      confirmPassword: this.user.password,
+      confirmPassword: "",
+      password:""
     });
     this.selected =
       this.employments
@@ -121,6 +132,14 @@ export class UserProfileComponent implements OnChanges, OnInit {
         category: this.user!.category,
         isActive: false,
       };
+      if((this.userForm.value.confirmPassword=="" || this.userForm.value.confirmPassword==undefined || this.userForm.value.confirmPassword==null)
+       && (this.userForm.value.password=="" || this.userForm.value.password==undefined || this.userForm.value.password==null)){
+        user.password=this.user.password;
+        console.log(user.password)
+        console.log(this.user.password)
+      }else if(!this.isPasswordInvalid && !this.isConfirmPasswordInvalid){
+          user.password=this.userForm.value.password || "";
+      }
       this.service.getByUsername(user.username).subscribe({
         next: (result: number) => {
           if (result == -1 || result == user.user_id) {
@@ -226,15 +245,15 @@ export class UserProfileComponent implements OnChanges, OnInit {
       !this.isNameInvalid &&
       !this.isSurnameInvalid &&
       !this.isUsernameInvalid &&
-      !this.isPasswordInvalid &&
-      !this.isConfirmPasswordInvalid &&
       !this.areInfoInvalid &&
       !this.isNumberInvalid &&
       !this.isCityInvalid &&
       !this.isCountryInvalid
     );
   }
-
+  onShowFutureAppointments(): void {
+    this.isShowAppointment = true;
+  }
   getCategory(category: Category | undefined): string {
     if (category === undefined) {
       return 'N/A';

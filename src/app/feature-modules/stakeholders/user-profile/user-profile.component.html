@@ -210,3 +210,19 @@
     </form>
   </div>
 </div>
+
+<button (click)="onShowFutureAppointments()"><b>My future appointments</b></button>
+<table border="1" *ngIf="isShowAppointment">
+  <tr>
+    <th>Date</th>
+    <th>Time</th>
+    <th>Duration</th>
+  </tr>
+  <tr *ngFor="let r of reservations">
+    <td>
+      {{r.date | date:'MMM d, y' }}
+    </td>
+    <td>{{r.time}}h</td>
+    <td>{{r.duration}}min</td>
+  </tr>
+</table>

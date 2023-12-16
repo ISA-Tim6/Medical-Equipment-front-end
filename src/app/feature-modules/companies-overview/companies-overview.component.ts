@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Company } from '../company-profile/model/company.model';
 import { Router } from '@angular/router';
 import { CompanyService } from '../services/company.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-companies-overview',
@@ -16,7 +17,7 @@ export class CompaniesOverviewComponent implements OnInit {
   filterDisabled: boolean = true;
   searchedCompanies: Company[] = [];
 
-  constructor(private service: CompanyService, private router: Router) {}
+  constructor(private service: CompanyService, private router: Router, private authService:AuthService) {}
   ngOnInit(): void {
     this.service.getCompanies().subscribe({
       next: (result: Company[]) => {
@@ -29,9 +30,13 @@ export class CompaniesOverviewComponent implements OnInit {
 
   companies: Company[];
   id: number;
-
+  isLoggedIn(): boolean {
+    return this.authService.isAuthenticated();
+  }
   showDetails(c: Company): void {
-    this.router.navigate([`company/${c.company_id}`]);
+    //this.router.navigate([`company/${c.company_id}`]);
+    if(this.isLoggedIn())
+      this.router.navigate([`companyProfile/${c.company_id}/${2}`]);
   }
 
   search(): void {

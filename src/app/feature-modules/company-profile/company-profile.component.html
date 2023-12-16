@@ -27,24 +27,27 @@
         </div>
     </div>
     <div>
-        Opening hours:
+        <div class="fields">
+        <div><label><b>Opening hours: {{company.openingHours}}</b></label></div>
         <input
         disabled={{disabledStatus}}
         type="time"
         [(ngModel)]="company.openingHours"
         />
+        </div>
     </div>
     <div>
-        Closing hours:
+        <div class="fields">
+        <div><label><b>Closing hours: {{company.closingHours}}</b></label></div>
         <input
         disabled={{disabledStatus}}
         type="time"
         [(ngModel)]="company.closingHours"
         />
+        </div>
     </div>
-    <div>Address:</div>                                                     
+                                                     
     <div>
-        City
     <p class="address">Address:</p>                                             
     <div class="fields">
         <div><label><b>City:</b></label></div>
@@ -124,13 +127,18 @@
                 <th>Name</th>
                 <th>Description</th>
                 <th>Type</th>
+                <th>Price</th>
+                <th>Quantity</th>
                 <th></th>
             </thead>
             <tr *ngFor="let e of company.equipment">
                 <td>{{e.name}}</td>
                 <td>{{e.description}}</td>
                 <td>{{e.type}}</td>
+                <td>{{e.price}}</td>
+                <td>{{e.quantity}}</td>
                 <td><button (click)="OnMinus(e)">-</button></td>
+                <td><button (click)="OnEquipmentUpdate(e,e.equipment_id||0)">Update</button></td>
             </tr>
             <tr>
                 <button (click)="OnPlus()">+</button>
@@ -139,19 +147,31 @@
         <div>
             <form [formGroup]="equipmentForm" *ngIf="equipmentFormVisible">
                 <div>
-                <input type="text" required  placeholder="name" formControlName="name">
+                Name:<input type="text" class="inputEquipmentName" required  placeholder="name" formControlName="name">
                 <span *ngIf="isValidEquipmentName()==false && equipmentForm.touched" style="color: red">
                     Invalid name!
                   </span>
                 </div>
                 <div>
-                <input type="text" required  placeholder="description" formControlName="description">
+                Description:<input type="text" required  placeholder="description" formControlName="description">
                 <span *ngIf="isValidEquipmentDescription()==false && equipmentForm.touched" style="color: red">
                     Invalid description!
                   </span>
                 </div>
                 <div>
-                    <input type="text" required   placeholder="type" formControlName="type">
+                    Price:<input type="number" class="inputEquipment" required  placeholder="price" formControlName="price">
+                    <span *ngIf="isValidEquipmentPrice()==false && equipmentForm.touched" style="color: red">
+                        Invalid price!
+                      </span>
+                </div>
+                <div>
+                    Quantity:<input type="number" class="inputEquipmentQuantity" required  placeholder="quantity" formControlName="quantity">
+                    <span *ngIf="isValidEquipmentQuantity()==false && equipmentForm.touched" style="color: red">
+                        Invalid quantity!
+                      </span>
+                </div>
+                <div>
+                    Type:<input class="inputEquipment"  type="text" required   placeholder="type" formControlName="type">
                     <span *ngIf="isValidEquipmentType()==false && equipmentForm.touched" style="color: red">
                         Invalid type!
                       </span>
@@ -160,6 +180,70 @@
             </form>
         </div>
     </div>
+    <br>
+    <p>Working time calendar</p>
+    <div>
+        <table border="1">
+            <tr>
+                <th>
+                    Date
+                </th>
+                <th>
+                    Time
+                </th>
+                <th>
+                    Duration
+                </th>
+                <th>
+                    Admin's name
+                </th>
+                <th>
+                    Admin's surname
+                </th>
+                <th>
+                    Status
+                </th>
+            </tr>
+            <tr *ngFor="let e of company.workingTimeCalendar.appointments">
+                <td>{{e.date}}</td>
+                <td>{{e.time}}</td>
+                <td>{{e.duration}}</td>
+                <td>{{e.admin?.name}}</td>
+                <td>{{e.admin?.surname}}</td>
+                <td>{{e.appointmentStatus}}</td>
+            </tr>
+            <tr>
+                <button (click)="onAppointmentPlus()">+</button>
+            </tr>
+        </table>
+        <div *ngIf="appointmentFormVisible">
+            <h3>Choose date and time. Duration of every appointment is 1h.</h3>
+            <form [formGroup]="appointmentForm">
+                <table>
+                    <tr>
+                        <td>
+                            Date:
+                        </td>
+                        <td>
+                            <input type="date" formControlName="date" min="{{currentDate | date:'yyyy-MM-dd'}}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Time:
+                        </td>
+                        <td>
+                            <input type="time" formControlName="time" min="08:00:00" max="10:00:00">
+                        </td>
+                    </tr>
+                    <tr>
+                        <button (click)="onConfirmAppointment()">Confirm</button>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+    <br>
 
     <p>Equipment search</p>
 <div>
