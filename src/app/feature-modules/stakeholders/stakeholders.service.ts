@@ -4,6 +4,9 @@ import { Observable, map, switchMap } from 'rxjs';
 import { RegistratedUser } from './model/user.model';
 import { environment } from 'src/env/environment';
 import { User } from './model/main-user.model';
+import { WorkingTimeCalendar } from '../company-profile/model/working-calendar.model';
+import { CompanyCalendar } from './model/company-calendar.model';
+import { Company } from '../company-profile/model/company.model';
 import { ApiService } from '../services/api.service';
 import { ConfigService } from '../services/config.service';
 import { UserService } from '../services/user.service';
@@ -39,6 +42,17 @@ export class StakeholdersService {
         );
     }
 
+    getSystemAdmin(): Observable<User> {
+      return this.apiService.get(this.config.whoami_url)
+        .pipe(
+          switchMap(user => {
+            console.log(user);
+            this.currentUser = user;
+            return this.http.get<User>(environment.apiHost + "user/systemAdmin/" + this.currentUser.user_id);
+          })
+        );
+    }
+
   getByUsername(username: string): Observable<any> {
     return this.http.get<User>(
       environment.apiHost + 'user/username/' + username
@@ -53,5 +67,13 @@ export class StakeholdersService {
       environment.apiHost + 'registratedUser/updateUser/' + oldUsername,
       user
     );
+  }
+
+  getCompanyCalendar(company_id: number): Observable<CompanyCalendar>{
+    return this.http.get<CompanyCalendar>(environment.apiHost +"company/companyCalendar/" + company_id);
+  }
+
+  getCompany(company_id: number) : Observable<Company>{
+    return this.http.get<Company>(environment.apiHost +"company/" + company_id);
   }
 }

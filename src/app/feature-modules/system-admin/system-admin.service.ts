@@ -21,7 +21,7 @@ export class SystemAdminService {
   }
 
   addSystemAdmin(admin: User): Observable<User> {
-    return this.http.post<User>(environment.apiHost + 'registratedUser/saveUser', admin);
+    return this.http.post<User>(environment.apiHost + 'user/saveSystemAdmin', admin);
   }
 
   getCompanies(): Observable<Company[]> {
@@ -44,5 +44,9 @@ export class SystemAdminService {
 
   findByEmail(email: string): Observable<Number>{
     return this.http.get<Number>(environment.apiHost + 'user/' + email);
+  }
+
+  changePassword(admin_id: number, password: string): Observable<User>{
+    return this.http.put<User>(environment.apiHost + 'user/changePasswordAdmin/' + admin_id, password);
   }
 }

@@ -1,36 +1,75 @@
-td{
-    align-items: center;
-    text-align: center;
-    border: 1px solid orangered;
-    background-color: beige;
+td {
+  align-items: center;
+  text-align: center;
+  border: 1px solid orangered;
+  background-color: beige;
 }
-.div-equipment-header{
-    text-align: center;
-    font-weight: bold;
-    font-style: weight;
+.div-equipment-header {
+  text-align: center;
+  font-weight: bold;
+  font-style: weight;
 }
-.span-equipment{
-    border: 1px solid orangered;
-    width: 50px;
+.span-equipment {
+  border: 1px solid orangered;
+  width: 50px;
 }
-th{
-    text-align: left;
-    background-color:azure;
-}
-
-
-.div-equipment{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    gap: 10px;
+th {
+  text-align: left;
+  background-color: azure;
 }
 
-table{
-    width: 250px;
+.div-equipment {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 10px;
 }
 
-p{
-    color: orangered;
-    font-size: 5vh;
+table {
+  width: 250px;
+}
+
+p {
+  color: orangered;
+  font-size: 5vh;
+}
+
+.grid-div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.grid-item {
+  width: 100%;
+}
+
+.appointments {
+  grid-column: 1;
+}
+
+.extra-appointment {
+  grid-column: 2;
+}
+
+.fancy-button {
+  border: none;
+  background: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: none;
+  text-decoration: underline;
+  color: blue;
+  margin-left: 3rem;
+  font-size: 1rem;
+}
+
+.fancy-button:hover {
+  text-decoration: underline;
+  color: darkblue;
+}
+
+.fancy-button:active {
+  color: red;
 }

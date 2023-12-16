@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CompanyFormComponent } from './company-form/company-form.component';
-import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+import { CompanyFormComponent } from './company-form/company-form.component';
 import { SystemAdminFormComponent } from './system-admin-form/system-admin-form.component';
 import { CompanyAdminFormComponent } from './company-admin-form/company-admin-form.component';
 import { EquipmentSearchComponent } from './equipment-search/equipment-search.component';
-import { StakeholdersModule } from '../stakeholders/stakeholders.module';
+import { SystemAdminHomePageComponent } from './system-admin-home-page/system-admin-home-page.component';
 
 
 @NgModule({
@@ -14,8 +14,9 @@ import { StakeholdersModule } from '../stakeholders/stakeholders.module';
     CompanyFormComponent,
     SystemAdminFormComponent,
     CompanyAdminFormComponent,
-    EquipmentSearchComponent
+    EquipmentSearchComponent,
+    SystemAdminHomePageComponent
   ],
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, StakeholdersModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule],
 })
 export class SystemAdminModule {}
