@@ -29,14 +29,18 @@ export class CompanyAdminChangePasswordComponent {
 
 
   public OnConfirm():void{
-    this.activatedRoute.params.subscribe(params=>{
-      let id=params['id'];
-      this.service.changePassword(id,this.password).subscribe({
-        next:(result:CompanyAdmin)=>{
-          this.router.navigate([`company-admin-profile`]);
-        }
-      })
-    
-  })
+    if(this.isLongPassword() && this.isRepetedPasswodCorrect())
+    {
+      this.activatedRoute.params.subscribe(params=>{
+        let id=params['id'];
+        this.service.changePassword(id,this.password).subscribe({
+          next:(result:CompanyAdmin)=>{
+            this.router.navigate([`company-admin-profile`]);
+          }
+        })
+      
+    })
+
+    }
   }
 }

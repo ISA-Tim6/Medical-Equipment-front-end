@@ -5,8 +5,8 @@
   </button>
   <button *ngIf="isLoggedIn() && isSystemAdmin()" [routerLink]="['system-admin-home-page']" class="navbar-btn">
     System admin home page
-  </button>
-  <button *ngIf="isLoggedIn()" [routerLink]="['company-admin-profile']" class="navbar-btn">
+    </button>
+  <button *ngIf="isLoggedIn() && !isRegisteredUser() && !isSystemAdmin()" [routerLink]="['company-admin-profile']" class="navbar-btn">
     Company Admin Profile
   </button>
   <button [routerLink]="['companies']" class="navbar-btn">All companies</button>

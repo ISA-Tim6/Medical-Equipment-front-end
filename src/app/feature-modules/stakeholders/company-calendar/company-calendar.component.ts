@@ -113,7 +113,8 @@ export class CompanyCalendarComponent {
         display: 'block',
         description: 'Free appointment'
       }
-      this.Events.push(e);
+      if(a.appointmentStatus == 'AVAILABLE')
+        this.Events.push(e);
     });
 
     this.companyCalendar.reservations.forEach(r => {

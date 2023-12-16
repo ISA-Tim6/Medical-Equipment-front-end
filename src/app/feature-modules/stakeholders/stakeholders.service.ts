@@ -11,6 +11,8 @@ import { ApiService } from '../services/api.service';
 import { ConfigService } from '../services/config.service';
 import { UserService } from '../services/user.service';
 import { CompanyAdmin } from './model/company-admin.model';
+import { Reservation } from '../company-profile/model/reservation.model';
+import { Appointment } from '../company-profile/model/appointment.model';
 
 @Injectable({
   providedIn: 'root',
@@ -75,5 +77,12 @@ export class StakeholdersService {
 
   getCompany(company_id: number) : Observable<Company>{
     return this.http.get<Company>(environment.apiHost +"company/" + company_id);
+  }
+  getAllFutureReservations(
+    id: number,
+  ): Observable<Appointment[]> {
+    return this.http.get<any>(
+      environment.apiHost + 'reservation/getFutureReservation/' + id
+    );
   }
 }
