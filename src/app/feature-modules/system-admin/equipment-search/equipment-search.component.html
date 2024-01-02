@@ -1,78 +1,75 @@
-<h2 class="title">Equipment search</h2>
-<div>
-    <table>
-        <tr>
-            <td>
-                <label>Search by name: </label>
-            </td>
-            <td>
-                <input type="text" placeholder="search by name" [(ngModel)]="name">
-            </td>
-        </tr>
-        <tr>
-            <td>
-            </td>
-            <td>
-                <button (click)="onSearch()" class="button">Search</button>
-            </td>
-        </tr>
-    </table>
+<div class="search-container">
+  <h2 class="title">Equipment search</h2>
 
-    <div *ngIf="equipment.length > 0">
-        <h4 class="title">Equipment</h4>
-        <table class="table">
+  <label>Search by name: </label>
+
+  <input class="fancy-input" type="text" [(ngModel)]="name" />
+  <br /><br />
+  <button (click)="onSearch()" class="button">Search</button>
+
+  <div *ngIf="equipment.length > 0">
+    <h4 class="title">Equipment</h4>
+    <table class="table">
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+      <tr *ngFor="let e of equipment">
+        <td>{{ e.name }}</td>
+        <td>{{ e.type }}</td>
+        <td>{{ e.description }}</td>
+        <td>
+          <p>Companies that have {{ e.name }}</p>
+          <table border="1">
             <tr>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Description</th>
+              <th>Name</th>
             </tr>
-            <tr *ngFor="let e of equipment">
-                <td>{{e.name}}</td>
-                <td>{{e.type}}</td>
-                <td>{{e.description}}</td>
-                <td>
-                    <p>Companies that have {{e.name}}</p>
-                    <table border="1">
-                        <tr>
-                            <th>Name</th>
-                        </tr>
-                        <tr *ngFor="let c of e.companies">
-                            <td>{{c.name}}</td>
-                        </tr>
-                    </table>
-                </td>
+            <tr *ngFor="let c of e.companies">
+              <td>{{ c.name }}</td>
             </tr>
-        </table>
-    </div>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div>
+    <h5 class="title">Filters</h5>
+
+    <label>Type:</label>
+
+    <input class="fancy-input" type="text" [(ngModel)]="filterType" />
+    <br /><br />
+    <label>Company name:</label>
+
+    <input type="text" class="fancy-input" [(ngModel)]="filterCompanyName" />
+    <br /><br />
+    <label>Company average grade:</label>
+
+    <span>
+      <input
+        type="number"
+        class="fancy-input"
+        [(ngModel)]="filterCompanyGradeFrom"
+        min="0"
+        max="10"
+        placeholder="from"
+      />
+      <input
+        type="number"
+        class="fancy-input"
+        [(ngModel)]="filterCompanyGradeTo"
+        min="0"
+        max="10"
+        placeholder="to"
+      />
+    </span>
 
     <div>
-        <h5 class="title">Filters</h5>
-        <table>
-            <tr>
-                <td>Type: </td>
-                <td>
-                    <input type="text" [(ngModel)]="filterType" placeholder="type">
-                </td>
-            </tr>
-            <tr>
-                <td>Company name: </td>
-                <td>
-                    <input type="text" [(ngModel)]="filterCompanyName" placeholder="company name">
-                </td>
-            </tr>
-            <tr>
-                <td>Company average grade: </td>
-                <td>
-                    <span>
-                        <input type="number" [(ngModel)]="filterCompanyGradeFrom" min="0" max="10" placeholder="from">
-                        <input type="number" [(ngModel)]="filterCompanyGradeTo" min="0" max="10" placeholder="to">
-                    </span>
-                </td>
-            </tr>
-        </table>
-        <div>
-            <button (click)="onFilter()" class="button">Filter</button>
-            <button (click)="onReset()" class="resetButton">Reset filters</button>
-        </div>
+      <br />
+      <button (click)="onFilter()" class="button">Filter</button>
+      <button (click)="onReset()" class="resetButton">Reset filters</button>
     </div>
+  </div>
 </div>

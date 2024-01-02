@@ -5,12 +5,13 @@
   <input type="text" class="fancy-input" [(ngModel)]="name" />
   <label>Enter company city:</label>
   <input type="text" class="fancy-input" [(ngModel)]="city" />
-
+  <br /><br />
   <button class="fancy-search-btn" (click)="search()">Search</button>
   <button class="fancy-reset-btn" (click)="reset()">Reset</button>
   <br /><br /><br /><br />
   <label for="minRating">Min rating:</label>
   <input
+    class="min-max"
     type="number"
     id="minRating"
     name="minRating"
@@ -19,12 +20,13 @@
 
   <label for="maxRating">Max rating:</label>
   <input
+    class="min-max"
     type="number"
     id="maxRating"
     name="maxRating"
     [(ngModel)]="maxRating"
   />
-  <br />
+  <br /><br />
   <button
     class="fancy-filter-btn"
     [disabled]="filterDisabled"
@@ -35,7 +37,7 @@
 
   <table>
     <tr *ngFor="let c of companies">
-      <td (click)="showDetails(c)">
+      <td class="company-card" (click)="showDetails(c)">
         <span>Name:</span> {{ c.name }}
         <br />
         <span>Average grade: </span>{{ c.averageGrade }}

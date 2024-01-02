@@ -61,11 +61,12 @@ export class CompanyOverviewComponent implements OnInit {
             this.company.workingTimeCalendar.appointments.filter(
               (a) => a.appointmentStatus == 'AVAILABLE'
             );
-            this.stakeholderService.getUser().subscribe({
-              next: (result: RegistratedUser) => {
-                this.user=result
-                console.log(this.user);
-              }})
+          this.stakeholderService.getUser().subscribe({
+            next: (result: RegistratedUser) => {
+              this.user = result;
+              console.log(this.user);
+            },
+          });
         },
       });
     });
@@ -97,11 +98,18 @@ export class CompanyOverviewComponent implements OnInit {
   }
 
   onReset(): void {
-    this.service
+    /*this.service
       .searchEquipmentByCompany(this.name, this.company.company_id || 0)
       .subscribe((result) => {
         this.equipmentList = result;
-      });
+      });*/
+    this.service.getCompany(this.id).subscribe({
+      next: (result: Company) => {
+        this.company = result;
+        this.company.company_id = this.id;
+        this.equipmentList = this.company.equipment || [];
+      },
+    });
   }
 
   onChoose(equipment: Equipment): void {

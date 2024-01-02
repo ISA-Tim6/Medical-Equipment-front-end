@@ -1,16 +1,34 @@
 <div class="navbar">
-  <button *ngIf="isLoggedIn() && isRegisteredUser()" [routerLink]="['user-profile']" class="navbar-btn">Profile</button>
+  <button
+    *ngIf="isLoggedIn() && isRegisteredUser()"
+    [routerLink]="['user-profile']"
+    class="navbar-btn"
+  >
+    Profile
+  </button>
   <button [routerLink]="['equipment-search']" class="navbar-btn">
     Equipment search
   </button>
-  <button *ngIf="isLoggedIn() && isSystemAdmin()" [routerLink]="['system-admin-home-page']" class="navbar-btn">
+  <button
+    *ngIf="isLoggedIn() && isSystemAdmin()"
+    [routerLink]="['system-admin-home-page']"
+    class="navbar-btn"
+  >
     System admin home page
-    </button>
-  <button *ngIf="isLoggedIn() && !isRegisteredUser() && !isSystemAdmin()" [routerLink]="['company-admin-profile']" class="navbar-btn">
+  </button>
+  <button
+    *ngIf="isLoggedIn() && !isRegisteredUser() && !isSystemAdmin()"
+    [routerLink]="['company-admin-profile']"
+    class="navbar-btn"
+  >
     Company Admin Profile
   </button>
   <button [routerLink]="['companies']" class="navbar-btn">All companies</button>
-  <button *ngIf="!isLoggedIn()" [routerLink]="['registration']" class="navbar-btn">
+  <button
+    *ngIf="!isLoggedIn()"
+    [routerLink]="['registration']"
+    class="navbar-btn"
+  >
     Registration
   </button>
   <button *ngIf="!isLoggedIn()" [routerLink]="['login']" class="navbar-btn">
@@ -20,6 +38,6 @@
     Logout
   </button>
 </div>
-<router-outlet></router-outlet>
-
-
+<div class="router-content">
+  <router-outlet></router-outlet>
+</div>
