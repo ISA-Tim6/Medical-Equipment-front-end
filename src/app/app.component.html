@@ -3,10 +3,15 @@
     *ngIf="isLoggedIn() && isRegisteredUser()"
     [routerLink]="['user-profile']"
     class="navbar-btn"
+    (click)="showRegUserHomePage = false"
   >
     Profile
   </button>
-  <button [routerLink]="['equipment-search']" class="navbar-btn">
+  <button
+    [routerLink]="['equipment-search']"
+    class="navbar-btn"
+    (click)="showRegUserHomePage = false"
+  >
     Equipment search
   </button>
   <button
@@ -23,7 +28,13 @@
   >
     Company Admin Profile
   </button>
-  <button [routerLink]="['companies']" class="navbar-btn">All companies</button>
+  <button
+    [routerLink]="['companies']"
+    class="navbar-btn"
+    (click)="showRegUserHomePage = false"
+  >
+    All companies
+  </button>
   <button
     *ngIf="!isLoggedIn()"
     [routerLink]="['registration']"
@@ -39,5 +50,8 @@
   </button>
 </div>
 <div class="router-content">
+  <app-reg-user-home-page
+    *ngIf="isRegisteredUser() && showRegUserHomePage"
+  ></app-reg-user-home-page>
   <router-outlet></router-outlet>
 </div>

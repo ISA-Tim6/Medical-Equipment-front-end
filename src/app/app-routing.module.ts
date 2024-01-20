@@ -15,6 +15,7 @@ import { HomePageComponent } from './feature-modules/home-page/home-page.compone
 import { CompanyCalendarComponent } from './feature-modules/stakeholders/company-calendar/company-calendar.component';
 import { CompanyAdminChangePasswordComponent } from './feature-modules/stakeholders/company-admin-change-password/company-admin-change-password.component';
 import { SystemAdminHomePageComponent } from './feature-modules/system-admin/system-admin-home-page/system-admin-home-page.component';
+import { RegUserHomePageComponent } from './feature-modules/stakeholders/reg-user-home-page/reg-user-home-page.component';
 
 const routes: Routes = [
   {
@@ -25,7 +26,10 @@ const routes: Routes = [
   { path: 'company-form', component: CompanyFormComponent },
   { path: 'system-admin-form', component: SystemAdminFormComponent },
   { path: 'company-admin-form', component: CompanyAdminFormComponent },
-  {path: 'company-admin-password/:id',component: CompanyAdminChangePasswordComponent},
+  {
+    path: 'company-admin-password/:id',
+    component: CompanyAdminChangePasswordComponent,
+  },
 
   {
     path: 'registration',
@@ -54,16 +58,20 @@ const routes: Routes = [
     component: LoginFormComponent,
   },
   {
-    path:'home-page',
-    component:HomePageComponent
+    path: 'home-page',
+    component: HomePageComponent,
   },
   {
-    path:'company-calendar/:company_id',
-    component:CompanyCalendarComponent
+    path: 'company-calendar/:company_id',
+    component: CompanyCalendarComponent,
   },
   {
-    path:'system-admin-home-page',
-    component:SystemAdminHomePageComponent
+    path: 'system-admin-home-page',
+    component: SystemAdminHomePageComponent,
+  },
+  {
+    path: 'reg-user-home-page',
+    component: RegUserHomePageComponent,
   },
 ];
 

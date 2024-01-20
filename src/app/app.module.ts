@@ -19,6 +19,7 @@ import { AuthService } from './auth/auth.service';
 import { ApiService } from './feature-modules/services/api.service';
 import { ConfigService } from './feature-modules/services/config.service';
 import { UserService } from './feature-modules/services/user.service';
+import { RegUserHomePageComponent } from './feature-modules/stakeholders/reg-user-home-page/reg-user-home-page.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,7 @@ import { UserService } from './feature-modules/services/user.service';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
-      multi: true
+      multi: true,
     },
     FooService,
     AuthService,

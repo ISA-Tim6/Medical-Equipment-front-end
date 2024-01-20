@@ -15,9 +15,15 @@ export class CompaniesOverviewComponent implements OnInit {
   minRating: number = 0;
   maxRating: number = 0;
   filterDisabled: boolean = true;
+  selected: string = 'None';
+  sortType: string = 'asc';
   searchedCompanies: Company[] = [];
 
-  constructor(private service: CompanyService, private router: Router, private authService:AuthService) {}
+  constructor(
+    private service: CompanyService,
+    private router: Router,
+    private authService: AuthService
+  ) {}
   ngOnInit(): void {
     this.service.getCompanies().subscribe({
       next: (result: Company[]) => {
@@ -35,7 +41,7 @@ export class CompaniesOverviewComponent implements OnInit {
   }
   showDetails(c: Company): void {
     //this.router.navigate([`company/${c.company_id}`]);
-    if(this.isLoggedIn())
+    if (this.isLoggedIn())
       this.router.navigate([`companyProfile/${c.company_id}/${2}`]);
   }
 
@@ -86,6 +92,7 @@ export class CompaniesOverviewComponent implements OnInit {
         this.minRating = 0;
         this.maxRating = 0;
         this.searchedCompanies = this.companies;
+        this.sortType = '';
       },
     });
   }
@@ -126,5 +133,45 @@ export class CompaniesOverviewComponent implements OnInit {
       return;
     }
     alert('You need to enter min/max rating to filter results.');
+  }
+
+  sort(): void {
+    switch (this.sortType) {
+      case 'Name asc':
+        this.companies = this.companies
+          .slice()
+          .sort((a, b) => a.name.localeCompare(b.name));
+        break;
+      case 'Name desc':
+        this.companies = this.companies
+          .slice()
+          .sort((a, b) => b.name.localeCompare(a.name));
+        break;
+      case 'City asc':
+        this.companies = this.companies
+          .slice()
+          .sort((a, b) => a.address.city.localeCompare(b.address.city));
+        break;
+      case 'City desc':
+        this.companies = this.companies
+          .slice()
+          .sort((a, b) => b.address.city.localeCompare(a.address.city));
+        break;
+      case 'Average grade asc':
+        this.companies = this.companies
+          .slice()
+          .sort((a, b) => a.averageGrade - b.averageGrade);
+        break;
+      case 'Average grade desc':
+        this.companies = this.companies
+          .slice()
+          .sort((a, b) => b.averageGrade - a.averageGrade);
+        break;
+    }
+  }
+
+  isRegisteredUser(): boolean {
+    const userRoles = this.authService.getUserRoles();
+    return userRoles !== null && userRoles.includes('ROLE_REGISTRATED_USER');
   }
 }
