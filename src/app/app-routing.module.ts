@@ -15,7 +15,7 @@ import { HomePageComponent } from './feature-modules/home-page/home-page.compone
 import { CompanyCalendarComponent } from './feature-modules/stakeholders/company-calendar/company-calendar.component';
 import { CompanyAdminChangePasswordComponent } from './feature-modules/stakeholders/company-admin-change-password/company-admin-change-password.component';
 import { SystemAdminHomePageComponent } from './feature-modules/system-admin/system-admin-home-page/system-admin-home-page.component';
-
+import { EquipmentDeliveryComponent } from './feature-modules/stakeholders/equipment-delivery/equipment-delivery.component';
 const routes: Routes = [
   {
     path: 'user-profile',
@@ -26,6 +26,8 @@ const routes: Routes = [
   { path: 'system-admin-form', component: SystemAdminFormComponent },
   { path: 'company-admin-form', component: CompanyAdminFormComponent },
   {path: 'company-admin-password/:id',component: CompanyAdminChangePasswordComponent},
+  {path: 'equipment-delivery/:id',component: EquipmentDeliveryComponent},
+
 
   {
     path: 'registration',
