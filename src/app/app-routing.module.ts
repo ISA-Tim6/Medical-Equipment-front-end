@@ -15,6 +15,7 @@ import { HomePageComponent } from './feature-modules/home-page/home-page.compone
 import { CompanyCalendarComponent } from './feature-modules/stakeholders/company-calendar/company-calendar.component';
 import { CompanyAdminChangePasswordComponent } from './feature-modules/stakeholders/company-admin-change-password/company-admin-change-password.component';
 import { SystemAdminHomePageComponent } from './feature-modules/system-admin/system-admin-home-page/system-admin-home-page.component';
+import { MapComponent } from './feature-modules/map/map.component';
 
 const routes: Routes = [
   {
@@ -64,6 +65,10 @@ const routes: Routes = [
   {
     path:'system-admin-home-page',
     component:SystemAdminHomePageComponent
+  },
+  {
+    path:'map',
+    component:MapComponent
   },
 ];
 
