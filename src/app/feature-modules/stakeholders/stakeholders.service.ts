@@ -125,4 +125,10 @@ export class StakeholdersService {
       environment.apiHost + 'reservation/deliverReservation/' + id
     );
   }
+
+  getAcceptedReservationsByUser(id: number): Observable<Reservation[]> {
+    return this.http.get<any>(
+      environment.apiHost + 'reservation/acceptedReservations/' + id
+    );
+  }
 }

@@ -44,6 +44,14 @@
     QR codes
   </button>
   <button
+    *ngIf="isLoggedIn() && isRegisteredUser()"
+    [routerLink]="['my-deliveries']"
+    class="navbar-btn"
+    (click)="showRegUserHomePage = false"
+  >
+    My deliveries
+  </button>
+  <button
     *ngIf="!isLoggedIn()"
     [routerLink]="['registration']"
     class="navbar-btn"

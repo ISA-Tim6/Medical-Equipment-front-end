@@ -11,6 +11,7 @@ import { CompanyAdminChangePasswordComponent } from './company-admin-change-pass
 import { RegUserHomePageComponent } from './reg-user-home-page/reg-user-home-page.component';
 import { QrComponent } from './qr/qr.component';
 import { EquipmentDeliveryComponent } from './equipment-delivery/equipment-delivery.component';
+import { DeliveriesComponent } from './deliveries/deliveries.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { EquipmentDeliveryComponent } from './equipment-delivery/equipment-deliv
     RegUserHomePageComponent,
     QrComponent,
     EquipmentDeliveryComponent,
+    DeliveriesComponent,
   ],
   imports: [CommonModule, ReactiveFormsModule, FormsModule, FullCalendarModule],
   exports: [

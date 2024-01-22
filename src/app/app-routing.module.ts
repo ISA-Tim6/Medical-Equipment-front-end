@@ -15,13 +15,11 @@ import { HomePageComponent } from './feature-modules/home-page/home-page.compone
 import { CompanyCalendarComponent } from './feature-modules/stakeholders/company-calendar/company-calendar.component';
 import { CompanyAdminChangePasswordComponent } from './feature-modules/stakeholders/company-admin-change-password/company-admin-change-password.component';
 import { SystemAdminHomePageComponent } from './feature-modules/system-admin/system-admin-home-page/system-admin-home-page.component';
-<<<<<<< HEAD
 import { RegUserHomePageComponent } from './feature-modules/stakeholders/reg-user-home-page/reg-user-home-page.component';
 import { QrComponent } from './feature-modules/stakeholders/qr/qr.component';
-
-=======
 import { EquipmentDeliveryComponent } from './feature-modules/stakeholders/equipment-delivery/equipment-delivery.component';
->>>>>>> 90b70af040430b7adcd5bc236aa426e0a11433ac
+import { DeliveriesComponent } from './feature-modules/stakeholders/deliveries/deliveries.component';
+
 const routes: Routes = [
   {
     path: 'user-profile',
@@ -31,16 +29,17 @@ const routes: Routes = [
   { path: 'company-form', component: CompanyFormComponent },
   { path: 'system-admin-form', component: SystemAdminFormComponent },
   { path: 'company-admin-form', component: CompanyAdminFormComponent },
-<<<<<<< HEAD
+
   {
     path: 'company-admin-password/:id',
     component: CompanyAdminChangePasswordComponent,
   },
-=======
-  {path: 'company-admin-password/:id',component: CompanyAdminChangePasswordComponent},
-  {path: 'equipment-delivery/:id',component: EquipmentDeliveryComponent},
 
->>>>>>> 90b70af040430b7adcd5bc236aa426e0a11433ac
+  {
+    path: 'company-admin-password/:id',
+    component: CompanyAdminChangePasswordComponent,
+  },
+  { path: 'equipment-delivery/:id', component: EquipmentDeliveryComponent },
 
   {
     path: 'registration',
@@ -87,6 +86,10 @@ const routes: Routes = [
   {
     path: 'qr',
     component: QrComponent,
+  },
+  {
+    path: 'my-deliveries',
+    component: DeliveriesComponent,
   },
 ];
 
