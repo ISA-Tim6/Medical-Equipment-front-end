@@ -85,4 +85,14 @@ export class StakeholdersService {
       environment.apiHost + 'reservation/getFutureReservation/' + id
     );
   }
+  cancelAppointment(appointmentId: number): Observable<any> {
+    return this.http.post<any>(environment.apiHost + 'reservation/cancelAppointment/'+appointmentId,null);
+  }
+  getCanceledAppointments(
+    id: number,
+  ): Observable<Appointment[]> {
+    return this.http.get<any>(
+      environment.apiHost + 'reservation/canceledAppointments/' + id
+    );
+  }
 }

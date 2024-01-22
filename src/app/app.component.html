@@ -8,6 +8,14 @@
     Profile
   </button>
   <button
+    *ngIf="isLoggedIn() && isRegisteredUser()"
+    [routerLink]="['future-appointments']"
+    class="navbar-btn"
+    (click)="showRegUserHomePage = false"
+  >
+    My future appointments
+  </button>
+  <button
     [routerLink]="['equipment-search']"
     class="navbar-btn"
     (click)="showRegUserHomePage = false"

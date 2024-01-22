@@ -42,6 +42,8 @@ export class CompanyOverviewComponent implements OnInit {
   equipmentList: Equipment[] = [];
   chosenItemsList: Item[] = [];
   availableAppointments: Appointment[] = [];
+  availableUserAppointments: Appointment[] = [];
+  canceledAppointments: Appointment[] = [];
   constructor(
     private service: CompanyService,
     private activatedRoute: ActivatedRoute,
@@ -61,16 +63,32 @@ export class CompanyOverviewComponent implements OnInit {
             this.company.workingTimeCalendar.appointments.filter(
               (a) => a.appointmentStatus == 'AVAILABLE'
             );
+          this.availableUserAppointments=this.availableAppointments;
           this.stakeholderService.getUser().subscribe({
             next: (result: RegistratedUser) => {
               this.user = result;
               console.log(this.user);
+             
+              this.stakeholderService.getCanceledAppointments(this.user.user_id as number).subscribe({
+                next: (result: any) => {
+                  
+                  this.canceledAppointments = result;                  
+                                    
+                  // Filtriranje dostupnih termina koji nisu otkazani
+                  
+                  for(let a of this.canceledAppointments){
+                    this.availableUserAppointments=this.availableUserAppointments.filter(c=>c.appointment_id==a.appointment_id)
+                  }
+
+                },
+              });
             },
           });
         },
       });
     });
   }
+  
   isRegisteredUser(): boolean {
     const userRoles = this.authService.getUserRoles();
     return userRoles !== null && userRoles.includes('ROLE_REGISTRATED_USER');
