@@ -113,4 +113,16 @@ export class StakeholdersService {
       environment.apiHost + 'reservation/rejectedqrs/' + id
     );
   }
+
+  getNewReservations(id: number): Observable<Reservation[]> {
+    return this.http.get<any>(
+      environment.apiHost + 'reservation/findNewReservations/' + id
+    );
+  }
+
+  deliverReservation(id: number): Observable<Reservation[]> {
+    return this.http.get<any>(
+      environment.apiHost + 'reservation/deliverReservation/' + id
+    );
+  }
 }

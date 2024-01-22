@@ -10,6 +10,7 @@ import { CompanyCalendarComponent } from './company-calendar/company-calendar.co
 import { CompanyAdminChangePasswordComponent } from './company-admin-change-password/company-admin-change-password.component';
 import { RegUserHomePageComponent } from './reg-user-home-page/reg-user-home-page.component';
 import { QrComponent } from './qr/qr.component';
+import { EquipmentDeliveryComponent } from './equipment-delivery/equipment-delivery.component';
 
 @NgModule({
   declarations: [
@@ -20,12 +21,14 @@ import { QrComponent } from './qr/qr.component';
     CompanyAdminChangePasswordComponent,
     RegUserHomePageComponent,
     QrComponent,
+    EquipmentDeliveryComponent,
   ],
   imports: [CommonModule, ReactiveFormsModule, FormsModule, FullCalendarModule],
   exports: [
     UserProfileComponent,
     RegistrationFormComponent,
     RegUserHomePageComponent,
+    EquipmentDeliveryComponent,
   ],
 })
 export class StakeholdersModule {}
