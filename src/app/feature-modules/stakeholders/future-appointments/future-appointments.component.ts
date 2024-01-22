@@ -3,6 +3,9 @@ import { Appointment } from '../../company-profile/model/appointment.model';
 import { StakeholdersService } from '../stakeholders.service';
 import { RegistratedUser } from '../model/user.model';
 import { Reservation } from '../../company-profile/model/reservation.model';
+import { CompanyService } from '../../services/company.service';
+import { Observable } from 'rxjs';
+import { Company } from '../../company-profile/model/company.model';
 
 @Component({
   selector: 'app-future-appointments',
@@ -12,7 +15,9 @@ import { Reservation } from '../../company-profile/model/reservation.model';
 export class FutureAppointmentsComponent implements OnInit{
   reservations:Appointment[]=[];
   user:RegistratedUser;
-  constructor(private service: StakeholdersService) {}
+  companies:Company[]=[];
+  id:number;
+  constructor(private service: StakeholdersService,private companyService:CompanyService) {}
   ngOnInit(): void {
     this.service.getUser().subscribe({
       next: (result: RegistratedUser) => {
@@ -31,11 +36,19 @@ export class FutureAppointmentsComponent implements OnInit{
       (response: boolean) => {
         console.log('Termin uspješno otkazan.');
         alert("Successfully cancelled.")
-        this.service.getAllFutureReservations(this.user.user_id as number).subscribe({
-          next:(result:Appointment[])=>{
-            this.reservations=result;
-          }
-        })
+        
+          a.appointmentStatus = 'AVAILABLE';
+          this.service.getAllFutureReservations(this.user.user_id as number).subscribe({
+            next:(result:Appointment[])=>{
+              this.reservations=result;
+              this.companyService.updateAppointment(
+                a,
+                a.admin?.company_id || 0,
+                a.admin?.id || 0
+              );
+            }
+          })
+          
       }
     );
   }

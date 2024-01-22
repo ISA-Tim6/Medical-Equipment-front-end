@@ -10,6 +10,7 @@ import { RegistratedUser } from '../stakeholders/model/user.model';
 import { timeout } from 'rxjs';
 import { StakeholdersService } from '../stakeholders/stakeholders.service';
 import { AuthService } from '../services/auth.service';
+import { CanceledAppointment } from '../company-profile/model/canceled-appointment.model';
 
 @Component({
   selector: 'app-company-overview',
@@ -43,7 +44,7 @@ export class CompanyOverviewComponent implements OnInit {
   chosenItemsList: Item[] = [];
   availableAppointments: Appointment[] = [];
   availableUserAppointments: Appointment[] = [];
-  canceledAppointments: Appointment[] = [];
+  canceledAppointments: CanceledAppointment[] = [];
   constructor(
     private service: CompanyService,
     private activatedRoute: ActivatedRoute,
@@ -67,19 +68,12 @@ export class CompanyOverviewComponent implements OnInit {
           this.stakeholderService.getUser().subscribe({
             next: (result: RegistratedUser) => {
               this.user = result;
-              console.log(this.user);
-             
               this.stakeholderService.getCanceledAppointments(this.user.user_id as number).subscribe({
                 next: (result: any) => {
-                  
-                  this.canceledAppointments = result;                  
-                                    
-                  // Filtriranje dostupnih termina koji nisu otkazani
-                  
+                  this.canceledAppointments = result;                     
                   for(let a of this.canceledAppointments){
-                    this.availableUserAppointments=this.availableUserAppointments.filter(c=>c.appointment_id==a.appointment_id)
+                    this.availableUserAppointments=this.availableUserAppointments.filter(c=>c.appointment_id!=a.appointmentId)
                   }
-
                 },
               });
             },

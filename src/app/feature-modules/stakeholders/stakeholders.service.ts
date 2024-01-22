@@ -13,6 +13,7 @@ import { UserService } from '../services/user.service';
 import { CompanyAdmin } from './model/company-admin.model';
 import { Reservation } from '../company-profile/model/reservation.model';
 import { Appointment } from '../company-profile/model/appointment.model';
+import { CanceledAppointment } from '../company-profile/model/canceled-appointment.model';
 
 @Injectable({
   providedIn: 'root',
@@ -90,7 +91,7 @@ export class StakeholdersService {
   }
   getCanceledAppointments(
     id: number,
-  ): Observable<Appointment[]> {
+  ): Observable<CanceledAppointment> {
     return this.http.get<any>(
       environment.apiHost + 'reservation/canceledAppointments/' + id
     );
