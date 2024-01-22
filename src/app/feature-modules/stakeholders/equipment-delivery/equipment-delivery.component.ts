@@ -16,7 +16,7 @@ export class EquipmentDeliveryComponent {
   ) {}
 
   userId:number;
-  reservations:Reservation[];
+  reservations:Reservation;
 
   ngOnInit(): void {
     
@@ -24,7 +24,7 @@ export class EquipmentDeliveryComponent {
       this.userId=params['id'];
 
       this.service.getNewReservations(this.userId).subscribe({
-        next: (result: Reservation[]) => {
+        next: (result: Reservation) => {
         this.reservations=result;
         console.log(result);         
         }
@@ -35,7 +35,7 @@ export class EquipmentDeliveryComponent {
 
   OnDeliver(r:Reservation):void{
     this.service.deliverReservation(r.reservation_id||0).subscribe({
-      next: (result: Reservation[]) => {
+      next: (result: Reservation) => {
       this.reservations=result;
       console.log(result);         
       }

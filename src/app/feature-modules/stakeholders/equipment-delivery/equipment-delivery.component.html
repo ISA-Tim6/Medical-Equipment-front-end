@@ -1,6 +1,6 @@
 <h1>Delivery</h1>
 <br>
-<h3>Reservations:</h3>
+<h3>Reservation:</h3>
 <table border="1">
     <tr>
         <th>
@@ -19,9 +19,9 @@
             Deliver
         </th>
     </tr>
-    <tr *ngFor="let e of reservations">
-        <td>{{e.appointment.date}}</td>
-        <td>{{e.appointment.time}}</td>
+    <tr >
+        <td>{{reservations.appointment.date}}</td>
+        <td>{{reservations.appointment.time}}</td>
         <td>
             <table border="1">
                 <tr>
@@ -35,7 +35,7 @@
                         Quantity
                     </th>
                 </tr>
-                <tr *ngFor="let i of e.items">
+                <tr *ngFor="let i of reservations.items">
                     <td>
                         {{i.equipment.name}}
                     </td>
@@ -49,10 +49,10 @@
             </table>
         </td>
         <td>
-            {{e.user.name}} {{e.user.surname}}
+            {{reservations.user.name}} {{reservations.user.surname}}
         </td>
         <td>
-           <button (click)="OnDeliver(e)"> Deliver</button>
+           <button (click)="OnDeliver(reservations)"> Deliver</button>
         </td>
     </tr>
     

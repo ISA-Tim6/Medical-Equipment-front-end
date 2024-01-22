@@ -86,13 +86,13 @@ export class StakeholdersService {
     );
   }
 
-  getNewReservations(id:number):Observable<Reservation[]>{
+  getNewReservations(id:number):Observable<Reservation>{
     return this.http.get<any>(
       environment.apiHost + 'reservation/findNewReservations/' + id
     );
   }
 
-  deliverReservation(id:number):Observable<Reservation[]>{
+  deliverReservation(id:number):Observable<Reservation>{
     return this.http.get<any>(
       environment.apiHost + 'reservation/deliverReservation/' + id
     );
