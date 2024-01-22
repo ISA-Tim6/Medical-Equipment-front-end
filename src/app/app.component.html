@@ -36,6 +36,14 @@
     All companies
   </button>
   <button
+    *ngIf="isLoggedIn() && isRegisteredUser()"
+    [routerLink]="['qr']"
+    class="navbar-btn"
+    (click)="showRegUserHomePage = false"
+  >
+    QR codes
+  </button>
+  <button
     *ngIf="!isLoggedIn()"
     [routerLink]="['registration']"
     class="navbar-btn"

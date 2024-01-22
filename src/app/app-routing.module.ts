@@ -16,6 +16,7 @@ import { CompanyCalendarComponent } from './feature-modules/stakeholders/company
 import { CompanyAdminChangePasswordComponent } from './feature-modules/stakeholders/company-admin-change-password/company-admin-change-password.component';
 import { SystemAdminHomePageComponent } from './feature-modules/system-admin/system-admin-home-page/system-admin-home-page.component';
 import { RegUserHomePageComponent } from './feature-modules/stakeholders/reg-user-home-page/reg-user-home-page.component';
+import { QrComponent } from './feature-modules/stakeholders/qr/qr.component';
 
 const routes: Routes = [
   {
@@ -72,6 +73,10 @@ const routes: Routes = [
   {
     path: 'reg-user-home-page',
     component: RegUserHomePageComponent,
+  },
+  {
+    path: 'qr',
+    component: QrComponent,
   },
 ];
 
