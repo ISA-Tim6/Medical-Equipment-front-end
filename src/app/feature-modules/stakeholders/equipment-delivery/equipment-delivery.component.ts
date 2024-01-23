@@ -60,7 +60,10 @@ export class EquipmentDeliveryComponent {
     this.service.deliverReservation(r.reservation_id||0).subscribe({
       next: (result: Reservation) => {
       this.reservations=result;
-      console.log(result);         
+      if(result!=null)
+      {
+        alert("Company doesn't have enough equipment in stock.")
+      }         
       }
     })
   }
