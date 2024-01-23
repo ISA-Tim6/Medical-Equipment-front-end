@@ -97,6 +97,10 @@ export class StakeholdersService {
       environment.apiHost + 'reservation/deliverReservation/' + id
     );
   }
-
+  getUsersWithReservations(id:number):Observable<RegistratedUser[]>{
+    return this.http.get<any>(
+      environment.apiHost + 'user/withReservation/' + id
+    );
+  }
   
 }

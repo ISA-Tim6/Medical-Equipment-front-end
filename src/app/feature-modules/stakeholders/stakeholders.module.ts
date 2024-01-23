@@ -9,6 +9,7 @@ import { FullCalendarModule} from '@fullcalendar/angular'
 import { CompanyCalendarComponent } from './company-calendar/company-calendar.component';
 import { CompanyAdminChangePasswordComponent } from './company-admin-change-password/company-admin-change-password.component';
 import { EquipmentDeliveryComponent } from './equipment-delivery/equipment-delivery.component';
+import { UsersWithReservationsComponent } from './users-with-reservations/users-with-reservations.component';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { EquipmentDeliveryComponent } from './equipment-delivery/equipment-deliv
     CompanyCalendarComponent,
     CompanyAdminChangePasswordComponent,
     EquipmentDeliveryComponent,
+    UsersWithReservationsComponent,
   ],
   imports: [CommonModule, ReactiveFormsModule, FormsModule, FullCalendarModule],
   exports: [UserProfileComponent, RegistrationFormComponent,EquipmentDeliveryComponent],

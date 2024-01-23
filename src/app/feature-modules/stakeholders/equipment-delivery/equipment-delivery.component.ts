@@ -2,6 +2,8 @@ import { Component, OnInit} from '@angular/core';
 import { StakeholdersService } from '../stakeholders.service';
 import { ActivatedRoute } from '@angular/router';
 import { Reservation } from '../../company-profile/model/reservation.model';
+import { CompanyAdmin } from '../model/company-admin.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-equipment-delivery',
@@ -12,15 +14,36 @@ export class EquipmentDeliveryComponent {
 
   constructor(
     private service: StakeholdersService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,private router: Router
   ) {}
 
   userId:number;
   reservations:Reservation;
+  companyAdmin:CompanyAdmin;
 
   ngOnInit(): void {
+
+
+    this.service.getCompanyAdmin().subscribe({
+      next: (result: CompanyAdmin) => {
+        console.log(result);
+        this.companyAdmin=result;
+        this.userId=this.companyAdmin.id;
+
+        if(this.companyAdmin.loggedBefore==false){
+          this.router.navigate([`company-admin-password/${this.userId}`]);
+        }
+
+        this.service.getNewReservations(this.userId).subscribe({
+          next: (result: Reservation) => {
+          this.reservations=result;
+          console.log(result);         
+          }
+        })
+      },
+    });
     
-    this.activatedRoute.params.subscribe(params=>{
+  /*  this.activatedRoute.params.subscribe(params=>{
       this.userId=params['id'];
 
       this.service.getNewReservations(this.userId).subscribe({
@@ -30,7 +53,7 @@ export class EquipmentDeliveryComponent {
         }
       })
          
-    })
+    })*/
   }
 
   OnDeliver(r:Reservation):void{

@@ -1,7 +1,7 @@
-<h1>Delivery</h1>
+<h1 class="h1">Delivery</h1>
 <br>
 <h3>Reservation:</h3>
-<table border="1">
+<table  *ngIf="reservations!=null" class="fancy-table">
     <tr>
         <th>
             Date
@@ -23,7 +23,7 @@
         <td>{{reservations.appointment.date}}</td>
         <td>{{reservations.appointment.time}}</td>
         <td>
-            <table border="1">
+            <table class="fancy-table1">
                 <tr>
                     <th>
                         Name
@@ -52,7 +52,7 @@
             {{reservations.user.name}} {{reservations.user.surname}}
         </td>
         <td>
-           <button (click)="OnDeliver(reservations)"> Deliver</button>
+           <button (click)="OnDeliver(reservations)" class="fancy-btn"> Deliver</button>
         </td>
     </tr>
     

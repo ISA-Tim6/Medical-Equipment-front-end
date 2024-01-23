@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { EquipmentSearchComponent } from '../system-admin/equipment-search/equipment-search.component';
 import { Appointment } from './model/appointment.model';
+import { StakeholdersService } from '../stakeholders/stakeholders.service';
 
 @Component({
   selector: 'app-company-profile',
@@ -18,7 +19,9 @@ import { Appointment } from './model/appointment.model';
 export class CompanyProfileComponent implements OnInit {
   constructor(
     private service: CompanyService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private stakeholderService: StakeholdersService,
+    private router:Router
   ) {}
 
   edit: string = 'Edit';
@@ -29,6 +32,7 @@ export class CompanyProfileComponent implements OnInit {
   equipmentFormVisible: Boolean = false;
   appointmentFormVisible: Boolean = false;
   admins: CompanyAdmin[];
+  companyAdmin:CompanyAdmin;
 
   minTime:string;
   maxTime:string;
@@ -54,7 +58,41 @@ export class CompanyProfileComponent implements OnInit {
   equipmentList: Equipment[] = [];
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe(params=>{
+    this.stakeholderService.getCompanyAdmin().subscribe({
+      next: (result: CompanyAdmin) => {
+        console.log(result);
+        this.companyAdmin=result;
+        this.user_id=this.companyAdmin.id;
+        this.id=this.companyAdmin.company_id;
+
+        if(this.companyAdmin.loggedBefore==false){
+          this.router.navigate([`company-admin-password/${this.user_id}`]);
+        }
+
+        this.service.getCompany(this.id).subscribe({
+          next: (result: Company) => {
+            this.company = result;
+            this.company.company_id=this.id;
+            this.equipmentList = this.company.equipment || [];
+            this.minTime=result.openingHours
+            this.maxTime=result.closingHours;
+            
+    
+            this.service.getOtherCompanyAdminsForCompany(this.id,this.user_id).subscribe({
+              next:(result:CompanyAdmin[])=>{
+                this.admins=result;
+              }
+            })
+          },
+        });
+        
+      },
+    });
+
+
+
+
+   /* this.activatedRoute.params.subscribe(params=>{
       this.id=params['company_id'];
       this.user_id=params['user_id'];
     this.service.getCompany(this.id).subscribe({
@@ -73,7 +111,8 @@ export class CompanyProfileComponent implements OnInit {
         })
       },
     });
-  })}
+  })*/
+}
 
   equipmentForm= new FormGroup({
     name: new FormControl('',[Validators.required]),
