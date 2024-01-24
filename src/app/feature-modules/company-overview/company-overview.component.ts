@@ -10,6 +10,7 @@ import { RegistratedUser } from '../stakeholders/model/user.model';
 import { timeout } from 'rxjs';
 import { StakeholdersService } from '../stakeholders/stakeholders.service';
 import { AuthService } from '../services/auth.service';
+import { CanceledAppointment } from '../company-profile/model/canceled-appointment.model';
 
 @Component({
   selector: 'app-company-overview',
@@ -42,6 +43,8 @@ export class CompanyOverviewComponent implements OnInit {
   equipmentList: Equipment[] = [];
   chosenItemsList: Item[] = [];
   availableAppointments: Appointment[] = [];
+  availableUserAppointments: Appointment[] = [];
+  canceledAppointments: CanceledAppointment[] = [];
   constructor(
     private service: CompanyService,
     private activatedRoute: ActivatedRoute,
@@ -61,16 +64,30 @@ export class CompanyOverviewComponent implements OnInit {
             this.company.workingTimeCalendar.appointments.filter(
               (a) => a.appointmentStatus == 'AVAILABLE'
             );
+          this.availableUserAppointments = this.availableAppointments;
           this.stakeholderService.getUser().subscribe({
             next: (result: RegistratedUser) => {
               this.user = result;
-              console.log(this.user);
+              this.stakeholderService
+                .getCanceledAppointments(this.user.user_id as number)
+                .subscribe({
+                  next: (result: any) => {
+                    this.canceledAppointments = result;
+                    for (let a of this.canceledAppointments) {
+                      this.availableUserAppointments =
+                        this.availableUserAppointments.filter(
+                          (c) => c.appointment_id != a.appointmentId
+                        );
+                    }
+                  },
+                });
             },
           });
         },
       });
     });
   }
+
   isRegisteredUser(): boolean {
     const userRoles = this.authService.getUserRoles();
     return userRoles !== null && userRoles.includes('ROLE_REGISTRATED_USER');
@@ -153,7 +170,7 @@ export class CompanyOverviewComponent implements OnInit {
     if (this.chosenItemsList.length > 0) {
       for (let item of this.chosenItemsList) {
         console.log(this.chosenItemsList.length);
-        item.equipment.quantity -= item.quantity;
+        //item.equipment.quantity -= item.quantity;
         //const retItem = await this.service.addItem(item); //prvo kreiraj itemse
         const retEquipment = await this.service.updateEquipment(item.equipment);
       }
@@ -226,7 +243,7 @@ export class CompanyOverviewComponent implements OnInit {
 
         for (let item of this.chosenItemsList) {
           console.log(this.chosenItemsList.length);
-          item.equipment.quantity -= item.quantity;
+          //item.equipment.quantity -= item.quantity;
           //const retItem = await this.service.addItem(item); //prvo kreiraj itemse
           const retEquipment = await this.service.updateEquipment(
             item.equipment

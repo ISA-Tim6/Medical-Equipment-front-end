@@ -19,6 +19,7 @@ import { RegUserHomePageComponent } from './feature-modules/stakeholders/reg-use
 import { QrComponent } from './feature-modules/stakeholders/qr/qr.component';
 import { EquipmentDeliveryComponent } from './feature-modules/stakeholders/equipment-delivery/equipment-delivery.component';
 import { DeliveriesComponent } from './feature-modules/stakeholders/deliveries/deliveries.component';
+import { FutureAppointmentsComponent } from './feature-modules/stakeholders/future-appointments/future-appointments.component';
 
 const routes: Routes = [
   {
@@ -90,6 +91,10 @@ const routes: Routes = [
   {
     path: 'my-deliveries',
     component: DeliveriesComponent,
+  },
+  {
+    path: 'future-appointments',
+    component: FutureAppointmentsComponent,
   },
 ];
 
