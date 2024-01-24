@@ -41,11 +41,7 @@ export class FutureAppointmentsComponent implements OnInit{
           this.service.getAllFutureReservations(this.user.user_id as number).subscribe({
             next:(result:Appointment[])=>{
               this.reservations=result;
-              this.companyService.updateAppointment(
-                a,
-                a.admin?.company_id || 0,
-                a.admin?.id || 0
-              );
+              
             }
           })
           
