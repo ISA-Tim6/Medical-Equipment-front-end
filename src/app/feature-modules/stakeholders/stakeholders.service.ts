@@ -13,6 +13,7 @@ import { UserService } from '../services/user.service';
 import { CompanyAdmin } from './model/company-admin.model';
 import { Reservation } from '../company-profile/model/reservation.model';
 import { Appointment } from '../company-profile/model/appointment.model';
+import { Contract } from './model/contact.model';
 
 @Injectable({
   providedIn: 'root',
@@ -83,6 +84,14 @@ export class StakeholdersService {
   ): Observable<Appointment[]> {
     return this.http.get<any>(
       environment.apiHost + 'reservation/getFutureReservation/' + id
+    );
+  }
+
+  getAllCompnayContracts(
+    company: string,
+  ): Observable<Contract[]> {
+    return this.http.get<any>(
+      environment.apiHost + 'contract/' + company
     );
   }
 }

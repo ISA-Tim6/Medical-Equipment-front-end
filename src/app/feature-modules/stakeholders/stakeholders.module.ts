@@ -8,6 +8,7 @@ import { CompanyAdminProfileComponent } from './company-admin-profile/company-ad
 import { FullCalendarModule} from '@fullcalendar/angular'
 import { CompanyCalendarComponent } from './company-calendar/company-calendar.component';
 import { CompanyAdminChangePasswordComponent } from './company-admin-change-password/company-admin-change-password.component';
+import { ContractsComponent } from './contracts/contracts.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { CompanyAdminChangePasswordComponent } from './company-admin-change-pass
     CompanyAdminProfileComponent,
     CompanyCalendarComponent,
     CompanyAdminChangePasswordComponent,
+    ContractsComponent,
   ],
   imports: [CommonModule, ReactiveFormsModule, FormsModule, FullCalendarModule],
   exports: [UserProfileComponent, RegistrationFormComponent],
