@@ -13,6 +13,7 @@ import { UserService } from '../services/user.service';
 import { CompanyAdmin } from './model/company-admin.model';
 import { Reservation } from '../company-profile/model/reservation.model';
 import { Appointment } from '../company-profile/model/appointment.model';
+import { HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -103,4 +104,11 @@ export class StakeholdersService {
     );
   }
   
+  deliverReservationUsingQRCode(file: File):Observable<Reservation>{
+    let fd = new FormData();
+    fd.append('qrCodeFile', file);
+    return this.http.post<any>(
+      environment.apiHost + 'reservation/uploadQrCode', fd
+    );
+  }
 }

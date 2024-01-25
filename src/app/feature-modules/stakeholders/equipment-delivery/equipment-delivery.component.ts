@@ -20,6 +20,11 @@ export class EquipmentDeliveryComponent {
   userId:number;
   reservations:Reservation;
   companyAdmin:CompanyAdmin;
+  selectedFile: File;
+  visibleQRCode: boolean = false;
+  imageURL: any;
+  reservationDataVisible = false;
+  reservation: Reservation;
 
   ngOnInit(): void {
 
@@ -68,4 +73,28 @@ export class EquipmentDeliveryComponent {
     })
   }
 
+  onFileUpload(event: any): void{
+    this.selectedFile = event.target.files[0];
+    var file = this.selectedFile;
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      this.imageURL = reader.result as string;
+    }
+
+    reader.readAsDataURL(file);
+  }
+  onUpload() {
+    this.service.deliverReservationUsingQRCode(this.selectedFile).subscribe( result => {
+      this.reservationDataVisible = true;
+      this.reservation = result;
+      if(this.reservation.reservationStatus != 'ACCEPTED'){
+        alert("Company doesn't have enough equipment in stock or you can't deliver in this moment.");
+      }
+    });
+  }
+
+  onQRCode(): void{
+    this.visibleQRCode = !this.visibleQRCode;
+  }
 }

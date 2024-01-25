@@ -63,3 +63,27 @@ h3{
     border-radius: 4px;
     cursor: pointer;
   }
+
+  .fancy-btn-top {
+    background-color: red;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 25%;
+  }
+
+  .qr-div{
+    margin-left: 40%;
+    margin-top: 5%;
+  }
+  .fancy-table-qr{
+    padding: 8px;
+    text-align: center;
+    background-color: #f3e5f5;
+    color: #333;
+    width:50%;
+    margin-left: -8%;
+    margin-top: 5%;
+  }

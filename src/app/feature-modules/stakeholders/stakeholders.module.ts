@@ -11,7 +11,6 @@ import { CompanyAdminChangePasswordComponent } from './company-admin-change-pass
 import { EquipmentDeliveryComponent } from './equipment-delivery/equipment-delivery.component';
 import { UsersWithReservationsComponent } from './users-with-reservations/users-with-reservations.component';
 
-
 @NgModule({
   declarations: [
     UserProfileComponent,
