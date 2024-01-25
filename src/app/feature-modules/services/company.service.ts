@@ -168,4 +168,10 @@ export class CompanyService {
       )
       .toPromise();
   }
+
+  sendMessage(): Observable<string>{
+    return this.http.post<any>(
+      environment.apiHost + 'foo/producer', "poruka poslata uspesnoo"
+    );
+  }
 }
