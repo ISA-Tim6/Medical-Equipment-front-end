@@ -17,6 +17,7 @@ import { CompanyAdminChangePasswordComponent } from './feature-modules/stakehold
 import { SystemAdminHomePageComponent } from './feature-modules/system-admin/system-admin-home-page/system-admin-home-page.component';
 import { ContractsComponent } from './feature-modules/stakeholders/contracts/contracts.component';
 import { MapComponent } from './feature-modules/map/map.component';
+import { LocationSimulatorComponent } from './feature-modules/location-simulator/location-simulator/location-simulator.component';
 
 const routes: Routes = [
   {
@@ -71,6 +72,10 @@ const routes: Routes = [
   {
     path:'map',
     component:MapComponent
+  },
+  {
+    path:'location-simulator',
+    component:LocationSimulatorComponent
   },
 ];
 

@@ -19,6 +19,7 @@ import { AuthService } from './auth/auth.service';
 import { ApiService } from './feature-modules/services/api.service';
 import { ConfigService } from './feature-modules/services/config.service';
 import { UserService } from './feature-modules/services/user.service';
+import { LocationSimulatorModule } from './feature-modules/location-simulator/location-simulator.module';
 import { MapComponent } from './feature-modules/map/map.component';
 
 @NgModule({
@@ -29,7 +30,7 @@ import { MapComponent } from './feature-modules/map/map.component';
     CompanyOverviewComponent,
     LoginFormComponent,
     HomePageComponent,
-    MapComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +41,7 @@ import { MapComponent } from './feature-modules/map/map.component';
     FormsModule,
     SystemAdminModule,
   ],
-  exports: [AppComponent],
+  exports: [AppComponent, MapComponent],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

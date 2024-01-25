@@ -7,7 +7,7 @@ import { Observable, Observer, catchError, map, of, tap } from 'rxjs';
 
 
 @Component({
-  selector: 'map',
+  selector: 'xp-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css']
 })

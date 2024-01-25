@@ -266,7 +266,4 @@ export class CompanyOverviewComponent implements OnInit {
     }
   }
 
-  sendMessage(): void{
-    this.service.sendMessage().subscribe({});
-  }
 }
