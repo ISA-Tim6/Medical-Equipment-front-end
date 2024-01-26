@@ -12,7 +12,7 @@ import { Appointment } from '../company-profile/model/appointment.model';
 import { Item } from '../company-overview/model/item.model';
 import { Reservation } from '../company-profile/model/reservation.model';
 import { compileClassMetadata } from '@angular/compiler';
-
+import { RegistratedUser } from '../stakeholders/model/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -34,14 +34,21 @@ export class CompanyService {
     );
   }
 
-  updateEquipmentWithId(equipment:Equipment,equipment_id:number):Observable<any>{
+  updateEquipmentWithId(
+    equipment: Equipment,
+    equipment_id: number
+  ): Observable<any> {
     return this.http.put<any>(
-      environment.apiHost+'equipment/updateEquipment/'+equipment_id,
+      environment.apiHost + 'equipment/updateEquipment/' + equipment_id,
       equipment
-    )
+    );
   }
 
-  addAppointment(appointment: Appointment, compamy_id: number,company_admin_id:number): Observable<any> {
+  addAppointment(
+    appointment: Appointment,
+    compamy_id: number,
+    company_admin_id: number
+  ): Observable<any> {
     return this.http.put<any>(
       environment.apiHost +
         'company/addAppointment/' +
@@ -114,10 +121,13 @@ export class CompanyService {
       .post<Item>(environment.apiHost + 'item/saveItem/', item)
       .toPromise();
   }
-  addReservation(reservation: Reservation): Promise<Reservation | undefined> {
+  addReservation(
+    reservation: Reservation,
+    penals: number
+  ): Promise<Reservation | undefined> {
     return this.http
       .post<Reservation>(
-        environment.apiHost + 'reservation/saveReservation/',
+        environment.apiHost + 'reservation/saveReservation/' + penals,
         reservation
       )
       .toPromise();
