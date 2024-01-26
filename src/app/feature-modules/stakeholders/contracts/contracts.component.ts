@@ -42,7 +42,14 @@ export class ContractsComponent {
     
   }
 
-
+  sendMessage():void{
+    let a:string="porukica";
+    this.stakeHolderService.sendMessage(a).subscribe({
+      next:(result:string)=>{
+        console.log(result)
+      }
+    })
+  }
 
 
 }

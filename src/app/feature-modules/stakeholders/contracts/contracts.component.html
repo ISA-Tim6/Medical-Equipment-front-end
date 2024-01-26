@@ -27,8 +27,10 @@
                 {{e.dayInMonth}}
             </td>
             <td>
-                <button class="fancy-btn">Cancel</button>
+                <button class="fancy-btn" (click)="sendMessage()">Cancel</button>
             </td>
         </tr>
     </table>
+    <button class="fancy-btn" (click)="sendMessage()">Send</button>
+
 </div>
