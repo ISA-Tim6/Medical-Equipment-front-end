@@ -6,6 +6,7 @@ import { environment } from 'src/env/environment';
 
 import {Stomp} from '@stomp/stompjs';
 import * as SockJS from 'sockjs-client';
+import { Location } from '../model/location.model';
 
 @Component({
   selector: 'app-location-simulator',
@@ -14,7 +15,7 @@ import * as SockJS from 'sockjs-client';
 })
 export class LocationSimulatorComponent implements OnInit{
   @ViewChild(MapComponent) mapComponent: MapComponent;
-  private serverUrl = environment.apiHost + 'socket'
+  private serverUrl = 'ws://localhost:81/socket';
   private stompClient: any;
 
   isLoaded: boolean = false;
@@ -38,11 +39,12 @@ export class LocationSimulatorComponent implements OnInit{
     this.stompClient = Stomp.over(ws);
     let that = this;
 
+    console.log("c");
     this.stompClient.connect({}, function () {
+      console.log("Connection established!");
       that.isLoaded = true;
       that.openGlobalSocket()
     });
-
   }
 
   // Funkcija salje poruku na WebSockets endpoint na serveru
@@ -61,6 +63,7 @@ export class LocationSimulatorComponent implements OnInit{
   openGlobalSocket() {
     if (this.isLoaded) {
       this.stompClient.subscribe("/socket-publisher", (message: { body: string; }) => {
+        console.log("global socket");
         this.handleResult(message);
       });
     }
@@ -69,9 +72,13 @@ export class LocationSimulatorComponent implements OnInit{
   // Funkcija koja se poziva kada server posalje poruku na topic na koji se klijent pretplatio
   handleResult(message: { body: string; }) {
     if (message.body) {
-      let messageResult: string = JSON.parse(message.body);
-      this.message=(messageResult);
+      let location: Location = JSON.parse(message.body);
+      this.drawPointOnMap(location);
     }
+  }
+
+  drawPointOnMap(location: Location): void{
+    this.mapComponent.drawPoint(location.latitude, location.longitude);
   }
 
 }

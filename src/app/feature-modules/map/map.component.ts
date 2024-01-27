@@ -107,5 +107,18 @@ export class MapComponent implements AfterViewInit {
     );
   }
   
+  drawPoint(longitude: number, latitude: number): void{
+    var greenIcon = L.icon({
+      iconUrl: 'https://cdn.icon-icons.com/icons2/321/PNG/512/Circle_34541.png',
   
+      iconSize:     [10, 15], // size of the icon
+      shadowSize:   [50, 64], // size of the shadow
+      iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+      shadowAnchor: [4, 62],  // the same for the shadow
+      popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+     });
+    L.marker([latitude, longitude], {icon: greenIcon})
+    .addTo(this.map);
+    
+  }
 }
