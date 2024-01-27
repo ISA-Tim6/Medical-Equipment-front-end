@@ -20,6 +20,7 @@ import { QrComponent } from './feature-modules/stakeholders/qr/qr.component';
 import { EquipmentDeliveryComponent } from './feature-modules/stakeholders/equipment-delivery/equipment-delivery.component';
 import { DeliveriesComponent } from './feature-modules/stakeholders/deliveries/deliveries.component';
 import { FutureAppointmentsComponent } from './feature-modules/stakeholders/future-appointments/future-appointments.component';
+import { MapComponent } from './feature-modules/map/map.component';
 
 const routes: Routes = [
   {
@@ -95,6 +96,10 @@ const routes: Routes = [
   {
     path: 'future-appointments',
     component: FutureAppointmentsComponent,
+  },
+  {
+    path: 'map',
+    component: MapComponent,
   },
 ];
 

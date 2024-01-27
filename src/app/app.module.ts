@@ -20,6 +20,7 @@ import { ApiService } from './feature-modules/services/api.service';
 import { ConfigService } from './feature-modules/services/config.service';
 import { UserService } from './feature-modules/services/user.service';
 import { RegUserHomePageComponent } from './feature-modules/stakeholders/reg-user-home-page/reg-user-home-page.component';
+import { MapComponent } from './feature-modules/map/map.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { RegUserHomePageComponent } from './feature-modules/stakeholders/reg-use
     CompanyOverviewComponent,
     LoginFormComponent,
     HomePageComponent,
+    MapComponent,
   ],
   imports: [
     BrowserModule,
