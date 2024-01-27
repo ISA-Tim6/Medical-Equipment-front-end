@@ -4,17 +4,6 @@ import 'leaflet-routing-machine';
 import { MapService } from './map.service';
 import { LocationResponse } from './model/location-response';
 import { Observable, Observer, catchError, map, of, tap } from 'rxjs';
-import VectorSource from 'ol/source/Vector';
-import VectorLayer from 'ol/layer/Vector';
-import { Point } from 'ol/geom';
-import OSM from 'ol/source/OSM';
-import * as olProj from 'ol/proj';
-import Feature from 'ol/Feature';
-import TileLayer from 'ol/layer/Tile';
-import { View } from 'ol';
-import Style from 'ol/style/Style';
-import { fromLonLat } from 'ol/proj';
-import Map from 'ol/Map';
 
 @Component({
   selector: 'xp-map',
@@ -25,9 +14,7 @@ export class MapComponent implements AfterViewInit {
   @Output() mapClick: EventEmitter<any> = new EventEmitter();
   @Input() initialCenter: [number, number] = [45.2396, 19.8227];
   @Input() initialZoom: number = 13
-  eventSource?: EventSource;
   
-  vectorLayer?: VectorLayer<VectorSource>;
   private map: any;
   private routeControl: any;
   constructor(private mapService: MapService) { }
@@ -119,58 +106,6 @@ export class MapComponent implements AfterViewInit {
       })
     );
   }
-  //ngOnInit(): void {
-    /*this.map = new Map({
-      target: 'map',
-      layers: [
-        new TileLayer({
-          source: new OSM()
-        })
-      ],
-      view: new View({
-        center: olProj.fromLonLat([0, 0]),
-        zoom: 2
-      })
-    });
-    console.log("uslo");
-    this.vectorLayer = new VectorLayer({
-      source: new VectorSource()
-    });
-
-    if (this.map && this.vectorLayer) {
-      this.map.addLayer(this.vectorLayer);
-
-      this.eventSource = new EventSource('http://localhost:82/api/events');
-      this.eventSource.onmessage = (event) => {
-        console.log(event.data);
-
-        const data = event.data;
-        const tokens = data.split(',')
-        const latitudeStr = tokens[0];
-        const longitudeStr = tokens[1];
-        console.log(latitudeStr, longitudeStr);
-        if (latitudeStr && longitudeStr) {
-          const latitude = parseFloat(latitudeStr);
-          const longitude = parseFloat(longitudeStr);
-          if(latitude === -1 && longitude === -1){
-            this.vectorLayer?.getSource()?.clear();
-          }
-          
-          const point = new Point(olProj.fromLonLat([longitude, latitude]));
-          const feature = new Feature({
-            geometry: point
-          });
-          
-          if(latitude === -1 && longitude === -1){
-            this.vectorLayer?.getSource()?.clear();
-          }
-          else if (this.vectorLayer?.getSource()) {
-            this.vectorLayer?.getSource()?.addFeature(feature);
-          }
-        }
-      };
-    }*/
-  //}
   
   
 }
