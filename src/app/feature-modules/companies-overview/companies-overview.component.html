@@ -7,7 +7,6 @@
   <input type="text" class="fancy-input" [(ngModel)]="city" />
   <br /><br />
   <button class="fancy-search-btn" (click)="search()">Search</button>
-  <button class="fancy-reset-btn" (click)="reset()">Reset</button>
   <br /><br /><br /><br />
   <label for="minRating">Min rating:</label>
   <input
@@ -34,6 +33,23 @@
   >
     Filter
   </button>
+
+  <div *ngIf="isRegisteredUser()">
+    <h2>Sort companies</h2>
+
+    <select class="min-max" [(ngModel)]="sortType" (change)="sort()">
+      <option value="Name asc">Name asc</option>
+      <option value="Name desc">Name desc</option>
+      <option value="City asc">City asc</option>
+      <option value="City desc">City desc</option>
+      <option value="Average grade asc">Average grade asc</option>
+
+      <option value="Average grade desc">Average grade desc</option>
+    </select>
+  </div>
+
+  <br />
+  <button class="fancy-reset-btn" (click)="reset()">Reset</button>
 
   <table>
     <tr *ngFor="let c of companies">

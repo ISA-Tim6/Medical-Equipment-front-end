@@ -3,10 +3,23 @@
     *ngIf="isLoggedIn() && isRegisteredUser()"
     [routerLink]="['user-profile']"
     class="navbar-btn"
+    (click)="showRegUserHomePage = false"
   >
     Profile
   </button>
-  <button [routerLink]="['equipment-search']" class="navbar-btn">
+  <button
+    *ngIf="isLoggedIn() && isRegisteredUser()"
+    [routerLink]="['future-appointments']"
+    class="navbar-btn"
+    (click)="showRegUserHomePage = false"
+  >
+    My future appointments
+  </button>
+  <button
+    [routerLink]="['equipment-search']"
+    class="navbar-btn"
+    (click)="showRegUserHomePage = false"
+  >
     Equipment search
   </button>
   <button
@@ -24,6 +37,7 @@
     Company Admin Profile
   </button>
   <button
+
     *ngIf="isLoggedIn() && !isRegisteredUser() "
     [routerLink]="['contracts']"
     class="navbar-btn"
@@ -31,6 +45,24 @@
     Contracts
   </button>
   <button [routerLink]="['companies']" class="navbar-btn">All companies</button>
+
+  <button
+    *ngIf="isLoggedIn() && isRegisteredUser()"
+    [routerLink]="['qr']"
+    class="navbar-btn"
+    (click)="showRegUserHomePage = false"
+  >
+    QR codes
+  </button>
+  <button
+    *ngIf="isLoggedIn() && isRegisteredUser()"
+    [routerLink]="['my-deliveries']"
+    class="navbar-btn"
+    (click)="showRegUserHomePage = false"
+  >
+    My deliveries
+  </button>
+
   <button
     *ngIf="!isLoggedIn()"
     [routerLink]="['registration']"
@@ -46,5 +78,8 @@
   </button>
 </div>
 <div class="router-content">
+  <app-reg-user-home-page
+    *ngIf="isRegisteredUser() && showRegUserHomePage"
+  ></app-reg-user-home-page>
   <router-outlet></router-outlet>
 </div>
