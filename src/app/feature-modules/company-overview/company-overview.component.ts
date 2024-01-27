@@ -265,4 +265,5 @@ export class CompanyOverviewComponent implements OnInit {
       }
     }
   }
+
 }
