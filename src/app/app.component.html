@@ -37,12 +37,15 @@
     Company Admin Profile
   </button>
   <button
-    [routerLink]="['companies']"
+
+    *ngIf="isLoggedIn() && !isRegisteredUser() "
+    [routerLink]="['contracts']"
     class="navbar-btn"
-    (click)="showRegUserHomePage = false"
   >
-    All companies
+    Contracts
   </button>
+  <button [routerLink]="['companies']" class="navbar-btn">All companies</button>
+
   <button
     *ngIf="isLoggedIn() && isRegisteredUser()"
     [routerLink]="['qr']"
@@ -59,6 +62,7 @@
   >
     My deliveries
   </button>
+
   <button
     *ngIf="!isLoggedIn()"
     [routerLink]="['registration']"

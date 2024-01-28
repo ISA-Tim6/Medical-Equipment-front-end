@@ -5,9 +5,8 @@ import { MapService } from './map.service';
 import { LocationResponse } from './model/location-response';
 import { Observable, Observer, catchError, map, of, tap } from 'rxjs';
 
-
 @Component({
-  selector: 'map',
+  selector: 'xp-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css']
 })
@@ -15,6 +14,7 @@ export class MapComponent implements AfterViewInit {
   @Output() mapClick: EventEmitter<any> = new EventEmitter();
   @Input() initialCenter: [number, number] = [45.2396, 19.8227];
   @Input() initialZoom: number = 13
+  
   private map: any;
   private routeControl: any;
   constructor(private mapService: MapService) { }
@@ -106,4 +106,6 @@ export class MapComponent implements AfterViewInit {
       })
     );
   }
+  
+  
 }
