@@ -14,6 +14,8 @@ import { EquipmentDeliveryComponent } from './equipment-delivery/equipment-deliv
 import { DeliveriesComponent } from './deliveries/deliveries.component';
 import { FutureAppointmentsComponent } from './future-appointments/future-appointments.component';
 
+import { ContractsComponent } from './contracts/contracts.component';
+
 @NgModule({
   declarations: [
     UserProfileComponent,
@@ -26,6 +28,7 @@ import { FutureAppointmentsComponent } from './future-appointments/future-appoin
     EquipmentDeliveryComponent,
     DeliveriesComponent,
     FutureAppointmentsComponent,
+    ContractsComponent,
   ],
   imports: [CommonModule, ReactiveFormsModule, FormsModule, FullCalendarModule],
   exports: [

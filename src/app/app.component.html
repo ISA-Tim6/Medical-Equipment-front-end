@@ -60,6 +60,13 @@
     My deliveries
   </button>
   <button
+    *ngIf="isLoggedIn() && !isRegisteredUser()"
+    [routerLink]="['contracts']"
+    class="navbar-btn"
+  >
+    Contracts
+  </button>
+  <button
     *ngIf="!isLoggedIn()"
     [routerLink]="['registration']"
     class="navbar-btn"

@@ -14,6 +14,7 @@ import { CompanyAdmin } from './model/company-admin.model';
 import { Reservation } from '../company-profile/model/reservation.model';
 import { Appointment } from '../company-profile/model/appointment.model';
 import { CanceledAppointment } from '../company-profile/model/canceled-appointment.model';
+import { Contract } from './model/contact.model';
 
 @Injectable({
   providedIn: 'root',
@@ -143,5 +144,12 @@ export class StakeholdersService {
     return this.http.get<any>(
       environment.apiHost + 'reservation/canceledAppointments/' + id
     );
+  }
+  getAllCompnayContracts(company: string): Observable<Contract[]> {
+    return this.http.get<any>(environment.apiHost + 'contract/' + company);
+  }
+
+  sendMessage(message: string): Observable<string> {
+    return this.http.post<any>(environment.apiHost + 'foo/producer1', message);
   }
 }

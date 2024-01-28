@@ -21,6 +21,7 @@ import { EquipmentDeliveryComponent } from './feature-modules/stakeholders/equip
 import { DeliveriesComponent } from './feature-modules/stakeholders/deliveries/deliveries.component';
 import { FutureAppointmentsComponent } from './feature-modules/stakeholders/future-appointments/future-appointments.component';
 import { MapComponent } from './feature-modules/map/map.component';
+import { ContractsComponent } from './feature-modules/stakeholders/contracts/contracts.component';
 
 const routes: Routes = [
   {
@@ -42,6 +43,12 @@ const routes: Routes = [
     component: CompanyAdminChangePasswordComponent,
   },
   { path: 'equipment-delivery/:id', component: EquipmentDeliveryComponent },
+
+  {
+    path: 'company-admin-password/:id',
+    component: CompanyAdminChangePasswordComponent,
+  },
+  { path: 'contracts', component: ContractsComponent },
 
   {
     path: 'registration',
