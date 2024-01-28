@@ -3,6 +3,7 @@ import { MapComponent } from '../../map/map.component';
 import { LocationSimulatorService } from '../location-simulator.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { environment } from 'src/env/environment';
+import {FormsModule} from '@angular/forms'
 
 import {Stomp} from '@stomp/stompjs';
 import * as SockJS from 'sockjs-client';
@@ -21,6 +22,7 @@ export class LocationSimulatorComponent implements OnInit{
   isLoaded: boolean = false;
   isCustomSocketOpened = false;
   message: string = '';
+  timeSeconds: number = 1;
 
   constructor(private service: LocationSimulatorService){}
 
@@ -29,7 +31,10 @@ export class LocationSimulatorComponent implements OnInit{
   }
 
   sendMessage(): void{
-    this.service.sendMessage().subscribe({});
+    if(this.timeSeconds > 0)
+    {
+      this.service.sendMessage(this.timeSeconds).subscribe({});
+    }
   }
 
   // Funkcija za otvaranje konekcije sa serverom

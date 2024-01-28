@@ -1,5 +1,14 @@
 <h2>Track delivery</h2>
-<button (click)="sendMessage()">Start</button>
+<div class="input-div">
+    <p>Input frequency of tracking in seconds: </p>
+    <div class="button-div">
+        <input type="number" min="0" [(ngModel)]="timeSeconds" name="time"> 
+        <button (click)="sendMessage()" class="fancy-btn">Start</button>
+
+    </div>
+
+</div>
+<br><br>
 <div id="map">
     <xp-map></xp-map>
 </div>
