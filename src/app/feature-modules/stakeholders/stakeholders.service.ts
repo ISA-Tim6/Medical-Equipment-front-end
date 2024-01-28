@@ -149,7 +149,10 @@ export class StakeholdersService {
     return this.http.get<any>(environment.apiHost + 'contract/' + company);
   }
 
-  sendMessage(message: string): Observable<string> {
-    return this.http.post<any>(environment.apiHost + 'foo/producer1', message);
+  sendMessage(message: string, company: string): Observable<boolean> {
+    return this.http.post<any>(
+      environment.apiHost + 'foo/producer1/' + company,
+      message
+    );
   }
 }
