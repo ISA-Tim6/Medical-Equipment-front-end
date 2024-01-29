@@ -1,0 +1,13 @@
+<h2>My QR codes - view & filter</h2>
+<hr />
+<div>
+  <select class="min-max" [(ngModel)]="filterType" (change)="filter()">
+    <option value="NEW">NEW</option>
+    <option value="ACCEPTED">ACCEPTED</option>
+    <option value="REJECTED">REJECTED</option>
+  </select>
+</div>
+<br /><button class="fancy-reset-btn" (click)="reset()">Reset</button>
+<div *ngFor="let imageUrl of qrCodeImages">
+  <img class="qr-img" [src]="imageUrl" alt="QR Code" />
+</div>

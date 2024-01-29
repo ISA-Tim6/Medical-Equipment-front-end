@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,AfterViewInit,Input } from '@angular/core';
 import { CompanyService } from '../services/company.service';
 import { Router } from '@angular/router';
 import { Company } from './model/company.model';
@@ -10,13 +10,16 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { EquipmentSearchComponent } from '../system-admin/equipment-search/equipment-search.component';
 import { Appointment } from './model/appointment.model';
 import { StakeholdersService } from '../stakeholders/stakeholders.service';
+import * as L from 'leaflet';
 
 @Component({
   selector: 'app-company-profile',
   templateUrl: './company-profile.component.html',
   styleUrls: ['./company-profile.component.css'],
 })
-export class CompanyProfileComponent implements OnInit {
+export class CompanyProfileComponent implements OnInit,AfterViewInit {
+  @Input() initialCenter: [number, number] = [45.2396, 19.8227];
+  @Input() initialZoom: number = 13
   constructor(
     private service: CompanyService,
     private activatedRoute: ActivatedRoute,
@@ -24,6 +27,7 @@ export class CompanyProfileComponent implements OnInit {
     private router:Router
   ) {}
 
+    private map:any;
   edit: string = 'Edit';
   id: number = 0;
   user_id: number;
@@ -56,6 +60,35 @@ export class CompanyProfileComponent implements OnInit {
   name: string;
   filterType: string;
   equipmentList: Equipment[] = [];
+
+  private initMap(): void {
+    this.map = L.map('map', {
+      center: this.initialCenter,
+      zoom: this.initialZoom,
+    });
+
+    const tiles = L.tileLayer(
+      'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      {
+        maxZoom: 18,
+        minZoom: 3,
+        attribution:
+          '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      }
+    );
+    tiles.addTo(this.map);
+    L.marker([this.company.address.longitude, this.company.address.latitude])
+    .addTo(this.map)
+  }
+
+  ngAfterViewInit(): void {
+    let DefaultIcon = L.icon({
+      iconUrl: 'https://unpkg.com/leaflet@1.6.0/dist/images/marker-icon.png',
+    });
+
+    L.Marker.prototype.options.icon = DefaultIcon;
+    this.initMap();
+  }
 
   ngOnInit(): void {
     this.stakeholderService.getCompanyAdmin().subscribe({

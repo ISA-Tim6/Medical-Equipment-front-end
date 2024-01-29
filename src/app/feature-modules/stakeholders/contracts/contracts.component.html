@@ -1,0 +1,26 @@
+<h1 class="h1">Contracts</h1>
+<br />
+<div>
+  <table class="fancy-table">
+    <tr>
+      <th>Equipment</th>
+      <th>Quantity</th>
+      <th>Day in month</th>
+      <th>Cancel</th>
+    </tr>
+    <tr *ngFor="let e of contracts">
+      <td>
+        {{ e.equipment }}
+      </td>
+      <td>
+        {{ e.quantity }}
+      </td>
+      <td>
+        {{ e.dayInMonth }}
+      </td>
+      <td>
+        <button class="fancy-btn" (click)="sendMessage()">Cancel</button>
+      </td>
+    </tr>
+  </table>
+</div>
