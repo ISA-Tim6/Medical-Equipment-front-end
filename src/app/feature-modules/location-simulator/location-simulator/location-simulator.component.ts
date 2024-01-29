@@ -18,7 +18,8 @@ export class LocationSimulatorComponent implements OnInit{
   @ViewChild(MapComponent) mapComponent: MapComponent;
   private serverUrl = 'ws://localhost:81/socket';
   private stompClient: any;
-
+  private isMapDrawn: boolean = false;
+  private i:number=0;
   isLoaded: boolean = false;
   isCustomSocketOpened = false;
   message: string = '';
@@ -83,7 +84,21 @@ export class LocationSimulatorComponent implements OnInit{
   }
 
   drawPointOnMap(location: Location): void{
+    if (this.isMapDrawn) {
+      // Resetovanje mape ili izvršavanje drugih akcija
+      this.resetMap();
+    }
+    
     this.mapComponent.drawPoint(location.latitude, location.longitude);
+    this.i+=1;
+    if(this.i==8)
+      this.isMapDrawn=true;
+  }
+  resetMap(): void {
+    this.mapComponent.pointLayer.clearLayers(); 
+    
+    this.isMapDrawn = false;
+    this.i=0;
   }
 
 }

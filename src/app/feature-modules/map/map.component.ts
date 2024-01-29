@@ -17,6 +17,8 @@ export class MapComponent implements AfterViewInit {
   
   private map: any;
   private routeControl: any;
+  public pointLayer: L.LayerGroup = L.layerGroup();
+
   constructor(private mapService: MapService) { }
 
   private initMap(): void {
@@ -113,12 +115,17 @@ export class MapComponent implements AfterViewInit {
   
       iconSize:     [10, 15], // size of the icon
       shadowSize:   [50, 64], // size of the shadow
-      iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+      iconAnchor:   [0.5, 0], // point of the icon which will correspond to marker's location
       shadowAnchor: [4, 62],  // the same for the shadow
       popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
      });
-    L.marker([latitude, longitude], {icon: greenIcon})
-    .addTo(this.map);
-    
+    //L.marker([latitude, longitude], {icon: greenIcon})
+    //.addTo(this.map);
+    const marker=L.marker([latitude, longitude], {icon: greenIcon});
+    this.pointLayer.addLayer(marker);
+    // Dodajte LayerGroup na mapu ako nije dodat
+    if (!this.map.hasLayer(this.pointLayer)) {
+        this.pointLayer.addTo(this.map);
+    }
   }
 }
