@@ -5,6 +5,7 @@ import { MapComponent } from '../map/map.component';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
 import { AppModule } from 'src/app/app.module';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -13,7 +14,7 @@ import { AppModule } from 'src/app/app.module';
     LocationSimulatorComponent
   ],
   imports: [
-    CommonModule, AppModule
+    CommonModule, AppModule, FormsModule
   ]
 })
 export class LocationSimulatorModule { }

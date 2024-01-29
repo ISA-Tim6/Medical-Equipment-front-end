@@ -10,9 +10,9 @@ export class LocationSimulatorService {
 
   constructor(private http: HttpClient) {}
 
-  sendMessage(): Observable<string>{
+  sendMessage(timeInSeconds: number): Observable<string>{
     return this.http.post<any>(
-      environment.apiHost + 'foo/producer', "1"
+      environment.apiHost + 'foo/producer', timeInSeconds.toString()
     );
   }
 }

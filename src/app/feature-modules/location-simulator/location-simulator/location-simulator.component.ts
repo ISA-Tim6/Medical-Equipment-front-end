@@ -3,9 +3,11 @@ import { MapComponent } from '../../map/map.component';
 import { LocationSimulatorService } from '../location-simulator.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { environment } from 'src/env/environment';
+import {FormsModule} from '@angular/forms'
 
 import {Stomp} from '@stomp/stompjs';
 import * as SockJS from 'sockjs-client';
+import { Location } from '../model/location.model';
 
 @Component({
   selector: 'app-location-simulator',
@@ -14,12 +16,14 @@ import * as SockJS from 'sockjs-client';
 })
 export class LocationSimulatorComponent implements OnInit{
   @ViewChild(MapComponent) mapComponent: MapComponent;
-  private serverUrl = environment.apiHost + 'socket'
+  private serverUrl = 'ws://localhost:81/socket';
   private stompClient: any;
-
+  private isMapDrawn: boolean = false;
+  private i:number=0;
   isLoaded: boolean = false;
   isCustomSocketOpened = false;
   message: string = '';
+  timeSeconds: number = 1;
 
   constructor(private service: LocationSimulatorService){}
 
@@ -28,7 +32,10 @@ export class LocationSimulatorComponent implements OnInit{
   }
 
   sendMessage(): void{
-    this.service.sendMessage().subscribe({});
+    if(this.timeSeconds > 0)
+    {
+      this.service.sendMessage(this.timeSeconds).subscribe({});
+    }
   }
 
   // Funkcija za otvaranje konekcije sa serverom
@@ -38,11 +45,12 @@ export class LocationSimulatorComponent implements OnInit{
     this.stompClient = Stomp.over(ws);
     let that = this;
 
+    console.log("c");
     this.stompClient.connect({}, function () {
+      console.log("Connection established!");
       that.isLoaded = true;
       that.openGlobalSocket()
     });
-
   }
 
   // Funkcija salje poruku na WebSockets endpoint na serveru
@@ -61,6 +69,7 @@ export class LocationSimulatorComponent implements OnInit{
   openGlobalSocket() {
     if (this.isLoaded) {
       this.stompClient.subscribe("/socket-publisher", (message: { body: string; }) => {
+        console.log("global socket");
         this.handleResult(message);
       });
     }
@@ -69,9 +78,27 @@ export class LocationSimulatorComponent implements OnInit{
   // Funkcija koja se poziva kada server posalje poruku na topic na koji se klijent pretplatio
   handleResult(message: { body: string; }) {
     if (message.body) {
-      let messageResult: string = JSON.parse(message.body);
-      this.message=(messageResult);
+      let location: Location = JSON.parse(message.body);
+      this.drawPointOnMap(location);
     }
+  }
+
+  drawPointOnMap(location: Location): void{
+    if (this.isMapDrawn) {
+      // Resetovanje mape ili izvršavanje drugih akcija
+      this.resetMap();
+    }
+    
+    this.mapComponent.drawPoint(location.latitude, location.longitude);
+    this.i+=1;
+    if(this.i==8)
+      this.isMapDrawn=true;
+  }
+  resetMap(): void {
+    this.mapComponent.pointLayer.clearLayers(); 
+    
+    this.isMapDrawn = false;
+    this.i=0;
   }
 
 }
