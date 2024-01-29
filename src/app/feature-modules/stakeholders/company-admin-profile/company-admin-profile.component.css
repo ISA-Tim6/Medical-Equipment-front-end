@@ -1,6 +1,8 @@
 p{
     font-size: 5vh;
-    color:orangered;
+    color:blue;
+    margin-left: 38%;
+    margin-right: auto;
 }
 
 .fields{
@@ -11,4 +13,26 @@ p{
 }
 .all-fields{
     width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color:#e5e0e0;
+    border: 5px solid #c6c4c4;
 }
+
+.fancy-btn {
+    background-color: red;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .fancy-btn1 {
+    background-color: blue;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }

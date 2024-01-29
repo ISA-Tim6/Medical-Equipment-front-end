@@ -8,6 +8,8 @@ import { CompanyAdminProfileComponent } from './company-admin-profile/company-ad
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { CompanyCalendarComponent } from './company-calendar/company-calendar.component';
 import { CompanyAdminChangePasswordComponent } from './company-admin-change-password/company-admin-change-password.component';
+import { EquipmentDeliveryComponent } from './equipment-delivery/equipment-delivery.component';
+import { UsersWithReservationsComponent } from './users-with-reservations/users-with-reservations.component';
 
 import { ContractsComponent } from './contracts/contracts.component';
 
@@ -28,6 +30,7 @@ import { FutureAppointmentsComponent } from './future-appointments/future-appoin
     RegUserHomePageComponent,
     QrComponent,
     EquipmentDeliveryComponent,
+    UsersWithReservationsComponent,
     DeliveriesComponent,
     FutureAppointmentsComponent,
     ContractsComponent,

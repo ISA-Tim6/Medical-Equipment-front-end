@@ -1,0 +1,14 @@
+<h1 class="h1">Registrated users that have reservations at this company:</h1>
+<br>
+<table  class="fancy-table">
+    <tr>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Username</th>
+    </tr>
+    <tr *ngFor="let e of users">
+        <td>{{e.name}}</td>
+        <td>{{e.surname}}</td>
+        <td>{{e.username}}</td>
+    </tr>
+</table>

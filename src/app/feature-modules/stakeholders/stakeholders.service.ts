@@ -13,6 +13,7 @@ import { UserService } from '../services/user.service';
 import { CompanyAdmin } from './model/company-admin.model';
 import { Reservation } from '../company-profile/model/reservation.model';
 import { Appointment } from '../company-profile/model/appointment.model';
+import { HttpParams } from '@angular/common/http';
 import { CanceledAppointment } from '../company-profile/model/canceled-appointment.model';
 import { Contract } from './model/contact.model';
 
@@ -116,17 +117,33 @@ export class StakeholdersService {
     );
   }
 
-  getNewReservations(id: number): Observable<Reservation[]> {
+   getNewReservations(id:number):Observable<Reservation>{
+
     return this.http.get<any>(
       environment.apiHost + 'reservation/findNewReservations/' + id
     );
   }
 
-  deliverReservation(id: number): Observable<Reservation[]> {
+
+  deliverReservation(id:number):Observable<Reservation>{
+
     return this.http.get<any>(
       environment.apiHost + 'reservation/deliverReservation/' + id
     );
   }
+
+  getUsersWithReservations(id:number):Observable<RegistratedUser[]>{
+    return this.http.get<any>(
+      environment.apiHost + 'user/withReservation/' + id
+    );
+  }
+  
+  deliverReservationUsingQRCode(file: File):Observable<Reservation>{
+    let fd = new FormData();
+    fd.append('qrCodeFile', file);
+    return this.http.post<any>(
+      environment.apiHost + 'reservation/uploadQrCode', fd
+      }
 
   getAcceptedReservationsByUser(id: number): Observable<Reservation[]> {
     return this.http.get<any>(

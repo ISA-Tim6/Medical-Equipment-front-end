@@ -19,6 +19,7 @@ import { ContractsComponent } from './feature-modules/stakeholders/contracts/con
 import { RegUserHomePageComponent } from './feature-modules/stakeholders/reg-user-home-page/reg-user-home-page.component';
 import { QrComponent } from './feature-modules/stakeholders/qr/qr.component';
 import { EquipmentDeliveryComponent } from './feature-modules/stakeholders/equipment-delivery/equipment-delivery.component';
+import { UsersWithReservationsComponent } from './feature-modules/stakeholders/users-with-reservations/users-with-reservations.component';
 import { DeliveriesComponent } from './feature-modules/stakeholders/deliveries/deliveries.component';
 import { FutureAppointmentsComponent } from './feature-modules/stakeholders/future-appointments/future-appointments.component';
 import { MapComponent } from './feature-modules/map/map.component';
@@ -34,6 +35,10 @@ const routes: Routes = [
   { path: 'company-form', component: CompanyFormComponent },
   { path: 'system-admin-form', component: SystemAdminFormComponent },
   { path: 'company-admin-form', component: CompanyAdminFormComponent },
+
+  {path: 'company-admin-password/:id',component: CompanyAdminChangePasswordComponent},
+  {path: 'equipment-delivery/:id',component: EquipmentDeliveryComponent},
+  { path: 'users-reservation', component:UsersWithReservationsComponent},
   {
     path: 'company-admin-password/:id',
     component: CompanyAdminChangePasswordComponent,
