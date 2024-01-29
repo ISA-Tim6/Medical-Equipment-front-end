@@ -15,13 +15,15 @@ import { HomePageComponent } from './feature-modules/home-page/home-page.compone
 import { CompanyCalendarComponent } from './feature-modules/stakeholders/company-calendar/company-calendar.component';
 import { CompanyAdminChangePasswordComponent } from './feature-modules/stakeholders/company-admin-change-password/company-admin-change-password.component';
 import { SystemAdminHomePageComponent } from './feature-modules/system-admin/system-admin-home-page/system-admin-home-page.component';
+import { ContractsComponent } from './feature-modules/stakeholders/contracts/contracts.component';
 import { RegUserHomePageComponent } from './feature-modules/stakeholders/reg-user-home-page/reg-user-home-page.component';
 import { QrComponent } from './feature-modules/stakeholders/qr/qr.component';
 import { EquipmentDeliveryComponent } from './feature-modules/stakeholders/equipment-delivery/equipment-delivery.component';
 import { DeliveriesComponent } from './feature-modules/stakeholders/deliveries/deliveries.component';
 import { FutureAppointmentsComponent } from './feature-modules/stakeholders/future-appointments/future-appointments.component';
 import { MapComponent } from './feature-modules/map/map.component';
-import { ContractsComponent } from './feature-modules/stakeholders/contracts/contracts.component';
+
+import { LocationSimulatorComponent } from './feature-modules/location-simulator/location-simulator/location-simulator.component';
 
 const routes: Routes = [
   {
@@ -32,23 +34,13 @@ const routes: Routes = [
   { path: 'company-form', component: CompanyFormComponent },
   { path: 'system-admin-form', component: SystemAdminFormComponent },
   { path: 'company-admin-form', component: CompanyAdminFormComponent },
-
-  {
-    path: 'company-admin-password/:id',
-    component: CompanyAdminChangePasswordComponent,
-  },
-
-  {
-    path: 'company-admin-password/:id',
-    component: CompanyAdminChangePasswordComponent,
-  },
-  { path: 'equipment-delivery/:id', component: EquipmentDeliveryComponent },
-
   {
     path: 'company-admin-password/:id',
     component: CompanyAdminChangePasswordComponent,
   },
   { path: 'contracts', component: ContractsComponent },
+
+  { path: 'equipment-delivery/:id', component: EquipmentDeliveryComponent },
 
   {
     path: 'registration',
@@ -107,6 +99,10 @@ const routes: Routes = [
   {
     path: 'map',
     component: MapComponent,
+  },
+  {
+    path: 'location-simulator',
+    component: LocationSimulatorComponent,
   },
 ];
 
