@@ -143,6 +143,7 @@ export class StakeholdersService {
     fd.append('qrCodeFile', file);
     return this.http.post<any>(
       environment.apiHost + 'reservation/uploadQrCode', fd
+    );
       }
 
   getAcceptedReservationsByUser(id: number): Observable<Reservation[]> {

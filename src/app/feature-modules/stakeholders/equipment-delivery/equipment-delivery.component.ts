@@ -97,4 +97,8 @@ export class EquipmentDeliveryComponent {
   onQRCode(): void{
     this.visibleQRCode = !this.visibleQRCode;
   }
+
+  locationSimulator(): void{
+    this.router.navigate([`location-simulator`]);
+  }
 }

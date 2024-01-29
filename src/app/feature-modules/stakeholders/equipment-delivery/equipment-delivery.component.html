@@ -1,5 +1,6 @@
 <h1 class="h1">Delivery</h1>
 <br>
+<button (click)="locationSimulator()" class="fancy-btn-top" > Location simulator</button>
 <button (click)="onQRCode()" class="fancy-btn-top" *ngIf="!visibleQRCode"> Deliver using QR Code</button>
 <button (click)="onQRCode()" class="fancy-btn-top" *ngIf="visibleQRCode"> Choose reservation</button>
 <div  *ngIf="visibleQRCode" class="qr-div">
