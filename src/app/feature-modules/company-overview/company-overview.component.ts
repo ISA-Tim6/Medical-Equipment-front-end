@@ -60,10 +60,13 @@ export class CompanyOverviewComponent implements OnInit {
           this.company = result;
           this.company.company_id = this.id;
           this.equipmentList = this.company.equipment || [];
+            
           this.availableAppointments =
             this.company.workingTimeCalendar.appointments.filter(
-              (a) => a.appointmentStatus == 'AVAILABLE'
+              (a) => a.appointmentStatus == 'AVAILABLE' && new Date(a.date)>=new Date() 
             );
+          
+          
           this.availableUserAppointments = this.availableAppointments;
           this.stakeholderService.getUser().subscribe({
             next: (result: RegistratedUser) => {
