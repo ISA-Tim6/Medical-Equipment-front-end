@@ -1,17 +1,36 @@
 <div class="login-container">
-  <form #loginForm="ngForm" (ngSubmit)="onSubmit()" *ngIf="!submitted" [formGroup]="form" >
-        <div class="form-group">
-        <input formControlName="username" matInput placeholder="username" required>
-        </div>
-        <div class="form-group">
-        <input formControlName="password" matInput placeholder="password" required type="password">
-        </div>
-    <button color="primary" 
-        type="submit">Login</button>
-    
-    <br><br>
-        <div>
-          <label >Don't have an account? <a href="http://localhost:4200/registration">Sign Up</a></label>
-      </div>
+  <form
+    #loginForm="ngForm"
+    (ngSubmit)="onSubmit()"
+    *ngIf="!submitted"
+    [formGroup]="form"
+  >
+    <h2 class="title">Log in</h2>
+    <div class="form-group">
+      <input
+        formControlName="username"
+        matInput
+        placeholder="username"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <input
+        formControlName="password"
+        matInput
+        placeholder="password"
+        required
+        type="password"
+      />
+    </div>
+    <button color="primary" type="submit">Login</button>
+
+    <br /><br />
+    <div>
+      <label
+        >Don't have an account?
+        <a href="http://localhost:4200/registration">Sign Up</a></label
+      >
+    </div>
   </form>
 </div>

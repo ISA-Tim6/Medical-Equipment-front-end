@@ -5,12 +5,12 @@
   <input type="text" class="fancy-input" [(ngModel)]="name" />
   <label>Enter company city:</label>
   <input type="text" class="fancy-input" [(ngModel)]="city" />
-
+  <br /><br />
   <button class="fancy-search-btn" (click)="search()">Search</button>
-  <button class="fancy-reset-btn" (click)="reset()">Reset</button>
   <br /><br /><br /><br />
   <label for="minRating">Min rating:</label>
   <input
+    class="min-max"
     type="number"
     id="minRating"
     name="minRating"
@@ -19,12 +19,13 @@
 
   <label for="maxRating">Max rating:</label>
   <input
+    class="min-max"
     type="number"
     id="maxRating"
     name="maxRating"
     [(ngModel)]="maxRating"
   />
-  <br />
+  <br /><br />
   <button
     class="fancy-filter-btn"
     [disabled]="filterDisabled"
@@ -33,9 +34,26 @@
     Filter
   </button>
 
+  <div *ngIf="isRegisteredUser()">
+    <h2>Sort companies</h2>
+
+    <select class="min-max" [(ngModel)]="sortType" (change)="sort()">
+      <option value="Name asc">Name asc</option>
+      <option value="Name desc">Name desc</option>
+      <option value="City asc">City asc</option>
+      <option value="City desc">City desc</option>
+      <option value="Average grade asc">Average grade asc</option>
+
+      <option value="Average grade desc">Average grade desc</option>
+    </select>
+  </div>
+
+  <br />
+  <button class="fancy-reset-btn" (click)="reset()">Reset</button>
+
   <table>
     <tr *ngFor="let c of companies">
-      <td (click)="showDetails(c)">
+      <td class="company-card" (click)="showDetails(c)">
         <span>Name:</span> {{ c.name }}
         <br />
         <span>Average grade: </span>{{ c.averageGrade }}

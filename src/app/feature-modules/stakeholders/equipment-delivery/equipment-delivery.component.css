@@ -1,0 +1,89 @@
+.fancy-table th,
+.fancy-table td {
+  padding: 8px;
+  text-align: center;
+  background-color: #f3e5f5;
+  color: #333;
+}
+
+.fancy-table{
+  padding: 8px;
+  text-align: center;
+  background-color: #f3e5f5;
+  color: #333;
+  width:50%;
+  margin-left:auto;
+  margin-right: auto;
+}
+
+.fancy-table th{
+    background-color: #d7d1d1;
+
+}
+
+.h1{
+    margin-left: 45%;
+    color: blue;
+}
+
+h3{
+    margin-left: 25%;
+    color: blue;
+}
+
+.fancy-table1 th,
+.fancy-table1 td {
+  padding: 8px;
+  text-align: center;
+  background-color: #f3e5f5;
+  color: #333;
+}
+
+.fancy-table1{
+  padding: 8px;
+  text-align: center;
+  background-color: #f3e5f5;
+  color: #333;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+
+}
+
+.fancy-table1 th{
+    background-color: #e5e0e0;
+
+}
+
+.fancy-btn {
+    background-color: red;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .fancy-btn-top {
+    background-color: red;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 25%;
+  }
+
+  .qr-div{
+    margin-left: 40%;
+    margin-top: 5%;
+  }
+  .fancy-table-qr{
+    padding: 8px;
+    text-align: center;
+    background-color: #f3e5f5;
+    color: #333;
+    width:50%;
+    margin-left: -8%;
+    margin-top: 5%;
+  }

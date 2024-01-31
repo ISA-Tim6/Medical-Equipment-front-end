@@ -1,6 +1,5 @@
 <div>
     <p>Company admin profile</p>
-    <hr>
     <div class="all-fields">
         <div class="fields">
           <div><label><b>Name:</b></label></div>
@@ -104,15 +103,15 @@
       </div>
     </div>
     <span>
-    <button (click)="updateUser()" >{{edit}}</button><span *ngIf="disabledStatus==false && isAllValid()==false " style="color: red">
+    <button (click)="updateUser()" class="fancy-btn">{{edit}}</button><span *ngIf="disabledStatus==false && isAllValid()==false " style="color: red">
         Invalid input data! Please correct them!
       </span>
-    <br>
-    <button (click)="onSeeCompanyProfile()">See company profile</button>
-    <br>
-    <button (click)="onChangePassword()">Change password</button>
+
+   
+    <button (click)="onChangePassword()" class="fancy-btn1">Change password</button>
     </span>
 
-    <button (click)="openCalendar()">Company Calendar</button>
+    
+    <br>
 
 </div>

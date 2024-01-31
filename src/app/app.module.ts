@@ -20,6 +20,12 @@ import { ApiService } from './feature-modules/services/api.service';
 import { ConfigService } from './feature-modules/services/config.service';
 import { UserService } from './feature-modules/services/user.service';
 
+import { LocationSimulatorModule } from './feature-modules/location-simulator/location-simulator.module';
+
+import { RegUserHomePageComponent } from './feature-modules/stakeholders/reg-user-home-page/reg-user-home-page.component';
+
+import { MapComponent } from './feature-modules/map/map.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,6 +34,7 @@ import { UserService } from './feature-modules/services/user.service';
     CompanyOverviewComponent,
     LoginFormComponent,
     HomePageComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
@@ -38,12 +45,12 @@ import { UserService } from './feature-modules/services/user.service';
     FormsModule,
     SystemAdminModule,
   ],
-  exports: [AppComponent],
+  exports: [AppComponent, MapComponent],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
-      multi: true
+      multi: true,
     },
     FooService,
     AuthService,

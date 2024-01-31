@@ -219,4 +219,8 @@ export class CompanyAdminProfileComponent implements OnInit{
   onChangePassword():void{
     this.router.navigate([`company-admin-password/${this.id}`]);
   }
+
+  OnDelivery():void{
+    this.router.navigate([`equipment-delivery/${this.id}`]);
+  }
 }

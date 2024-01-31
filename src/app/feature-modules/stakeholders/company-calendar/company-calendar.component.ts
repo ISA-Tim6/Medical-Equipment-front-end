@@ -10,6 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Company } from '../../company-profile/model/company.model';
 import { formatDate } from '@angular/common';
 import { FullCalendarComponent } from '@fullcalendar/angular';
+import { CompanyAdmin } from '../model/company-admin.model';
 
 @Component({
   selector: 'app-company-calendar',
@@ -18,6 +19,8 @@ import { FullCalendarComponent } from '@fullcalendar/angular';
 })
 export class CompanyCalendarComponent {
   @ViewChild(FullCalendarComponent) calendar: FullCalendarComponent;
+  companyAdmin:CompanyAdmin;
+  company_id:number;
   companyCalendar: CompanyCalendar;
   company: Company;
   openingHours: string = '';
@@ -41,11 +44,55 @@ export class CompanyCalendarComponent {
     selectMirror: true,
     dayMaxEvents: true,
   };
-  constructor(private httpClient: HttpClient, private service: StakeholdersService, private activatedRoute: ActivatedRoute) {}
+  constructor(private httpClient: HttpClient,private router: Router, private service: StakeholdersService, private activatedRoute: ActivatedRoute) {}
   onDateClick(res: any) {
     alert('Clicked on date : ' + res.dateStr);
   }
   ngOnInit() {
+
+    this.service.getCompanyAdmin().subscribe({
+      next: (result: CompanyAdmin) => {
+        console.log(result);
+        this.companyAdmin=result;
+        this.company_id=this.companyAdmin.company_id;
+
+        if(this.companyAdmin.loggedBefore==false){
+          this.router.navigate([`company-admin-password/${this.companyAdmin.id}`]);
+        }
+
+        this.service.getCompanyCalendar(this.company_id).subscribe(result => {
+          this.companyCalendar = result;
+          this.createAvailableAppointments();
+          });
+    
+          this.service.getCompany(this.company_id).subscribe(result => {
+            this.company = result;
+            this.openingHours = this.company.openingHours.toString().replace(',', ':');
+            if((this.openingHours.split(':')[0]).length == 1)
+              this.openingHours = '0'.concat(this.openingHours);
+            if((this.openingHours.split(':')[1]).length == 1)
+              this.openingHours = this.openingHours.split(':')[0] + ':0' + this.openingHours.split(':')[1]; 
+  
+            this.closingHours = this.company.closingHours.toString().replace(',', ':');
+  
+            if((this.closingHours.split(':')[0]).length == 1)
+              this.closingHours = '0'.concat(this.closingHours);
+            if((this.closingHours.split(':')[1]).length == 1)
+              this.closingHours = this.closingHours.split(':')[0] + ':0' + this.closingHours.split(':')[1]; 
+  
+            var b=  {
+              // days of week. an array of zero-based day of week integers (0=Sunday)
+              daysOfWeek: [ 1, 2, 3, 4, 5, 6, 0 ], 
+            
+              startTime: this.openingHours, // a start time (10am in this example)
+              endTime: this.closingHours, // an end time (6pm in this example)
+            }
+            this.businessHours.push(b);
+            this.calendarOptions.businessHours = this.businessHours;
+            });
+
+      },
+    });
     // setTimeout(() => {
     //   this.calendarOptions = {
     //     initialView: 'dayGridMonth',
@@ -54,7 +101,7 @@ export class CompanyCalendarComponent {
     //   };
     // }, 2500);
 
-    this.activatedRoute.params.subscribe(params=>{
+  /*  this.activatedRoute.params.subscribe(params=>{
       this.service.getCompanyCalendar(params['company_id']).subscribe(result => {
         this.companyCalendar = result;
         this.createAvailableAppointments();
@@ -85,7 +132,7 @@ export class CompanyCalendarComponent {
           this.businessHours.push(b);
           this.calendarOptions.businessHours = this.businessHours;
           });
-    });
+    });*/
 
       setTimeout(() => {
        this.calendarOptions = {

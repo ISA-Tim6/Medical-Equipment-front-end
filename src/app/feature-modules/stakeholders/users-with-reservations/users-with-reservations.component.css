@@ -1,0 +1,27 @@
+.fancy-table th,
+.fancy-table td {
+  padding: 8px;
+  text-align: center;
+  background-color: #f3e5f5;
+  color: #333;
+}
+
+.fancy-table{
+  padding: 8px;
+  text-align: center;
+  background-color: #f3e5f5;
+  color: #333;
+  width:50%;
+  margin-left:auto;
+  margin-right: auto;
+}
+
+.fancy-table th{
+    background-color: #d7d1d1;
+
+}
+
+.h1{
+    margin-left: 25%;
+    color: blue;
+}

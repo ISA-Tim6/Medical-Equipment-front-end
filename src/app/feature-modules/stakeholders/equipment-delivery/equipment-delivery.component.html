@@ -1,0 +1,103 @@
+<h1 class="h1">Delivery</h1>
+<br>
+<button (click)="locationSimulator()" class="fancy-btn-top" > Location simulator</button>
+<button (click)="onQRCode()" class="fancy-btn-top" *ngIf="!visibleQRCode"> Deliver using QR Code</button>
+<button (click)="onQRCode()" class="fancy-btn-top" *ngIf="visibleQRCode"> Choose reservation</button>
+<div  *ngIf="visibleQRCode" class="qr-div">
+    <input type="file" #fileInput (change)="onFileUpload($event)">
+    <button (click)="onUpload()" class="fancy-btn">Deliver</button>
+    <br><br><img [src]="imageURL" alt="Place for QR Code">
+    <br>
+    <div *ngIf="reservationDataVisible">
+        <h2>Reservation info</h2>
+        <table class="fancy-table-qr">
+            <tr>
+                <th>
+                    Date
+                </th>
+                <th>
+                    Time
+                </th>
+                <th>
+                    User
+                </th>
+                <th>
+                    Delivery status
+                </th>
+            </tr>
+            <tr >
+                <td>{{reservation.appointment.date}}</td>
+                <td>{{reservation.appointment.time}}</td>
+                <td>
+                    {{reservation.user.name}} {{reservation.user.surname}}
+                </td>
+                <td>
+                   {{reservation.reservationStatus}}
+                </td>
+            </tr>
+            
+        </table>
+    </div>
+</div>
+
+<div *ngIf="!visibleQRCode">
+    <h3>Reservation:</h3>
+    <table  *ngIf="reservations!=null" class="fancy-table">
+        <tr>
+            <th>
+                Date
+            </th>
+            <th>
+                Time
+            </th>
+            <th>
+                Items
+            </th>
+            <th>
+                User
+            </th>
+            <th>
+                Deliver
+            </th>
+        </tr>
+        <tr >
+            <td>{{reservations.appointment.date}}</td>
+            <td>{{reservations.appointment.time}}</td>
+            <td>
+                <table class="fancy-table1">
+                    <tr>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Description
+                        </th>
+                        <th>
+                            Quantity
+                        </th>
+                    </tr>
+                    <tr *ngFor="let i of reservations.items">
+                        <td>
+                            {{i.equipment.name}}
+                        </td>
+                        <td>
+                            {{i.equipment.description}}
+                        </td>
+                        <td>
+                            {{i.quantity}}
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                {{reservations.user.name}} {{reservations.user.surname}}
+            </td>
+            <td>
+               <button (click)="OnDeliver(reservations)" class="fancy-btn"> Deliver</button>
+            </td>
+        </tr>
+        
+    </table>
+
+</div>
+

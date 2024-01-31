@@ -1,0 +1,29 @@
+<h2>My deliveries - view & sort</h2>
+
+<select class="min-max" [(ngModel)]="sortType" (change)="sort()">
+  <option value="Price asc">Price asc</option>
+  <option value="Price desc">Price desc</option>
+  <option value="Date asc">Date asc</option>
+  <option value="Date desc">Date desc</option>
+</select>
+<br /><br />
+<button class="fancy-reset-btn" (click)="reset()">Reset</button>
+<hr />
+
+<div *ngFor="let delivery of deliveries" class="delivery-item">
+  <p><strong>Reservation Status:</strong> ACCEPTED</p>
+  <p>
+    <strong>Appointment Date:</strong>
+    {{ delivery.appointment.date | date : "MMMM d, yyyy" }}
+  </p>
+  <p><strong>Appointment Time:</strong> {{ delivery.appointment.time }}</p>
+  <p><strong>Price:</strong> {{ calculateTotalPrice(delivery.items) }}</p>
+  <p><strong>Items:</strong></p>
+  <ul>
+    <li *ngFor="let item of delivery.items">
+      {{ item.equipment.name }}, x{{ item.quantity }}
+    </li>
+  </ul>
+  <br />
+  <br />
+</div>

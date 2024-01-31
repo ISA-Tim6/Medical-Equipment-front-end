@@ -11,15 +11,12 @@ import { AuthService } from './feature-modules/services/auth.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-
   title = 'MedicalEquipment';
-
+  showRegUserHomePage: boolean = true;
 
   constructor(private router: Router, private authService: AuthService) {}
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
   isLoggedIn(): boolean {
     return this.authService.isAuthenticated();
@@ -27,21 +24,21 @@ export class AppComponent implements OnInit {
 
   logout(): void {
     this.authService.logout();
-    this.router.navigate(["/login"])
+    this.showRegUserHomePage = true;
+    this.router.navigate(['/login']);
   }
   isCompanyAdmin(): boolean {
     const userRoles = this.authService.getUserRoles();
     return userRoles !== null && userRoles.includes('ROLE_COMPANY_ADMIN');
-}
+  }
 
   isRegisteredUser(): boolean {
-      const userRoles = this.authService.getUserRoles();
-      return userRoles !== null && userRoles.includes('ROLE_REGISTRATED_USER');
+    const userRoles = this.authService.getUserRoles();
+    return userRoles !== null && userRoles.includes('ROLE_REGISTRATED_USER');
   }
 
   isSystemAdmin(): boolean {
     const userRoles = this.authService.getUserRoles();
     return userRoles !== null && userRoles.includes('ROLE_SYSTEM_ADMIN');
   }
-
 }
