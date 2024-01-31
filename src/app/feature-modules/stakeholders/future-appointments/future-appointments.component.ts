@@ -10,42 +10,48 @@ import { Company } from '../../company-profile/model/company.model';
 @Component({
   selector: 'app-future-appointments',
   templateUrl: './future-appointments.component.html',
-  styleUrls: ['./future-appointments.component.css']
+  styleUrls: ['./future-appointments.component.css'],
 })
-export class FutureAppointmentsComponent implements OnInit{
-  reservations:Appointment[]=[];
-  user:RegistratedUser;
-  companies:Company[]=[];
-  id:number;
-  constructor(private service: StakeholdersService,private companyService:CompanyService) {}
+export class FutureAppointmentsComponent implements OnInit {
+  reservations: Appointment[] = [];
+  user: RegistratedUser;
+  companies: Company[] = [];
+  id: number;
+  constructor(
+    private service: StakeholdersService,
+    private companyService: CompanyService
+  ) {}
   ngOnInit(): void {
     this.service.getUser().subscribe({
       next: (result: RegistratedUser) => {
         console.log(result);
         this.user = result;
-        this.service.getAllFutureReservations(this.user.user_id as number).subscribe({
-          next:(result:Appointment[])=>{
-            this.reservations=result;
-          }
-        })
+        this.service
+          .getAllFutureReservations(this.user.user_id as number)
+          .subscribe({
+            next: (result: Appointment[]) => {
+              this.reservations = result;
+            },
+          });
       },
     });
   }
-  onCancel(a:Appointment) {
-    this.service.cancelAppointment(a.appointment_id as number).subscribe(
-      (response: boolean) => {
+  onCancel(a: Appointment) {
+    this.service
+      .cancelAppointment(a.appointment_id as number)
+      .subscribe((response: boolean) => {
         console.log('Termin uspješno otkazan.');
-        alert("Successfully cancelled.")
-        
-          a.appointmentStatus = 'AVAILABLE';
-          this.service.getAllFutureReservations(this.user.user_id as number).subscribe({
-            next:(result:Appointment[])=>{
-              this.reservations=result;
-              
-            }
-          })
-          
-      }
-    );
+        alert('Successfully cancelled.');
+
+        a.appointmentStatus = 'AVAILABLE';
+        this.service
+          .getAllFutureReservations(this.user.user_id as number)
+          .subscribe({
+            next: (result: Appointment[]) => {
+              this.reservations = result;
+              location.reload();
+            },
+          });
+      });
   }
 }

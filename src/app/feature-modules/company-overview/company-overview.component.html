@@ -176,7 +176,11 @@
                 <td>{{ e.admin?.surname }}</td>
                 <td>{{ e.appointmentStatus }}</td>
                 <td>
-                  <button class="fancy-search-btn" (click)="onReserve(e)">
+                  <button
+                    class="fancy-search-btn"
+                    (click)="onReserve(e)"
+                    [disabled]="e.appointmentStatus == 'RESERVED'"
+                  >
                     Reserve
                   </button>
                 </td>

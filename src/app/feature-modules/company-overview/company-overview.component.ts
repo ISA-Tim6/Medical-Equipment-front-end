@@ -11,6 +11,7 @@ import { timeout } from 'rxjs';
 import { StakeholdersService } from '../stakeholders/stakeholders.service';
 import { AuthService } from '../services/auth.service';
 import { CanceledAppointment } from '../company-profile/model/canceled-appointment.model';
+import { Time } from '@angular/common';
 
 @Component({
   selector: 'app-company-overview',
@@ -60,13 +61,17 @@ export class CompanyOverviewComponent implements OnInit {
           this.company = result;
           this.company.company_id = this.id;
           this.equipmentList = this.company.equipment || [];
-            
+
           this.availableAppointments =
             this.company.workingTimeCalendar.appointments.filter(
-              (a) => a.appointmentStatus == 'AVAILABLE' && new Date(a.date)>=new Date() 
+              (a) =>
+                a.appointmentStatus == 'AVAILABLE' &&
+                new Date(a.date).getDate >= new Date().getDate
             );
-          
-          
+
+          /*for (let c of this.company.workingTimeCalendar.appointments)
+            console.log(new Date(c.date + 'T' + c.time));*/
+
           this.availableUserAppointments = this.availableAppointments;
           this.stakeholderService.getUser().subscribe({
             next: (result: RegistratedUser) => {
@@ -198,7 +203,8 @@ export class CompanyOverviewComponent implements OnInit {
           this.user.penals!
         );
 
-        if (retReservation == null) alert("You have 3 penals, can't reserve!");
+        if (retReservation == null)
+          alert("Can't reserve."); //ovo vraca i za konflikt i za penals
         else {
           appointment.appointmentStatus = 'RESERVED';
 
@@ -207,19 +213,21 @@ export class CompanyOverviewComponent implements OnInit {
             this.id,
             appointment.admin?.id || 0
           );
-          this.chosenItemsList = [];
-          //samo available appoint
-          this.availableAppointments.forEach((ap) => {
-            if (ap.appointment_id == appointment.appointment_id) {
-              ap.appointmentStatus = 'RESERVED';
-            }
-          });
-          this.availableAppointments = this.availableAppointments.filter(
-            (a) => a.appointmentStatus == 'AVAILABLE'
-          );
-          this.isShowCalendarClicked = false;
-          //azurirati quantity u equpimentu
-          alert('Sucessfully reserved!');
+          if ((retAppointment as number) > 0) {
+            this.chosenItemsList = [];
+            //samo available appoint
+            this.availableAppointments.forEach((ap) => {
+              if (ap.appointment_id == appointment.appointment_id) {
+                ap.appointmentStatus = 'RESERVED';
+              }
+            });
+            this.availableAppointments = this.availableAppointments.filter(
+              (a) => a.appointmentStatus == 'AVAILABLE'
+            );
+            this.isShowCalendarClicked = false;
+            //azurirati quantity u equpimentu
+            alert('Sucessfully reserved!');
+          }
         }
       } else {
         alert("You didn't choose equipment.");
@@ -253,6 +261,7 @@ export class CompanyOverviewComponent implements OnInit {
           appointment,
           this.id
         );
+        console.log(appId);
         if ((appId as number) > 0) {
           alert('Sucessfully reserved extra-term!');
           this.isShowCalendarClicked = false;
@@ -307,5 +316,4 @@ export class CompanyOverviewComponent implements OnInit {
       }
     }
   }
-
 }
