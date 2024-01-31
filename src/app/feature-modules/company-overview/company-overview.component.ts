@@ -263,7 +263,7 @@ export class CompanyOverviewComponent implements OnInit {
         );
         console.log(appId);
         if ((appId as number) > 0) {
-          alert('Sucessfully reserved extra-term!');
+          //alert('Sucessfully reserved extra-term!');
           this.isShowCalendarClicked = false;
           this.freeSlots = [];
 
@@ -293,7 +293,7 @@ export class CompanyOverviewComponent implements OnInit {
           );
 
           if (retReservation == null)
-            alert("You have 3 penals, can't reserve!");
+            alert("You can't reserve!");
           else {
             this.isShowCalendarClicked = false;
             this.service.getCompany(this.id).subscribe({
